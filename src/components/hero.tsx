@@ -7,8 +7,9 @@ export default function hero() {
     const images = ["/makeup.webp", "/makeup2.jpg"];
 
     const nextImage = () => {
-        setCurrentImage((prev) => (prev + 1) % images.length);
+      setCurrentImage((prev) => (prev + 1) % images.length )
     };
+
 
     const prevImage = () => {
         setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
@@ -42,6 +43,7 @@ export default function hero() {
       </button>
      
         <div className="text-center text-[#fdcd95] max-w-4xl px-6">
+          <span className="bg-transparent backdrop-blur-lg rounded-lg font-semibold py-1 p-4">Typeaulogy Paris</span>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight drop-shadow-lg">
             Votre Beauté Naturelle
           </h1>

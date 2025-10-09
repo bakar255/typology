@@ -3,9 +3,9 @@ import { useState } from "react";
 const products = [
     {
         id: 1, 
-        titre: "Sérum Anti-Âge",
+        titre: "T-26 - Beaume à lèvres",
         description: "Sérum hydratant pour une peau plus jeune",
-        image: "/makeup.webp",
+        image: "/dior6.webp",
         price: 45,
         rating: 4.8,
         reviews: 124,
@@ -13,9 +13,9 @@ const products = [
     },
     {
         id: 2, 
-        titre: "Crème Hydratante",
-        description: "Crème hydratante 24h pour tous types de peau",
-        image: "/makeup2.jpg",
+        titre: "T-41 - Crème Hydratante",
+        description: "Combinaison d'acide + Fond de teint",
+        image: "/dior.jpg",
         price: 32,
         rating: 4.6,
         reviews: 89,
@@ -23,9 +23,9 @@ const products = [
     },
     {
         id: 3, 
-        titre: "Masque Purifiant",
-        description: "Masque détoxifiant aux argiles naturelles",
-        image: "/makeup.webp",
+        titre: "T-61 - Rouge à lèvre ",
+        description: "Mélange d'acides exotiques + Arômes naturelle",
+        image: "/dior5.webp",
         price: 28,
         rating: 4.7,
         reviews: 156,
@@ -33,9 +33,9 @@ const products = [
     },
     {
         id: 4, 
-        titre: "Huile Visage",
-        description: "Huile nourrissante aux huiles essentielles",
-        image: "/makeup2.jpg",
+        titre: "T-53 - Rouge à lèvre",
+        description: "Rouge à lèvre élégant et portatif + Naturel ",
+        image: "/dior4.jpg",
         price: 38,
         rating: 4.5,
         reviews: 67,
@@ -43,9 +43,9 @@ const products = [
     },
     {
         id: 5, 
-        titre: "Gommage Doux",
+        titre: "T-32 - Exofoliant français ",
         description: "Exfoliant doux aux micro-grains",
-        image: "/makeup.webp",
+        image: "/dior3.webp",
         price: 22,
         rating: 4.4,
         reviews: 93,
@@ -53,9 +53,9 @@ const products = [
     },
     {
         id: 6, 
-        titre: "Toner Équilibrant",
+        titre: "T-66 - Baume à lèvre",
         description: "Toner purifiant et équilibrant le pH",
-        image: "/makeup2.jpg",
+        image: "/dior2.jpg",
         price: 18,
         rating: 4.3,
         reviews: 78,
@@ -67,38 +67,38 @@ const products = [
 export default function Proprety() {
 
     return (
-        <div className="container mt-16 mx-auto">
-            <div className="text-center flex flex-col items-center justify-center">
+            <div className="container mt-16 mx-auto">
+        <div className="text-center flex flex-col items-center justify-center">
             <span className="text-5xl font-bold mb-2">Nos Best-Seller</span>
             <span className="text-2xl font-semibold">Découvrez nos produits les plus vendus</span>
             
             <div className="proprety-grid">
-
-                {products.map((product) => (
-                    <div key={product.id} className="proprety-item">
-                        <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <img 
-                                src={product.image} 
-                                alt={product.titre} 
-                                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300" 
-                            />
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold mb-2">{product.titre}</h3>
-                                <p className="text-gray-600 mb-4 text-sm leading-relaxed">{product.description}</p>                        
-                            
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-[#fdcd95]">{product.price}€</span>
-                                </div>
-                            </div>
-                            <button className="bg-gray-200 text-center text-black px-6 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors flex items-center gap-2">
-                             Ajouter au panier
-                          </button>
-                        </div>
+            {products.map((product) => (
+                <div key={product.id} className="proprety-item">
+                <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+                    <img 
+                    src={product.image} 
+                    alt={product.titre} 
+                    className="w-full max-h-[1800px] hover:scale-105 transition-transform duration-300" 
+                    />
+                    <div className="w-full max-w-[1900px] max-h-[1900px] flex flex-col text-left space-y-2.5 justify-between flex-grow p-4">
+                    <div>
+                        <span className="font-semibold text-black block">{product.titre}</span>  
+                        <span className="text-black block">{product.description}</span>
                     </div>
-                ))}
+                    <div className="absolute right-1 items-center mt-4">
+                        <span className="font-bold text-black">{product.price}€</span>
+                    </div>
+                    </div>
+                    
+                    <button className="w-full py-3 rounded-sm text-black border cursor-pointer border-black bg-white   mt-auto">
+                    Ajouter au panier
+                    </button>
+                </div>
+                </div>
+            ))}
             </div>
-
-            </div>
+        </div>
         </div>
     )
 }
