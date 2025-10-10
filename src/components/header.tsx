@@ -9,7 +9,7 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <span className="text-[19px] font-medium">Acceuil</span>
             <button className="text-[19px] font-medium">A propos </button>
-            <button className="text-[19px] font-medium ml-2 cursor-pointer bg-[#fdcd95] py-1 p-5 rounded-sm">Produits <ChevronDown size={24} className='inline-block text-black'/> </button>
+            <button className="text-[19px] font-medium ml-2 cursor-pointer border border-black py-1 p-6 text-blakc rounded-sm">Produits <ChevronDown size={24} className='inline-block text-black'/> </button>
           </div>
 
           <div className="items-center flex flex-col gap-1">

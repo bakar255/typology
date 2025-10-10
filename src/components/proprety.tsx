@@ -6,7 +6,7 @@ const products = [
         titre: "T-26 - Beaume à lèvres",
         description: "Sérum hydratant pour une peau plus jeune",
         image: "/dior6.webp",
-        price: 45,
+        price: 45.99,
         rating: 4.8,
         reviews: 124,
         isBestSeller: true,
@@ -16,7 +16,7 @@ const products = [
         titre: "T-41 - Crème Hydratante",
         description: "Combinaison d'acide + Fond de teint",
         image: "/dior.jpg",
-        price: 32,
+        price: 59.99,
         rating: 4.6,
         reviews: 89,
         isBestSeller: true,
@@ -26,7 +26,7 @@ const products = [
         titre: "T-61 - Rouge à lèvre ",
         description: "Mélange d'acides exotiques + Arômes naturelle",
         image: "/dior5.webp",
-        price: 28,
+        price: 28.50,
         rating: 4.7,
         reviews: 156,
         isBestSeller: true,
@@ -36,7 +36,7 @@ const products = [
         titre: "T-53 - Rouge à lèvre",
         description: "Rouge à lèvre élégant et portatif + Naturel ",
         image: "/dior4.jpg",
-        price: 38,
+        price: 39.99,
         rating: 4.5,
         reviews: 67,
         isBestSeller: false,
@@ -46,7 +46,7 @@ const products = [
         titre: "T-32 - Exofoliant français ",
         description: "Exfoliant doux aux micro-grains",
         image: "/dior3.webp",
-        price: 22,
+        price: 22.99,
         rating: 4.4,
         reviews: 93,
         isBestSeller: false,
@@ -56,7 +56,7 @@ const products = [
         titre: "T-66 - Baume à lèvre",
         description: "Toner purifiant et équilibrant le pH",
         image: "/dior2.jpg",
-        price: 18,
+        price: 18.23,
         rating: 4.3,
         reviews: 78,
         isBestSeller: false,
@@ -69,8 +69,8 @@ export default function Proprety() {
     return (
             <div className="container mt-16 mx-auto">
         <div className="text-center flex flex-col items-center justify-center">
-            <span className="text-5xl font-bold mb-2">Nos Best-Seller</span>
-            <span className="text-2xl font-semibold">Découvrez nos produits les plus vendus</span>
+            <span className="text-8xl font-bold mb-2">Nos Best-Seller</span>
+            <span className="text-5xl font-semibold">Découvrez nos produits les plus vendus</span>
             
             <div className="proprety-grid">
             {products.map((product) => (
@@ -81,7 +81,7 @@ export default function Proprety() {
                     alt={product.titre} 
                     className="w-full max-h-[1800px] hover:scale-105 transition-transform duration-300" 
                     />
-                    <div className="w-full max-w-[1900px] max-h-[1900px] flex flex-col text-left space-y-2.5 justify-between flex-grow p-4">
+                    <div className="w-full max-w-[2000px] max-h-[2000px] flex flex-col text-left space-y-2.5 justify-between flex-grow p-4">
                     <div>
                         <span className="font-semibold text-black block">{product.titre}</span>  
                         <span className="text-black block">{product.description}</span>
@@ -91,7 +91,7 @@ export default function Proprety() {
                     </div>
                     </div>
                     
-                    <button className="w-full py-3 rounded-sm text-black border cursor-pointer border-black bg-white   mt-auto">
+                    <button className="w-full py-3 p-5 rounded-sm text-black border cursor-pointer border-black bg-white  mt-auto">
                     Ajouter au panier
                     </button>
                 </div>

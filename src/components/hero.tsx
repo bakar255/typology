@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
+import { MoveRight, MoveLeft } from "lucide-react";
 
 export default function hero() {
 
@@ -9,8 +10,6 @@ export default function hero() {
     const nextImage = () => {
       setCurrentImage((prev) => (prev + 1) % images.length )
     };
-
-
     const prevImage = () => {
         setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
     };
@@ -32,28 +31,25 @@ export default function hero() {
         
         <button 
         onClick={prevImage}
-        className="absolute left-4 top-1/2 transform cursor-pointer -translate-y-1/2 w-12 h-12 bg-white bg-opacity-50 text-black rounded-full flex items-center justify-center text-xl font-bold hover:bg-opacity-70 transition-all">
-        ←
+        className="absolute left-4 top-1/2 transform cursor-pointer -translate-y-1/2 w-12 h-12 bg-white bg-opacity-50 text-black rounded-full flex items-center justify-center text-xl  hover:bg-opacity-70 transition-all">
+        <MoveLeft />
       </button>
 
       <button 
       onClick={nextImage}
-      className="absolute right-4 top-1/2 transform cursor-pointer -translate-y-1/2 w-12 h-12 bg-white bg-opacity-50 text-black rounded-full flex items-center justify-center text-xl font-bold hover:bg-opacity-70 transition-all">
-        →
+      className="absolute right-4 top-1/2 transform cursor-pointer -translate-y-1/2 w-12 h-12 bg-white bg-opacity-50 text-black rounded-full flex items-center justify-center text-xl  hover:bg-opacity-70 transition-all">
+        <MoveRight />
       </button>
      
-        <div className="text-center text-[#fdcd95] max-w-4xl px-6">
-          <span className="bg-transparent backdrop-blur-lg rounded-lg font-semibold py-1 p-4">Typeaulogy Paris</span>
+        <div className="text-center text-[#000000] max-w-3xl px-6 mr-250 mb-30">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight drop-shadow-lg">
             Votre Beauté Naturelle
           </h1>
-          <p className="text-xl md:text-2xl mb-8 leading-relaxed drop-shadow-md">
+          <p className="text-4xl mb-8 leading-relaxed drop-shadow-md text-black">
             Découvrez nos produits cosmétiques naturels et efficaces, 
             conçus pour révéler votre éclat authentique
           </p>
-          <button className="bg-[#fdcd95] text-black px-8 py-4 cursor-pointer rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors">
-            Découvrir nos produits
-          </button>
+          
         </div>
         
         {/* Indicateurs de navigation */}
@@ -63,7 +59,7 @@ export default function hero() {
               key={index}
               onClick={() => goToImage(index)}
               className={`w-5 h-2 rounded-lg transition-opacity cursor-pointer ${
-                index === currentImage ? 'bg-white opacity-80' : 'bg-white opacity-40'
+                index === currentImage ? 'bg-gray-600 opacity-80' : 'bg-gray-500 opacity-40'
               }`}
             />
           ))}
