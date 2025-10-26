@@ -15,7 +15,7 @@ A modern, fully-functional e-commerce website built with Next.js, TypeScript, an
 
 ## 🚀 Live Demo
 
-**[View Live Site](https://typology-clone-e1fu9csve-bakar255s-projects.vercel.app/)**
+**[View Live Site](https://typology-clone.vercel.app/)**
 
 ## ✨ Features
 
