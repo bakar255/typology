@@ -1,4 +1,4 @@
-import { User, Search, ChevronDown } from 'lucide-react';
+import { User, Search, ChevronDown, PaintBucket, ShoppingBasket, ShoppingBasketIcon } from 'lucide-react';
 
 export default function Header() {
 
@@ -8,7 +8,6 @@ export default function Header() {
          
           <div className="flex items-center gap-4">
             <span className="text-[19px] font-medium">Acceuil</span>
-            <button className="text-[19px] font-medium">A propos </button>
             <button className="text-[19px] font-medium ml-2 cursor-pointer border border-black py-1 p-6 text-blakc rounded-sm">Produits <ChevronDown size={24} className='inline-block text-black'/> </button>
           </div>
 
@@ -23,8 +22,9 @@ export default function Header() {
             Français <ChevronDown size={26} className="inline-block ml-1 text-black"/>
           </label>
             <label htmlFor=""></label>
-            <Search size={26} className=" text-black"/>
-            <User size={26} className=" text-black"/>
+            <Search size={26} className=" cursor-pointer text-black"/>
+            <User size={26} className=" cursor-pointer text-black"/>
+            <ShoppingBasketIcon size={26} className=' cursor-pointer mx-5'/>
           </div>
         </div>
 
