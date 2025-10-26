@@ -3,7 +3,15 @@
 
 A modern, fully-functional e-commerce website built with Next.js, TypeScript, and Tailwind CSS. This project demonstrates advanced React patterns, state management, and responsive design.
 
-![Typology E-commerce](public/screen.PNG)
+
+<div align="center">
+  <img src="public/screen.PNG" alt="Typology E-commerce Homepage" width="45%" />
+  <img src="public/screen1.PNG" alt="Product Page" width="45%" />
+  <br/>
+  <img src="public/screen2.PNG" alt="Shopping Cart" width="45%" />
+  <img src="public/screen3.PNG" alt="Search Results" width="45%" />
+</div>
+
 
 ## 🚀 Live Demo
 
