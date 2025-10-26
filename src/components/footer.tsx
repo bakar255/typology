@@ -1,5 +1,4 @@
 import { SendHorizontal, Mail } from "lucide-react"
-import Image from "next/image"
 import { useState } from "react"
 
 export default function Footer() {
@@ -28,9 +27,9 @@ export default function Footer() {
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Contactez-nous</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Livraison et retours gratuits</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Avis client</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Cadeaux d'entreprises</a>
+              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Cadeaux d&apos;entreprises</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Presse</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Normes de l'entreprise</a>
+              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Normes de l&apos;entreprise</a>
             </div>
           </div>
 
@@ -43,7 +42,7 @@ export default function Footer() {
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Charte de confidentialité</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Nos produits</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Affiliation</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Rejoindre l'équipe</a>
+              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Rejoindre l&apos;équipe</a>
             </div>
           </div>
 
@@ -76,7 +75,7 @@ export default function Footer() {
                   type="submit"
                   className="w-full bg-gradient-to-r from-pink-500 to-rose-500 cursor-pointer hover:to-rose-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
-                  <span>S'abonner</span>
+                  <span>S&apos;abonner</span>
                   <SendHorizontal className="h-5 w-5" />
                 </button>
               </form>
@@ -101,7 +100,7 @@ export default function Footer() {
         <div className="border-t border-gray-200 py-6">
           <div className="max-w-7xl mx-auto px-5">
             <p className="text-center text-gray-500 text-sm">
-              © 2024 Typology. Tous droits réservés.
+              © Typology clone. Ce site n&apos;a aucun but lucratif. <br/> Il a été crée a titre personelles et les images ci-dessus appartiennent a leur détenteur respectif.
             </p>
           </div>
         </div>

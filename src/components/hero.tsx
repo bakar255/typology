@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { MoveRight, MoveLeft, Play, Pause } from "lucide-react";
 
-export default function hero() {
+export default function Hero() {
     const [currentImage, setCurrentImage] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [isAutoPlay, setIsAutoPlay] = useState(true);
@@ -33,7 +33,7 @@ export default function hero() {
         }, 300);
     };
 
-    const goToImage = (index) => {
+    const goToImage = (index: number) => {
         if (isTransitioning || index === currentImage) return;
         setDirection(index > currentImage ? 'right' : 'left');
         setIsTransitioning(true);
@@ -56,7 +56,7 @@ export default function hero() {
         }, 5000);
 
         return () => clearInterval(interval);
-    }, [isAutoPlay, currentImage]);
+    }, [isAutoPlay]);
 
     return (
         <div className="relative w-full h-[80vh] mt-20 overflow-hidden group">
@@ -142,7 +142,7 @@ export default function hero() {
                             }`}
                         >
                             {index === currentImage && (
-                                <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-rose-400 rounded-full animate-pulse" />
+                                <div className="absolute inset-0 bg-gradient-to-r from-white to-rose-400 rounded-full animate-pulse" />
                             )}
                         </button>
                     ))}

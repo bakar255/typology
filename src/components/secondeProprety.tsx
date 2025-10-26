@@ -1,4 +1,6 @@
 
+import Image from "next/image";
+
 export default function SecondProprety() {
     return (
         <div className="text-center mt-11">
@@ -22,9 +24,11 @@ export default function SecondProprety() {
 
         {/* Colonne d'image a droite */}
         <div>
-          <img 
-          src="coffret.webp"
+          <Image 
+          src="/coffret.webp"
           alt="coffret"
+          width={600}
+          height={500}
           className="max-w-5xl w-full object-cover max-h-[500px] h-full "
            />
         </div>
