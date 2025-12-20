@@ -1,11 +1,6 @@
 
 
-
-
-
-
 export default function SecondeHero() {
-
 
 
     return (
@@ -19,7 +14,6 @@ export default function SecondeHero() {
                 <source src="/makeup.mp4" type="video/mp4" />
             </video>
             
-           
             <div className="absolute inset-0 z-50 flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-white text-5xl mb-8 font-bold">Découvrez votre peau !</h1>

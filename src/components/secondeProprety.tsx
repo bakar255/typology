@@ -10,8 +10,8 @@ export default function SecondProprety() {
     
     {/* Colonne de texte à gauche */}
        <div className="space-y-6 max-w-2xl">
-        <h2 className="text-7xl font-bold text-black">DUO, TRIO ET KITS</h2>
-        <p className="text-4xl text-black leading-relaxed">
+        <h2 className="text-6xl font-bold text-black">DUO, TRIO ET KITS</h2>
+        <p className="text-2xl text-black leading-relaxed">
           Découvrez nos duos et trios de soins et parfums, conçus pour répondre efficacement à vos besoins spécifiques.
         </p>
         <p className=" text-3xl text-black leading-relaxed">
