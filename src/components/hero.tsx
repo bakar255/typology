@@ -59,7 +59,7 @@ export default function Hero() {
     }, [isAutoPlay]);
 
     return (
-        <div className="relative w-full h-[80vh] mt-20 overflow-hidden group">
+        <div className="relative w-full h-[80vh] overflow-hidden group">
             {/* Background  */}
             <div className="relative w-full h-full">
                 {images.map((image, index) => (

@@ -53,6 +53,17 @@ body, html {
   cursor: pointer;
 }
 
+.btn {
+  display: block;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 10px 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+
 .proprety-item:hover {
   transform: translateY(-4px);
 }
