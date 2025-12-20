@@ -4,6 +4,7 @@ import { useCart } from '@/context/CartContext';
 import { useSearch } from '@/context/SearchContext';
 import { products } from '@/data/products';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Header() {
   const { cartItems, removeFromCart, updateQuantity, getTotalItems } = useCart();
@@ -30,23 +31,22 @@ export default function Header() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full py-1 p-5 bg-white z-50 shadow-sm">
+    <div className=" w-full py-2 bg-white z-50 shadow-sm">
         <div className="flex items-center justify-between max-w-[1700px] mx-auto">
          
-          <div className="flex items-center gap-4">
-            <span className="text-[19px] font-medium cursor-pointer">Acceuil</span>
-            <button className="text-[19px] font-medium ml-2 cursor-pointer border border-black py-1 p-6 text-blakc rounded-sm">Produits <ChevronDown size={24} className='inline-block text-black'/> </button>
+          <div className="mr-12 flex items-center gap-4">
+            <Link href="/collection" className='text-sm font-medium text-muted-foreground'> Collection </Link>
           </div>
 
           <div className="items-center flex flex-col gap-1">
-            <span className="font-bold text-2xl text-black mr-15">Typeaulogy</span>
-            <span className="text-black font-semibold text-2xl mr-16">Paris</span>
+            <span className="font-bold text-1xl text-black mr-15">Typeaulogy</span>
+            <span className="text-black font-semibold text-1xl mr-16">Paris</span>
           </div>
 
           <div className="flex items-center gap-7">
            {/* Selection langues*/}
-          <label htmlFor="languages" className="block font-semibold mb-1">
-            Français <ChevronDown size={26} className=" inline-block ml-1 text-black"/>
+          <label htmlFor="languages" className="block mb-1 text-sm text-muted foreground">
+            Français <ChevronDown size={16} className=" inline-block ml-1 text-black"/>
           </label>
             
             {/* Search */}
@@ -68,8 +68,8 @@ export default function Header() {
                       <Image
                         src={product.image}
                         alt={product.titre}
-                        width={40}
-                        height={40}
+                        width={20}
+                        height={20}
                         className="rounded object-cover"
                       />
                       <div className="ml-3 flex-1">
@@ -82,7 +82,6 @@ export default function Header() {
               )}
             </div>
 
-            <User size={26} className=" cursor-pointer text-black"/>
             
             {/* Cart */}
             <div className="relative">
@@ -103,7 +102,7 @@ export default function Header() {
                 <div className="absolute top-full right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-1 w-80 max-h-96 overflow-y-auto z-50">
                   <div className="p-4">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-semibold">Panier ({getTotalItems()} articles)</h3>
+                      <h3 className="">Panier ({getTotalItems()} articles)</h3>
                       <button 
                         onClick={() => setIsCartOpen(false)}
                         className="text-gray-500 hover:text-gray-700"
