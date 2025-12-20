@@ -37,8 +37,8 @@ export default function Header() {
             <div className="flex items-center justify-between max-w-[1700px] mx-auto">
              
               <div className="items-center flex flex-col gap-1">
-                <span className="font-bold text-1xl text-black mr-15">Typeaulogy</span>
-                <span className="text-black font-semibold text-1xl mr-16">Paris</span>
+                <span className=" font-bold text-4xl text-foreground logo mr-15">Typeaulogy</span>
+                <span className="text-foreground font-semibold text-4xl logo mr-16">Paris</span>
               </div>
 
               <div className="flex items-center gap-7">
