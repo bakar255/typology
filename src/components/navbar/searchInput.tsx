@@ -28,11 +28,11 @@ export default function SearchInput() {
 
   return (
     <div className="relative">
-      <div className='flex items-center rounded-lg border min-w-60 h-10 py-2 px-2 text-foreground'>
+      <div className='flex items-center rounded-lg min-w-70 h-10 py-2 px-2 text-foreground'>
         <input
           type="text"
-          placeholder="Rechercher..."
-          className='outline-none flex-1'
+          placeholder="Rechercher un produit..."
+          className='outline-none flex-1 leading-5 tracking-wider font-light focus-within:outline-1 outline-black '
           onChange={(e) => handleSearch(e.target.value)}
         />
         <Search size={16} className='text-foreground'/>

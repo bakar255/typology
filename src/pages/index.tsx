@@ -1,4 +1,4 @@
-import Header from "@/components/header";
+import Header from "@/components/navbar/header";
 import Hero  from "@/components/hero";
 import Proprety from "@/components/proprety";
 import AnimatedHero from "@/components/AnimatedHero";
