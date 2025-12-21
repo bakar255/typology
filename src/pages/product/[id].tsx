@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowLeft, Star, ShoppingCart, Heart, Plus, Minus } from "lucide-react";
-import Header from "@/components/header";
+import Header from "@/components/navbar/header";
 import Footer from "@/components/footer";
 import { useCart } from "@/context/CartContext";
 import { products, Product } from "@/data/products";
