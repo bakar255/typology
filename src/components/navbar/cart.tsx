@@ -13,7 +13,7 @@ export default function Cart() {
         onClick={() => setIsCartOpen(!isCartOpen)}
         className="relative cursor-pointer"
       >
-        <ShoppingBasketIcon size={26} className='cursor-pointer mx-5'/>
+        <ShoppingBasketIcon size={25} className='cursor-pointer mt-1.5'/>
         {getTotalItems() > 0 && (
           <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
             {getTotalItems()}
