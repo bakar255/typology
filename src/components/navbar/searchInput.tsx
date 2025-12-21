@@ -28,7 +28,7 @@ export default function SearchInput() {
 
   return (
     <div className="relative">
-      <div className='flex items-center rounded-lg min-w-70 h-10 py-2 px-2 text-foreground'>
+      <div className='flex items-center  min-w-80 h-10 py-2 px-2 text-foreground border-b border-[#161616] '>
         <input
           type="text"
           placeholder="Rechercher un produit..."
@@ -40,7 +40,7 @@ export default function SearchInput() {
 
       {/* Search Results Dropdown */}
       {isSearchOpen && searchResults.length > 0 && (
-        <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-64 overflow-y-auto z-50">
+        <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-64 overflow-y-auto z-100">
           {searchResults.map((product) => (
             <div
               key={product.id}

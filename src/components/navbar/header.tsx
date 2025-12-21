@@ -10,12 +10,12 @@ export default function Header() {
 
   return (
     <div className="w-full">
-        <div className="py-1 px-4">
-            <div className="flex items-center justify-between max-w-[1700px] mx-auto">
+        <div className="py-4 px-4">
+            <div className="flex items-center justify-between max-w-[1700px] mx-auto relative">
 
               <SearchInput />
              
-              <div className="flex flex-col items-center gap-1 flex-1">
+              <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 flex-1">
                 <span className="font-bold text-2xl text-foreground logo">Typeaulogy</span>
                 <span className="text-foreground font-semibold text-2xl logo">Paris</span>
               </div>

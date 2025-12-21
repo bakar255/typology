@@ -59,9 +59,10 @@ body, html {
 }
 
 .btn {
+  color:#2c2c2c;
   display: block;
-  font-weight: 500;
-  font-size: 1.1rem;
+  font-weight: 100;
+  font-size: 17px;
   padding: 10px 16px;
   text-decoration: none;
   transition: all 0.2s ease;
