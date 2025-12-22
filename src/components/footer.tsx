@@ -15,14 +15,31 @@ export default function Footer() {
     }
   }
 
+
+
+  const information = [
+  'Aide', 'Retour de colis', 'Localiser mon colis',
+  'Première livraison', 'Information sur nos emballages biodégradable',
+  'Nos promotions',
+  ]
+
   return (
     <div>
       <footer className="bg-gradient-to-br from-gray-50 to-gray-100 border-t border-gray-200 relative">
         <div className="py-16 px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+
+          <div className="space-y-2 text-gray-600 flex flex-col items-start">
+            <h2 className="text-1xl text-muted-foreground uppercase text-gray-800">Information</h2>
+             {information.map((item) => (
+              <div>
+                <span className="text-sm cursor-pointer">{item}</span> 
+              </div>
+             ))}
+          </div>
  
           <div className="space-y-6 flex flex-col items-start">
-            <h2 className="font-bold text-2xl text-gray-800 mb-4">À PROPOS</h2>
-            <div className="space-y-3 text-gray-600">
+            <h2 className="text-1xl text-gray-800 mb-4">À propos de nous</h2>
+            <div className="space-y-3 text-gray-600 text-sm">
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Nos points de vente</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Contactez-nous</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Livraison et retours gratuits</a>
@@ -34,8 +51,8 @@ export default function Footer() {
           </div>
 
           <div className="space-y-6 flex flex-col items-start">
-            <h2 className="font-bold text-2xl text-gray-800 mb-4">AIDE</h2>
-            <div className="space-y-3 text-gray-600">
+            <h2 className="uppercase text-1xl text-muted-foreground text-gray-800 mb-4">Aide</h2>
+            <div className="space-y-3 text-gray-600 text-sm">
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Vos questions fréquentes</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Notre Histoire</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Conditions générales</a>

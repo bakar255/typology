@@ -1,7 +1,7 @@
 import Header from "@/components/navbar/header";
 import Hero  from "@/components/hero";
 import Proprety from "@/components/proprety";
-import AnimatedHero from "@/components/AnimatedHero";
+import AnimatedHero from "@/components/animations/AnimatedHero";
 import SecondProprety from "@/components/secondeProprety";
 import Footer from "@/components/footer";
 
