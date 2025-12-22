@@ -4,6 +4,7 @@ import { ButtonHeader } from '../ui/headerButton';
 import Cart from './cart';
 import SearchInput from './searchInput';
 import NavigationSection from './navigationSection';
+import Logo from '../ui/logo';
 
 export default function Header() {
 
@@ -15,10 +16,7 @@ export default function Header() {
 
               <SearchInput />
              
-              <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 flex-1">
-                <span className="font-bold text-2xl text-foreground logo">Typeaulogy</span>
-                <span className="text-foreground font-semibold text-2xl logo">Paris</span>
-              </div>
+              <Logo />
 
               <div className="flex items-center gap-7">
                {/* Selection langues*/}

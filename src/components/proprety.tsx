@@ -2,9 +2,13 @@ import { useRouter } from "next/router";
 import { useCart } from "@/context/CartContext";
 import { products, Product } from "@/data/products";
 import Image from "next/image";
+import { useState } from "react";
 
 
 export default function Proprety() {
+
+    const [slide, setSlide] = useState([]);
+
     const router = useRouter();
     const { addToCart } = useCart();
 
@@ -18,12 +22,12 @@ export default function Proprety() {
     };
 
     return (
-        <div className="container mt-16 mx-auto">
-            <div className="text-center flex flex-col items-center justify-center">
-                <span className="text-8xl font-bold mb-2">Nos Best-Seller</span>
-                <span className="text-5xl font-semibold">Découvrez nos produits les plus vendus</span>
+        <div className="container mx-auto py-26 relative">
+            <div className="text-center flex flex-col items-center justify-center ">
+                <span className="text-4xl font-bold mb-2 playfair-family">Nos Best-Seller</span>
+                <span className="text-2xl font-semibold playfair-family">Découvrez nos produits les plus vendus</span>
                 
-                <div className="proprety-grid">
+                <div className="col-span-6 flex space-x-6 gap-3 py-5">
                 {products.map((product) => (
                     <div 
                         key={product.id} 
@@ -40,16 +44,16 @@ export default function Proprety() {
                         />
                         <div className="w-full max-w-[2000px] max-h-[2000px] flex flex-col text-left space-y-2.5 justify-between flex-grow p-4">
                         <div>
-                            <span className="font-semibold text-black block">{product.titre}</span>  
-                            <span className="text-black block">{product.description}</span>
+                            <span className="font-semibold text-foreground block">{product.titre}</span>  
+                            <span className="text-foreground block">{product.description}</span>
                         </div>
-                        <div className="absolute right-1 items-center mt-4">
-                            <span className="font-bold text-black">{product.price}€</span>
+                        <div className="absolute right-2 bottom-18 items-center mt-4">
+                            <span className="font-bold text-">{product.price}€</span>
                         </div>
                         </div>
                         
                         <button 
-                            className="w-full py-3 p-5 rounded-sm text-black border cursor-pointer border-black bg-white mt-auto hover:bg-gray-50 transition-colors"
+                            className="w-full py-3 p-5 rounded-sm text-black border cursor-pointer border-black bg-white"
                             onClick={(e) => handleAddToCart(e, product)}
                         >
                         Ajouter au panier
