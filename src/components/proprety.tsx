@@ -22,7 +22,7 @@ export default function Proprety() {
     };
 
     return (
-        <div className="container mx-auto py-26 relative">
+        <div className=" container mx-auto py-26 relative">
             <div className="text-center flex flex-col items-center justify-center ">
                 <span className="text-4xl font-bold mb-2 playfair-family">Nos Best-Seller</span>
                 <span className="text-2xl font-semibold playfair-family">Découvrez nos produits les plus vendus</span>
