@@ -15,61 +15,38 @@ export default function Footer() {
     }
   }
 
-
-
-  const information = [
-  'Aide', 'Retour de colis', 'Localiser mon colis',
-  'Première livraison', 'Information sur nos emballages biodégradable',
-  'Nos promotions',
-  ]
-
   return (
     <div>
       <footer className="bg-gradient-to-br from-gray-50 to-gray-100 relative">
-        <div className="py-16 px-16 grid md:grid-cols-2 lg:grid-cols-4 mx-auto">
+        <div className="py-12 px-8 grid md:grid-cols-2 lg:grid-cols-4 mx-auto max-w-7xl">
 
-          <div className="space-y-2 text-gray-600 flex flex-col items-start">
-            <h2 className="text-1xl text-muted-foreground  text-gray-800">Information</h2>
-             {information.map((item) => (
-              <div>
-                <span className="text-sm cursor-pointer">{item}</span> 
-              </div>
-             ))}
-          </div>
- 
-          <div className="space-y-6 flex flex-col items-start">
-            <h2 className="text-1xl text-gray-800 mb-4">À propos de nous</h2>
-            <div className="space-y-3 text-gray-600 text-sm">
+          {/* À propos de nous */}
+          <div className="space-y-4 flex flex-col items-start">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">À propos de nous</h2>
+            <div className="space-y-2 text-gray-600 text-sm">
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Nos points de vente</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Contactez-nous</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Livraison et retours gratuits</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Avis client</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Cadeaux d&apos;entreprises</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Presse</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Normes de l&apos;entreprise</a>
+              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Livraison et retours</a>
             </div>
           </div>
 
-          <div className="space-y-6 flex flex-col items-start">
-            <h2 className=" text-1xl text-muted-foreground text-gray-800 mb-4">Aide</h2>
-            <div className="space-y-3 text-gray-600 text-sm">
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Vos questions fréquentes</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Notre Histoire</a>
+          {/* Aide */}
+          <div className="space-y-4 flex flex-col items-start">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">Aide</h2>
+            <div className="space-y-2 text-gray-600 text-sm">
+              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">FAQ</a>
               <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Conditions générales</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Charte de confidentialité</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Nos produits</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Affiliation</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Rejoindre l&apos;équipe</a>
+              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Confidentialité</a>
             </div>
           </div>
 
-          {/*  Newsletter */}
-          <div className="md:col-span-2 lg:col-span-1 flex flex-col items-center lg:items-start">
+          {/* Newsletter */}
+          <div className="md:col-span-2 lg:col-span-2 flex flex-col items-center lg:items-start">
             <div className="w-full max-w-md">
               <h3 className="text-xl font-bold text-gray-800 mb-2 text-center lg:text-left">
                 Recevez nos nouveautés
               </h3>
-              <p className="text-gray-600 mb-6 text-center lg:text-left">
+              <p className="text-gray-600 mb-4 text-center lg:text-left">
                 Soyez les premiers informés de nos nouvelles collections et offres exclusives
               </p>
               
