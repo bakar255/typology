@@ -1,4 +1,4 @@
-import { SendHorizontal, Mail } from "lucide-react"
+import { SendHorizontal, Mail, Facebook, TwitchIcon, Twitter } from "lucide-react"
 import { useState } from "react"
 
 export default function Footer() {
@@ -15,38 +15,83 @@ export default function Footer() {
     }
   }
 
+  const information = [
+    'Aide', 'Retour de colis', 'Localiser mon colis',
+    'Première livraison', 'Information sur nos emballages biodégradable',
+    'Nos promotions',
+  ]
+
+  const aboutUs = [
+    { name: 'Nos points de vente', href: '#' },
+    { name: 'Contactez-nous', href: '#' },
+    { name: 'Livraison et retours gratuits', href: '#' },
+    { name: 'Avis client', href: '#' },
+    { name: 'Cadeaux d\'entreprises', href: '#' },
+    { name: 'Presse', href: '#' },
+    { name: 'Normes de l\'entreprise', href: '#' },
+  ]
+
+  const help = [
+    { name: 'Vos questions fréquentes', href: '#' },
+    { name: 'Notre Histoire', href: '#' },
+    { name: 'Conditions générales', href: '#' },
+    { name: 'Charte de confidentialité', href: '#' },
+    { name: 'Nos produits', href: '#' },
+    { name: 'Affiliation', href: '#' },
+    { name: 'Rejoindre l\'équipe', href: '#' },
+  ]
+
   return (
     <div>
+        <div className="flex w-screen h-30 bg-[#f8efdf] ">
+
+          <div className="flex  items-center justify-center">
+            
+            <Mail size={26} className="ml-15"/>
+          <p className="ml-5 text-1xl text-foreground leading-5 tracking-tight uppercase">
+              Soyez un des premiers à être informé à propos de nos derniers arrivages, tendances ainsi que nos offres exclusive. 
+           </p>
+          </div>
+            <div className="flex items-center justify-end">
+           </div>
+        </div>
       <footer className="bg-gradient-to-br from-gray-50 to-gray-100 relative">
-        <div className="py-12 px-8 grid md:grid-cols-2 lg:grid-cols-4 mx-auto max-w-7xl">
+        <div className="py-16 px-16 grid md:grid-cols-2 lg:grid-cols-4 mx-auto">
 
-          {/* À propos de nous */}
-          <div className="space-y-4 flex flex-col items-start">
-            <h2 className="text-lg font-semibold text-gray-800 mb-2">À propos de nous</h2>
-            <div className="space-y-2 text-gray-600 text-sm">
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Nos points de vente</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Contactez-nous</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Livraison et retours</a>
+          <div className="space-y-2 text-gray-600 flex flex-col items-start">
+            <h2 className="text-1xl text-muted-foreground  text-gray-800">Information</h2>
+             {information.map((item) => (
+              <div key={item}>
+                <span className="text-sm cursor-pointer">{item}</span> 
+              </div>
+             ))}
+          </div>
+ 
+          <div className="space-y-6 flex flex-col items-start">
+            <h2 className="text-1xl text-gray-800 mb-4">À propos de nous</h2>
+            <div className="space-y-3 text-gray-600 text-sm">
+              {aboutUs.map((link) => (
+                <a key={link.name} href={link.href} className="block hover:text-gray-800 transition-colors duration-200">{link.name}</a>
+              ))}
             </div>
           </div>
 
-          {/* Aide */}
-          <div className="space-y-4 flex flex-col items-start">
-            <h2 className="text-lg font-semibold text-gray-800 mb-2">Aide</h2>
-            <div className="space-y-2 text-gray-600 text-sm">
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">FAQ</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Conditions générales</a>
-              <a href="#" className="block hover:text-gray-800 transition-colors duration-200">Confidentialité</a>
+          <div className="space-y-6 flex flex-col items-start">
+            <h2 className=" text-1xl text-muted-foreground text-gray-800 mb-4">Aide</h2>
+            <div className="space-y-3 text-gray-600 text-sm">
+              {help.map((link) => (
+                <a key={link.name} href={link.href} className="block hover:text-gray-800 transition-colors duration-200">{link.name}</a>
+              ))}
             </div>
           </div>
 
-          {/* Newsletter */}
-          <div className="md:col-span-2 lg:col-span-2 flex flex-col items-center lg:items-start">
+          {/*  Newsletter */}
+          <div className="md:col-span-2 lg:col-span-1 flex flex-col items-center lg:items-start">
             <div className="w-full max-w-md">
               <h3 className="text-xl font-bold text-gray-800 mb-2 text-center lg:text-left">
                 Recevez nos nouveautés
               </h3>
-              <p className="text-gray-600 mb-4 text-center lg:text-left">
+              <p className="text-gray-600 mb-6 text-center lg:text-left">
                 Soyez les premiers informés de nos nouvelles collections et offres exclusives
               </p>
               

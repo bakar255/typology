@@ -30,8 +30,8 @@ body, html {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 1rem;
-  width: 70%;
-  height: 70%;
+  width: 80%;
+  height: 0%;
   max-height: 2000px;
   max-width: 1700px;
   margin: 3rem auto;

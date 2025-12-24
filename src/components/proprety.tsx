@@ -22,12 +22,12 @@ export default function Proprety() {
     };
 
     return (
-        <div className=" container mx-auto py-26 relative">
-            <div className="text-center flex flex-col items-center justify-center ">
+        <div className="">
+            <div className="text-center flex flex-col items-center justify-center mt-12">
                 <span className="text-4xl font-bold mb-2 playfair-family">Nos Best-Seller</span>
                 <span className="text-2xl font-semibold playfair-family">Découvrez nos produits les plus vendus</span>
                 
-                <div className="col-span-6 flex space-x-6 gap-3 py-5">
+                <div className="proprety-grid">
                 {products.map((product) => (
                     <div 
                         key={product.id} 

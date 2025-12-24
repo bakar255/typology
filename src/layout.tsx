@@ -1,4 +1,5 @@
 import Header from "./components/navbar/header"
+import { Analytics } from "@vercel/analytics/next"
 
 export default function DashboardLayout({
   children,
