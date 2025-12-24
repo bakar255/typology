@@ -4,6 +4,7 @@ import Proprety from "@/components/proprety";
 import AnimatedHero from "@/components/animations/AnimatedHero";
 import SecondProprety from "@/components/secondeProprety";
 import Footer from "@/components/footer";
+import ProductList from "@/components/ProductList";
 
 export default function Home() {
 
@@ -15,6 +16,7 @@ export default function Home() {
       <Proprety />
       <AnimatedHero />
       <SecondProprety />
+      <ProductList />
       <Footer />
       </div>
     </div>
