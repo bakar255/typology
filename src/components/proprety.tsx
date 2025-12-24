@@ -42,13 +42,13 @@ export default function Proprety() {
                         height={300}
                         className="w-full max-h-[1800px] hover:scale-105 transition-transform duration-300 object-cover" 
                         />
-                        <div className="w-full max-w-[2000px] max-h-[2000px] flex flex-col text-left space-y-2.5 justify-between flex-grow p-4">
+                        <div className=" font-medium w-full max-w-[2000px] max-h-[2000px] flex flex-col text-left space-y-2.5 justify-between flex-grow p-4">
                         <div>
-                            <span className="font-semibold text-foreground block">{product.titre}</span>  
+                            <span className=" text-foreground block">{product.titre}</span>  
                             <span className="text-foreground block">{product.description}</span>
                         </div>
                         <div className="absolute right-2 bottom-18 items-center mt-4">
-                            <span className="font-bold text-">{product.price}€</span>
+                            <span className="font-medium">{product.price}€</span>
                         </div>
                         </div>
                         

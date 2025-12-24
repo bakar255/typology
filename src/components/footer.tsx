@@ -1,4 +1,4 @@
-import { SendHorizontal, Mail, Facebook, TwitchIcon, Twitter } from "lucide-react"
+import { SendHorizontal, Mail, Facebook, TwitchIcon, Twitter,  } from "lucide-react"
 import { useState } from "react"
 
 export default function Footer() {
@@ -51,10 +51,20 @@ export default function Footer() {
           <p className="ml-5 text-1xl text-foreground leading-5 tracking-tight uppercase">
               Soyez un des premiers à être informé à propos de nos derniers arrivages, tendances ainsi que nos offres exclusive. 
            </p>
+
+           <button className="rounded-s-xs py-3 ml-15 px-2 bg-black text-white"> Sign Up </button>
           </div>
-            <div className="flex items-center justify-end">
+            <div className="flex items-center ml-56 justify-end">
+              <p className="ml-10 text-1xl text-foreground leading-5 tracking-tight uppercase mr-4">
+                CONNECT WITH US
+              </p>
+              <div className="flex space-x-4 ml-5">
+                <Facebook size={24} className="cursor-pointer hover:text-blue-600" />
+                <Twitter size={24} className="cursor-pointer hover:text-blue-400" />
+              </div>
            </div>
         </div>
+
       <footer className="bg-gradient-to-br from-gray-50 to-gray-100 relative">
         <div className="py-16 px-16 grid md:grid-cols-2 lg:grid-cols-4 mx-auto">
 
