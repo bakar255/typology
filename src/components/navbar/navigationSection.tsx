@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useRouter } from 'next/router';
 import { ButtonHeader } from "../ui/headerButton"
 import Link from "next/link";
-         
-  const navigationItems = [
+import { ProductPreview } from "./productPreview";
+
+const navigationItems = [
   {
     title: 'Bodycare',
     slug: 'bodycare',
@@ -23,10 +24,10 @@ import Link from "next/link";
         subSlug: 'korean-beauty',
         items: [
           // subItems: ['Sheet Masks', 'Essences', 'Toners', 'Ampoules']
-          {name: 'Sheet Masks', slug: 'sheet-masks'},
-          {name: 'Essences', slug: 'essences'},
-          {name: 'Toners', slug: 'toners'},
-          {name: 'Ampoules', slug: 'ampoules'},
+          { name: 'Sheet Masks', slug: 'sheet-masks' },
+          { name: 'Essences', slug: 'essences' },
+          { name: 'Toners', slug: 'toners' },
+          { name: 'Ampoules', slug: 'ampoules' },
         ]
       }
     ]
@@ -208,67 +209,88 @@ import Link from "next/link";
 
 export default function NavigationSection() {
 
-const [onHover, setOnHover] = useState<string | null >(null);
+  const [onHover, setOnHover] = useState<string | null>(null);
+  const [selectedSection, setSelectedSection] = useState<{ title: string, items: any[] } | null>(null);
 
-const router = useRouter();
+  const router = useRouter();
 
-return (
+  return (
 
- <div className=" ">
-  <div className="max-w-[1700px] mx-auto px-4 py-1 relative">
-    <nav className="flex items-center justify-center">
+    <div className=" ">
+      <div className="max-w-[1700px] mx-auto px-4 py-1 relative">
+        <nav className="flex items-center justify-center">
 
-      <div className="flex gap-8">
+          <div className="flex gap-8">
 
-        {navigationItems.map((item) => (
-          <div
-            key={item.title}
-            onMouseEnter={() => setOnHover(item.title)}
+            {navigationItems.map((item) => (
+              <div
+                key={item.title}
+                onMouseEnter={() => setOnHover(item.title)}
+              >
+                <ButtonHeader
+                  title={item.title}
+                  onClick={() => router.push(`/${item.slug}`)}
+                />
 
-          >
-            <ButtonHeader 
-            title={item.title} 
-            onClick={() => router.push(`/${item.slug}`) }
-            />
+                {onHover === item.title && (
+                  <div
+                    className="absolute top-full bg-white z-50 border-t border-gray-300 min-h-[150px] shadow-sm"
+                    style={{ left: 'calc(-50vw + 50%)', width: '100vw' }}
+                    onMouseLeave={() => {
+                      setOnHover(null);
+                      setSelectedSection(null);
+                    }}
+                  >
+                    <div className="max-w-[1700px] mx-auto px-8 py-8 flex items-start gap-12">
 
-            {onHover === item.title && (
-              <div className="absolute top-full bg-white z-50 border-t border-gray-300 min-h-[150px]" style={{left: 'calc(-50vw + 50%)', width: '100vw'}}   onMouseLeave={() => setOnHover(null)}>
-                <div className=" px-8 py-6">
+                      <div className="flex gap-x-32 justify-center flex-1">
 
-                    <div className="flex gap-x-32 justify-center">
-                     
-                    {/* Navigation Subtitle */}
-                    {item.sectionItems?.map((section) => (
-                      <div key={section.subItems} className="flex flex-col">
+                        {/* Navigation Subtitle */}
+                        {item.sectionItems?.map((section) => (
+                          <div key={section.subItems} className="flex flex-col">
 
-                        <h2 className="text-lg font-semibold mb-1 text-[#444444] uppercase tracking-wide">{section.subItems}</h2>
-                        <div className="border-t border-gray-300 mb-3"></div>
-
-                    {/* Navigation subItems */}
-                        {section.items.map((section) => (
-                          <div key={section.name} className="mb-2 space-y-3.5">
-                            <Link 
-                            className="cursor-pointer text-sm tracking-widest text-[#2c2c2c] hover:text-gray-600"
-                            href={`${section.slug}`}
+                            <button
+                              onClick={() => setSelectedSection({ title: section.subItems, items: section.items })}
+                              className={`text-lg font-semibold mb-1 uppercase tracking-wide text-left transition-colors ${selectedSection?.title === section.subItems ? 'text-black' : 'text-[#444444] hover:text-black'
+                                }`}
                             >
-                            {section.name}
-                           </Link>
+                              {section.subItems}
+                            </button>
+                            <div className={`border-t mb-3 transition-all duration-300 ${selectedSection?.title === section.subItems ? 'border-black w-full' : 'border-gray-300 w-12 group-hover:w-full'
+                              }`}></div>
+
+                            {/* Navigation subItems */}
+                            {section.items.map((subItem) => (
+                              <div key={subItem.name} className="mb-2 space-y-3.5">
+                                <Link
+                                  className="cursor-pointer text-sm tracking-widest text-[#2c2c2c] hover:text-gray-600 block"
+                                  href={`/${subItem.slug}`}
+                                >
+                                  {subItem.name}
+                                </Link>
+                              </div>
+                            ))}
                           </div>
                         ))}
                       </div>
-                    ))}
+
+                      {/* Product Preview Section - Appears on Selection */}
+                      {selectedSection && (
+                        <div className="shrink-0">
+                          <ProductPreview title={selectedSection.title} items={selectedSection.items} />
+                        </div>
+                      )}
+
+                    </div>
                   </div>
-
-                </div>
+                )}
               </div>
-            )}
+            ))}
+
           </div>
-        ))}
+        </nav>
+      </div >
+    </div >
 
-      </div>
-    </nav>
-  </div>
-</div>
-
-    )
+  )
 }
