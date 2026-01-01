@@ -1,5 +1,6 @@
 import { SendHorizontal, Mail, Facebook, TwitchIcon, Twitter,  } from "lucide-react"
 import { useState } from "react"
+import Logo from "./ui/logo"
 
 export default function Footer() {
   const [email, setEmail] = useState("")
@@ -66,7 +67,17 @@ export default function Footer() {
         </div>
 
       <footer className="bg-gradient-to-br from-gray-50 to-gray-100 relative">
-        <div className="py-16 px-16 grid md:grid-cols-2 lg:grid-cols-4 mx-auto">
+        <div className="py-16 px-16 grid md:grid-cols-2 lg:grid-cols-5 mx-auto">
+
+            
+             <div>
+               <span className="heading text-2xl">Typology Paris</span>
+                <p className="text-gray-600 text-xs mt-2 mr-5 tracking-wider">
+                TYPOLOGY PARIS® est le meilleur site français ayant une large collections de produits luxurieux avec une selection de plus 100 produits de marques prestigieuse venue du monde entier.
+                </p>
+              
+             </div>
+
 
           <div className="space-y-2 text-gray-600 flex flex-col items-start">
             <h2 className="text-1xl text-muted-foreground  text-gray-800">Information</h2>

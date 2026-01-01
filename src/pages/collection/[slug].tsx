@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/navbar/header";
 import { slugData } from "@/data/data";
 import { Search, Filter, ArrowUpDown } from "lucide-react";
@@ -53,6 +54,7 @@ export default function slug({title, subtitle, products}: SlugProps)  {
                     </button>
                   </div>
               </div>
+              <Footer />
         </div>
     )
 }
