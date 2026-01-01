@@ -82,6 +82,19 @@ body, html {
   cursor: pointer;
 }
 
+.btnFilter {
+  display: flex;
+  justify-content: flex-start;
+  background-color: white;
+  width: 260px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #202020;
+  border-radius: 1px;
+  align-items: center;
+  font-size: 14px;
+}
+
 
 .proprety-item:hover {
   transform: translateY(-4px);
