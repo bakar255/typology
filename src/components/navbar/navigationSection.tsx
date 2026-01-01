@@ -10,23 +10,23 @@ const navigationItems = [
     slug: 'bodycare',
     sectionItems: [
       {
-        subItems: 'Soaps & Cleansers',
+        subItems: 'Savons et nettoyants',
         subSlug: 'soaps-cleansers',
         items: [
-          { name: 'Soap', slug: 'soap' },
+          { name: 'Savon', slug: 'soap' },
           { name: 'Lotions', slug: 'lotions' },
-          { name: 'Body Oils', slug: 'body-oils' },
-          { name: 'Scrubs', slug: 'scrubs' }
+          { name: 'Huiles pour le corps', slug: 'body-oils' },
+          { name: 'Gommages', slug: 'scrubs' }
         ]
       },
       {
-        subItems: 'Korean Beauty',
+        subItems: 'Beauté coréenne',
         subSlug: 'korean-beauty',
         items: [
           // subItems: ['Sheet Masks', 'Essences', 'Toners', 'Ampoules']
-          { name: 'Sheet Masks', slug: 'sheet-masks' },
+          { name: 'Masques en feuilles', slug: 'sheet-masks' },
           { name: 'Essences', slug: 'essences' },
-          { name: 'Toners', slug: 'toners' },
+          { name: 'Toniques', slug: 'toners' },
           { name: 'Ampoules', slug: 'ampoules' },
         ]
       }
@@ -34,129 +34,129 @@ const navigationItems = [
   },
 
   {
-    title: 'Skin Care',
+    title: 'Skincare',
     slug: 'skin-care',
     sectionItems: [
       {
-        subItems: 'Cleansers',
+        subItems: 'Nettoyants',
         subSlug: 'cleansers',
         items: [
-          { name: 'Foam Cleanser', slug: 'foam-cleanser' },
-          { name: 'Gel Cleanser', slug: 'gel-cleanser' },
-          { name: 'Micellar Water', slug: 'micellar-water' }
+          { name: 'Nettoyant moussant', slug: 'foam-cleanser' },
+          { name: 'Nettoyant en gel', slug: 'gel-cleanser' },
+          { name: 'Eau micellaire', slug: 'micellar-water' }
         ]
       },
       {
-        subItems: 'Moisturizers',
+        subItems: 'Hydratants',
         subSlug: 'moisturizers',
         items: [
-          { name: 'Day Cream', slug: 'day-cream' },
-          { name: 'Night Cream', slug: 'night-cream' },
-          { name: 'Hydrating Lotion', slug: 'hydrating-lotion' }
+          { name: 'Crème de jour', slug: 'day-cream' },
+          { name: 'Crème de nuit', slug: 'night-cream' },
+          { name: 'Lotion hydratante', slug: 'hydrating-lotion' }
         ]
       },
       {
-        subItems: 'Serums',
+        subItems: 'Sérums',
         subSlug: 'serums',
         items: [
-          { name: 'Vitamin C Serum', slug: 'vitamin-c-serum' },
-          { name: 'Hyaluronic Acid', slug: 'hyaluronic-acid' },
-          { name: 'Retinol Serum', slug: 'retinol-serum' }
+          { name: 'Sérum à la vitamine C', slug: 'vitamin-c-serum' },
+          { name: 'Acide hyaluronique', slug: 'hyaluronic-acid' },
+          { name: 'Sérum au rétinol', slug: 'retinol-serum' }
         ]
       },
       {
-        subItems: 'Masks',
+        subItems: 'Masques',
         subSlug: 'masks',
         items: [
-          { name: 'Clay Mask', slug: 'clay-mask' },
-          { name: 'Sheet Mask', slug: 'sheet-mask' },
-          { name: 'Sleeping Mask', slug: 'sleeping-mask' }
+          { name: 'Masque à l\'argile', slug: 'clay-mask' },
+          { name: 'Masque en feuille', slug: 'sheet-mask' },
+          { name: 'Masque de nuit', slug: 'sleeping-mask' }
         ]
       }
     ]
   },
 
   {
-    title: 'Bundles',
+    title: 'Lots',
     slug: 'bundles',
     sectionItems: [
       {
-        subItems: 'Skincare Sets',
+        subItems: 'Ensembles soins de la peau',
         subSlug: 'skincare-sets',
         items: [
-          { name: 'Anti-Aging Kit', slug: 'anti-aging-kit' },
-          { name: 'Acne Treatment Set', slug: 'acne-treatment-set' },
-          { name: 'Brightening Bundle', slug: 'brightening-bundle' }
+          { name: 'Kit anti-âge', slug: 'anti-aging-kit' },
+          { name: 'Ensemble traitement acné', slug: 'acne-treatment-set' },
+          { name: 'Lot éclaircissant', slug: 'brightening-bundle' }
         ]
       },
       {
-        subItems: 'Bodycare Sets',
+        subItems: 'Ensembles soins du corps',
         subSlug: 'bodycare-sets',
         items: [
-          { name: 'Relaxation Spa Set', slug: 'relaxation-spa-set' },
-          { name: 'Exfoliation Kit', slug: 'exfoliation-kit' },
-          { name: 'Hydration Pack', slug: 'hydration-pack' }
+          { name: 'Ensemble spa relaxation', slug: 'relaxation-spa-set' },
+          { name: 'Kit exfoliation', slug: 'exfoliation-kit' },
+          { name: 'Pack hydratation', slug: 'hydration-pack' }
         ]
       },
       {
-        subItems: 'Gift Sets',
+        subItems: 'Coffrets cadeaux',
         subSlug: 'gift-sets',
         items: [
-          { name: 'Luxury Gift Box', slug: 'luxury-gift-box' },
-          { name: 'Travel Size Set', slug: 'travel-size-set' },
-          { name: 'Holiday Special', slug: 'holiday-special' }
+          { name: 'Boîte cadeau luxe', slug: 'luxury-gift-box' },
+          { name: 'Ensemble taille voyage', slug: 'travel-size-set' },
+          { name: 'Spécial fêtes', slug: 'holiday-special' }
         ]
       },
       {
-        subItems: 'Seasonal',
+        subItems: 'Saisonnier',
         subSlug: 'seasonal',
         items: [
-          { name: 'Summer Glow Set', slug: 'summer-glow-set' },
-          { name: 'Winter Care Bundle', slug: 'winter-care-bundle' },
-          { name: 'Spring Renewal Kit', slug: 'spring-renewal-kit' }
+          { name: 'Ensemble éclat été', slug: 'summer-glow-set' },
+          { name: 'Lot soin hiver', slug: 'winter-care-bundle' },
+          { name: 'Kit renouvellement printemps', slug: 'spring-renewal-kit' }
         ]
       }
     ]
   },
 
   {
-    title: 'Makeup',
+    title: 'Maquillage',
     slug: 'makeup',
     sectionItems: [
       {
-        subItems: 'Foundation',
+        subItems: 'Fond de teint',
         subSlug: 'foundation',
         items: [
-          { name: 'Liquid Foundation', slug: 'liquid-foundation' },
-          { name: 'Cream Foundation', slug: 'cream-foundation' },
-          { name: 'Tinted Moisturizer', slug: 'tinted-moisturizer' }
+          { name: 'Fond de teint liquide', slug: 'liquid-foundation' },
+          { name: 'Fond de teint crème', slug: 'cream-foundation' },
+          { name: 'Hydratant teinté', slug: 'tinted-moisturizer' }
         ]
       },
       {
-        subItems: 'Lipstick',
+        subItems: 'Rouge à lèvres',
         subSlug: 'lipstick',
         items: [
-          { name: 'Matte Lipstick', slug: 'matte-lipstick' },
-          { name: 'Glossy Lipstick', slug: 'glossy-lipstick' },
-          { name: 'Tinted Balm', slug: 'tinted-balm' }
+          { name: 'Rouge à lèvres mat', slug: 'matte-lipstick' },
+          { name: 'Rouge à lèvres brillant', slug: 'glossy-lipstick' },
+          { name: 'Baume teinté', slug: 'tinted-balm' }
         ]
       },
       {
-        subItems: 'Eyeshadow',
+        subItems: 'Fard à paupières',
         subSlug: 'eyeshadow',
         items: [
           { name: 'Palette', slug: 'palette' },
-          { name: 'Single Shade', slug: 'single-shade' },
-          { name: 'Cream Eyeshadow', slug: 'cream-eyeshadow' }
+          { name: 'Nuance unique', slug: 'single-shade' },
+          { name: 'Fard à paupières crème', slug: 'cream-eyeshadow' }
         ]
       },
       {
-        subItems: 'Brushes',
+        subItems: 'Pinceaux',
         subSlug: 'brushes',
         items: [
-          { name: 'Foundation Brush', slug: 'foundation-brush' },
-          { name: 'Eyeshadow Brush Set', slug: 'eyeshadow-brush-set' },
-          { name: 'Lip Brush', slug: 'lip-brush' }
+          { name: 'Pinceau fond de teint', slug: 'foundation-brush' },
+          { name: 'Jeu de pinceaux fard à paupières', slug: 'eyeshadow-brush-set' },
+          { name: 'Pinceau à lèvres', slug: 'lip-brush' }
         ]
       }
     ]
@@ -170,36 +170,36 @@ const navigationItems = [
         subItems: 'Floral',
         subSlug: 'floral',
         items: [
-          { name: 'Rose Perfume', slug: 'rose-perfume' },
-          { name: 'Jasmine Scent', slug: 'jasmine-scent' },
-          { name: 'Lavender Mist', slug: 'lavender-mist' }
+          { name: 'Parfum rose', slug: 'rose-perfume' },
+          { name: 'Parfum jasmin', slug: 'jasmine-scent' },
+          { name: 'Brume lavande', slug: 'lavender-mist' }
         ]
       },
       {
         subItems: 'Oriental',
         subSlug: 'oriental',
         items: [
-          { name: 'Vanilla Essence', slug: 'vanilla-essence' },
-          { name: 'Sandalwood', slug: 'sandalwood' },
-          { name: 'Amber Spice', slug: 'amber-spice' }
+          { name: 'Essence vanille', slug: 'vanilla-essence' },
+          { name: 'Santal', slug: 'sandalwood' },
+          { name: 'Épice ambre', slug: 'amber-spice' }
         ]
       },
       {
-        subItems: 'Fresh',
+        subItems: 'Frais',
         subSlug: 'fresh',
         items: [
-          { name: 'Citrus Blast', slug: 'citrus-blast' },
-          { name: 'Ocean Breeze', slug: 'ocean-breeze' },
-          { name: 'Green Tea', slug: 'green-tea' }
+          { name: 'Explosion d\'agrumes', slug: 'citrus-blast' },
+          { name: 'Brise océane', slug: 'ocean-breeze' },
+          { name: 'Thé vert', slug: 'green-tea' }
         ]
       },
       {
-        subItems: 'Woody',
+        subItems: 'Boisé',
         subSlug: 'woody',
         items: [
-          { name: 'Cedarwood', slug: 'cedarwood' },
-          { name: 'Pine Forest', slug: 'pine-forest' },
-          { name: 'Oak Moss', slug: 'oak-moss' }
+          { name: 'Cèdre', slug: 'cedarwood' },
+          { name: 'Forêt de pins', slug: 'pine-forest' },
+          { name: 'Mousse de chêne', slug: 'oak-moss' }
         ]
       }
     ]
@@ -228,8 +228,8 @@ export default function NavigationSection() {
                 onMouseEnter={() => setOnHover(item.title)}
               >
                 <ButtonHeader
-                  title={item.title}
-                  onClick={() => router.push(`/${item.slug}`)}
+                  title={item.title} 
+                  onClick={() =>  router.push(`/${item.slug}`) }
                 />
 
                 {onHover === item.title && (
@@ -264,7 +264,7 @@ export default function NavigationSection() {
                               <div key={subItem.name} className="mb-2 space-y-3.5">
                                 <Link
                                   className="cursor-pointer text-sm tracking-widest text-[#2c2c2c] hover:text-gray-600 block"
-                                  href={`/${subItem.slug}`}
+                                  href={`/collection/${subItem.slug}`}
                                 >
                                   {subItem.name}
                                 </Link>
