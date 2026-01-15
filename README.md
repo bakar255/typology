@@ -1,5 +1,5 @@
 
-# 🛍️ Typology E-commerce Clone
+#  Typology E-commerce Clone
 
 A modern, fully-functional e-commerce website built with Next.js, TypeScript, and Tailwind CSS. This project demonstrates advanced React patterns, state management, and responsive design.
 
@@ -17,26 +17,23 @@ A modern, fully-functional e-commerce website built with Next.js, TypeScript, an
 
 **[View Live Site](https://typology-clone.vercel.app/)**
 
-## ✨ Features
+##  Features
 
-### 🛒 **Shopping Cart System**
+###  **Shopping Cart System**
 - Global state management with React Context API
 - Add/remove products with quantity controls
 - Real-time cart updates and total calculations
 - Persistent cart state during session
 
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **Icons**: Lucide React
 - **State Management**: React Context API
-- **Deployment**: Vercel
-- **Image Optimization**: Next.js Image component
 
-## 🏗️ Architecture
+##  Architecture
 
 ### **Context Providers**
 - `CartContext`: Global cart state management
@@ -62,7 +59,7 @@ src/
 ```
 
 
-## 🎯 Key Features Implementation
+##  Key Features Implementation
 
 ### **Shopping Cart**
 - Context API for global state
@@ -70,5 +67,3 @@ src/
 - Real-time total calculations
 - Session persistence
 ---
-
-*Built with ❤️ using Next.js, TypeScript, and Tailwind CSS*
