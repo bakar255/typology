@@ -55,11 +55,10 @@ export default function ProductList() {
           <button
             key={item.id}
             onClick={() => setSelectedCategory(item.name)}
-            className={` hover:bg-pink-100 w-40 h-14 cursor-pointer font-bold border py-2.5 px-6 ${
-              selectedCategory === item.name
+            className={` hover:bg-pink-100 w-40 h-14 cursor-pointer font-bold border py-2.5 px-6 ${selectedCategory === item.name
                 ? "bg-black text-white border-black"
                 : "bg-white text-black border-black"
-            }`}
+              }`}
 
           >
             {item.name}
@@ -70,7 +69,7 @@ export default function ProductList() {
         {bundles.map((bundle) => (
           <div key={bundle.id} className="flex flex-col gap-2 w-full py-5 items-center">
             <img src={bundle.image} alt={bundle.title} className="bg-amber-100 w-66 " />
-        
+
             <div className="flex flex-col gap-5 justify-center items-center">
               <span className="font-bold text-center">{bundle.title}</span>
               <span className="text-sm text-center">{bundle.subtitle}</span>
