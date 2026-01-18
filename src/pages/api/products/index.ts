@@ -44,10 +44,10 @@ export default async function handler(
       description: product.description || '',
       image: product.imageUrl || '/placeholder.jpg',
       price: product.price || 0,
-      rating: 4.5, // Valeur par défaut, peut être ajouté au schéma plus tard
-      reviews: 0, // Valeur par défaut
+      rating: 4.5,
+      reviews: 0,
       category: product.category || undefined,
-      isBestSeller: false, // Peut être déterminé par logique métier plus tard
+      isBestSeller: false,
       brand: product.brand,
       currency: product.currency,
       productUrl: product.productUrl,

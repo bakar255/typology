@@ -8,37 +8,40 @@ const categories = [
   { id: 3, name: "Parfums" },
   { id: 4, name: "Bodycare" },
   { id: 5, name: "Skincare" },
+  {id: 6, name: "Crème de jour"}
 ];
 
 const bundles = [
   {
     id: 1,
-    image: "/bundle.png",
-    title: "Black Opium",
+    image: "/kayali.webp",
+    title: "Kay Ali",
     subtitle: "Cheirosa 91",
     description: "Une nouvelle obsession est en train d'apparaître.",
   },
   {
     id: 2,
-    image: "/bundle1.png",
+    image: "/kilian.png",
     title: "Bundle Premium",
     subtitle: "Collection Exclusive",
     description: "Découvrez notre sélection premium de produits.",
   },
   {
     id: 3,
-    image: "/bundle2.png",
+    image: "/kevin.png",
     title: "Set Découverte",
     subtitle: "Essentiels Beauté",
     description: "Tous les essentiels pour votre routine beauté.",
   },
   {
     id: 4,
-    image: "/bundle3.png",
-    title: "Collection Luxe",
-    subtitle: "Édition Limitée",
-    description: "Une collection exclusive pour une beauté exceptionnelle.",
+    image: "/beauty.png",
+    title: "Cerave Collection",
+    subtitle: "BodyCare",
+    description: "Une collection exclusive pour un soin de qualité.",
   },
+
+
 ];
 
 export default function ProductList() {
@@ -74,11 +77,11 @@ export default function ProductList() {
   };
 
   return (
-    <div className="py-10">
+    <div className="max-w-7xl mx-auto">
       {/* Section titres */}
       <div className="text-center mb-5">
-        <h1 className="text-4xl font-bold">Une sélection d'objets de qualité</h1>
-        <h2 className="text-3xl mt-2">Choisis pour vous !</h2>
+        <h1 className="text-5xl mb-2 font-bold playfair-family">Une sélection d'objets de qualité</h1>
+        <h2 className="text-3xl mt-8 font-medium">Choisis pour vous !</h2>
       </div>
 
       <div className="flex justify-center items-center space-x-5 mb-0 flex-wrap">
@@ -86,11 +89,7 @@ export default function ProductList() {
           <button
             key={item.id}
             onClick={() => setSelectedCategory(item.name)}
-            className={` hover:bg-pink-100 w-40 h-14 cursor-pointer font-bold border py-2.5 px-6 ${selectedCategory === item.name
-                ? "bg-black text-white border-black"
-                : "bg-white text-black border-black"
-              }`}
-
+            className="rounded-full border border-black py-2 px-4 cursor-pointer ml-4 shadow-sm"
           >
             {item.name}
           </button>
@@ -114,11 +113,11 @@ export default function ProductList() {
               <img 
                 src={product.image || "/placeholder.jpg"} 
                 alt={product.titre} 
-                className="bg-amber-100 w-full h-64 object-cover" 
+                className="bg-amber-100 w-full h-72 object-cover" 
               />
 
               <div className="flex flex-col gap-2 justify-center items-center text-center">
-                <span className="font-bold">{product.titre}</span>
+                <span className="font-bold text-xl">{product.titre}</span>
                 <span className="text-sm text-gray-600">{product.description}</span>
                 {product.price && (
                   <span className="font-semibold text-lg">{product.price}€</span>
@@ -126,7 +125,7 @@ export default function ProductList() {
               </div>
 
               <button 
-                className="bg-white cursor-pointer text-black border border-black px-2 w-full py-2 mt-7"
+                className="bg-white cursor-pointer text-black border border-black w-40 py-2"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleProductClick(product.id);
@@ -138,18 +137,18 @@ export default function ProductList() {
           ))}
         </div>
       ) : !selectedCategory ? (
-        <div className="px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-center items-start mt-10">
+        <div className="px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-center items-start mt-10 mb-12">
           {bundles.map((bundle) => (
             <div key={bundle.id} className="flex flex-col gap-2 w-full py-5 items-center">
-              <img src={bundle.image} alt={bundle.title} className="bg-amber-100 w-66 " />
+              <img src={bundle.image} alt={bundle.title} className="bg-amber-100 w-72" />
 
-              <div className="flex flex-col gap-5 justify-center items-center">
-                <span className="font-bold text-center">{bundle.title}</span>
-                <span className="text-sm text-center">{bundle.subtitle}</span>
-                <span className="text-sm text-center">{bundle.description}</span>
+              <div className="flex flex-col gap-2 justify-center items-center">
+                <span className="font-bold text-center text-2xl">{bundle.title}</span>
+                <span className="text-sm text-center text-2xl uppercase ">{bundle.subtitle}</span>
+                <span className="text-center text-1xl ">{bundle.description}</span>
               </div>
 
-              <button className="bg-white cursor-pointer text-black border border-black px-2 w-full py-2 mt-7">
+              <button className="bg-white cursor-pointer text-black border border-black px-2 w-30 py-2 mt-7">
                 ACHETER
               </button>
             </div>
