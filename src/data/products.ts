@@ -6,7 +6,7 @@ export interface Product {
     price: number;
     rating: number;
     reviews: number;
-    category: string;
+    category?: string;
     isBestSeller: boolean;
     detailedDescription?: string;
     ingredients?: string[];

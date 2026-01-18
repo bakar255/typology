@@ -1,16 +1,34 @@
 import { useRouter } from "next/router";
 import { useCart } from "@/context/CartContext";
-import { products, Product } from "@/data/products";
 import Image from "next/image";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { Product } from "@/data/products";
 
 export default function Proprety() {
 
     const [slide, setSlide] = useState([]);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
 
     const router = useRouter();
     const { addToCart } = useCart();
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    const fetchProducts = async () => {
+        try {
+            const response = await fetch('/api/products?limit=12');
+            const data = await response.json();
+            setProducts(data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            setProducts([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleProductClick = (productId: number) => {
         router.push(`/product/${productId}`);
@@ -27,6 +45,12 @@ export default function Proprety() {
                 <span className="text-4xl font-bold mb-2 playfair-family">Nos Best-Seller</span>
                 <span className="text-2xl font-semibold playfair-family">Découvrez nos produits les plus vendus</span>
                 
+                {loading ? (
+                    <div className="text-center py-10">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+                        <p className="text-gray-600">Chargement des produits...</p>
+                    </div>
+                ) : (
                 <div className="proprety-grid">
                 {products.map((product) => (
                     <div 
@@ -62,6 +86,7 @@ export default function Proprety() {
                     </div>
                 ))}
                 </div>
+                )}
             </div>
         </div>
     )

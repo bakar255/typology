@@ -5,30 +5,50 @@ import { ArrowLeft, Star, ShoppingCart, Heart, Plus, Minus } from "lucide-react"
 import Header from "@/components/navbar/header";
 import Footer from "@/components/footer";
 import { useCart } from "@/context/CartContext";
-import { products, Product } from "@/data/products";
+import { Product } from "@/data/products";
 
 export default function ProductDetail() {
      const router = useRouter();
     const { id } = router.query;
     const [product, setProduct] = useState<Product | null>(null);
+    const [loading, setLoading] = useState(true);
      const [quantity, setQuantity] = useState(1);
     const { addToCart } = useCart();
 
      useEffect(() => {
         if (id) {
-            const foundProduct = products.find(p => p.id === parseInt(id as string));
-            setProduct(foundProduct || null);
+            fetchProduct(parseInt(id as string));
         }
     }, [id]);
 
-    if (!product) {
+    const fetchProduct = async (productId: number) => {
+        setLoading(true);
+        try {
+            const response = await fetch(`/api/products/${productId}`);
+            if (response.ok) {
+                const data = await response.json();
+                setProduct(data);
+            } else {
+                setProduct(null);
+            }
+        } catch (error) {
+            console.error('Error fetching product:', error);
+            setProduct(null);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading || !product) {
         return (
             <div>
                 <Header />
                 <div className="flex items-center justify-center min-h-screen">
                     <div className="text-center">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
-                        <p className="text-gray-600">Chargement du produit...</p>
+                        <p className="text-gray-600">
+                            {loading ? 'Chargement du produit...' : 'Produit non trouvé'}
+                        </p>
                     </div>
                 </div>
                 <Footer />

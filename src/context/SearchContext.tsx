@@ -1,15 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-
-interface Product {
-    id: number;
-    titre: string;
-    description: string;
-    image: string;
-    price: number;
-    rating: number;
-    reviews: number;
-    isBestSeller: boolean;
-}
+import { Product } from '@/data/products';
 
 interface SearchContextType {
     searchQuery: string;

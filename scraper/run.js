@@ -1,26 +1,39 @@
-
+import * as cheerio from "cheerio";
 
 async function fn() {
+    const url = "https://www.lookfantastic.fr/c/health-beauty/new/new-in/eu/";
 
-const URL = "https://www.lookfantastic.fr/c/health-beauty/new/new-in/eu/"
+    const response = await fetch(url, {
+        headers: {
+            "User-Agent": "Mozilla/5.0"
+        }
+    });
 
-const response = await fetch(url, {
-method: "GET",
-});
+    const html = await response.text();
+    const $ = cheerio.load(html);
 
+    const produits = $(".product-card");
 
-// Parsing
-const parser = DOMParser;
-const doc = parser.parseFromString(htmlText, "text/html" );
+    produits.each((i, produit) => {
+        const title = $(produit)
+            .find(".product-item-title")
+            .text()
+            .trim();
+         
+        const image = $(produit)
+            .find("img.item-image")
+            .attr("src");
 
-const produits = querySelectorAll("product-card");
+        const price = $(produit)
+            .find(".product-item-price")
+            .first()
+            .text()
+            .trim();
 
-produits.forEach((i, produits) => {
-    const productTitle = produits.querySelector('product-item-title')
-    const price = produits.querySelector("span.text-[14px]").textContent;
-    console.log(price, productTitle);
-});
-
-
-return response.text();
+        console.log(
+            `Titre: ${title} \n Image: ${image} \n Prix: ${price} \n`
+        );
+    });
 }
+
+fn();

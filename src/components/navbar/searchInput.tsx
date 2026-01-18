@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { useSearch } from '@/context/SearchContext';
-import { products } from '@/data/products';
 import Image from 'next/image';
+import { Product } from '@/data/products';
 
 export default function SearchInput() {
   const { setSearchQuery, searchResults, setSearchResults, isSearchOpen, setIsSearchOpen, performSearch } = useSearch();
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    // Charger les produits au montage pour la recherche
+    fetch('/api/products?limit=100')
+      .then(res => res.json())
+      .then(data => setProducts(data))
+      .catch(err => console.error('Error fetching products for search:', err));
+  }, []);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);

@@ -67,3 +67,17 @@ src/
 - Real-time total calculations
 - Session persistence
 ---
+
+### **Documentation**
+
+Typology is a e-commerce built e-commerce with mutiple categories insiped from various website on the internet, i did the following tasks :
+
+- Navbar with search engine context and mutiple functinanlity as favorite items, mutiple languages,
+
+- Hero section with animations
+
+- Reutilisable UI components for Logo, product-card, button with React
+
+- Legally scraped data from real websites and incorporate them to the actual database
+
+- Real footers with newsletters and informations about 

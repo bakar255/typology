@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Product } from "@/data/products";
 
 const categories = [
   { id: 1, name: "Cosmétique" },
@@ -41,6 +43,35 @@ const bundles = [
 
 export default function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetchProducts(selectedCategory);
+  }, [selectedCategory]);
+
+  const fetchProducts = async (category: string | null) => {
+    setLoading(true);
+    try {
+      const url = category 
+        ? `/api/products?category=${encodeURIComponent(category)}&limit=12`
+        : `/api/products?limit=12`;
+      
+      const response = await fetch(url);
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setProducts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleProductClick = (productId: number) => {
+    router.push(`/product/${productId}`);
+  };
 
   return (
     <div className="py-10">
@@ -65,23 +96,70 @@ export default function ProductList() {
           </button>
         ))}
       </div>
-      <div className="px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-center items-start mt-10">
-        {bundles.map((bundle) => (
-          <div key={bundle.id} className="flex flex-col gap-2 w-full py-5 items-center">
-            <img src={bundle.image} alt={bundle.title} className="bg-amber-100 w-66 " />
+      
+      {/* Affichage des produits ou bundles selon la catégorie sélectionnée */}
+      {loading ? (
+        <div className="text-center py-10">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+          <p className="text-gray-600">Chargement des produits...</p>
+        </div>
+      ) : selectedCategory && products.length > 0 ? (
+        <div className="px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-center items-start mt-10">
+          {products.map((product) => (
+            <div 
+              key={product.id} 
+              className="flex flex-col gap-2 w-full py-5 items-center cursor-pointer"
+              onClick={() => handleProductClick(product.id)}
+            >
+              <img 
+                src={product.image || "/placeholder.jpg"} 
+                alt={product.titre} 
+                className="bg-amber-100 w-full h-64 object-cover" 
+              />
 
-            <div className="flex flex-col gap-5 justify-center items-center">
-              <span className="font-bold text-center">{bundle.title}</span>
-              <span className="text-sm text-center">{bundle.subtitle}</span>
-              <span className="text-sm text-center">{bundle.description}</span>
+              <div className="flex flex-col gap-2 justify-center items-center text-center">
+                <span className="font-bold">{product.titre}</span>
+                <span className="text-sm text-gray-600">{product.description}</span>
+                {product.price && (
+                  <span className="font-semibold text-lg">{product.price}€</span>
+                )}
+              </div>
+
+              <button 
+                className="bg-white cursor-pointer text-black border border-black px-2 w-full py-2 mt-7"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleProductClick(product.id);
+                }}
+              >
+                ACHETER
+              </button>
             </div>
+          ))}
+        </div>
+      ) : !selectedCategory ? (
+        <div className="px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-center items-start mt-10">
+          {bundles.map((bundle) => (
+            <div key={bundle.id} className="flex flex-col gap-2 w-full py-5 items-center">
+              <img src={bundle.image} alt={bundle.title} className="bg-amber-100 w-66 " />
 
-            <button className="bg-white cursor-pointer text-black border border-black px-2 w-full py-2 mt-7">
-              ACHETER
-            </button>
-          </div>
-        ))}
-      </div>
+              <div className="flex flex-col gap-5 justify-center items-center">
+                <span className="font-bold text-center">{bundle.title}</span>
+                <span className="text-sm text-center">{bundle.subtitle}</span>
+                <span className="text-sm text-center">{bundle.description}</span>
+              </div>
+
+              <button className="bg-white cursor-pointer text-black border border-black px-2 w-full py-2 mt-7">
+                ACHETER
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-10">
+          <p className="text-gray-600">Aucun produit trouvé pour cette catégorie.</p>
+        </div>
+      )}
     </div>
   );
 }
