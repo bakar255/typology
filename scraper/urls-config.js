@@ -38,7 +38,7 @@ export const urlConfig = [
 
   // Parfums
   {
-    url: "https://www.lookfantastic.fr/c/parfums/fragrances/eu/",
+    url: "https://www.lookfantastic.fr/c/health-beauty/parfum/voir-tout/",
     category: "Parfums",
     subCategory: "Fragrances",
   },
@@ -62,5 +62,4 @@ export const urlConfig = [
     subCategory: "Nettoyants",
   },
 
-  // Ajoutez d'autres URLs ici...
 ];
