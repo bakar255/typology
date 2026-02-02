@@ -1,3 +1,5 @@
+"use client";
+
 import Footer from "@/components/footer"
 import { useState } from "react"
 
@@ -8,12 +10,37 @@ export default function Registrer() {
     const [email, setEmail] = useState("");
     const [password, setPassword ] = useState("");
 
+    const handleRegistrer = async (e:any) => {
+        e.preventDefault();
+
+        try {
+            const res = await fetch("http://localhost:3001/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email, password}),
+            });
+
+            const data = await res.json();
+        
+            if(res.ok) {
+                alert(`Bienvenue`)
+                console.log("Connecté", data);
+            } else {
+                console.error("err:", data.message || data.error);
+            }
+        }  catch (err) {
+            console.error("Erreur")
+        }
+    }
+
     return (
    <div>
         <div className="flex items-center justify-center flex flex-col py-20 min-h-screen bg-gray-50">
 
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-                <h3 className="text-3xl font-bold text-center mb-6 playfair-family text-gray-800">Log in</h3>
+                <h4 className="text-3xl  text-center mb-6 text-gray-800">Registrer</h4>
 
                 <form className="flex flex-col space-y-4">
                     <div>
@@ -40,18 +67,14 @@ export default function Registrer() {
 
                     <button 
                         type="submit"
+                        onClick={handleRegistrer}
                         className="py-3 w-full bg-pink-500  text-white rounded-lg text-sm font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
                     >
                         Continue
                     </button>
                 </form>
 
-                <div className="mt-4 text-center">
-                    <p className="text-sm text-gray-600">
-                        Vous n'avez pas de compte? 
-                        <a href="#" className="text-pink-600 hover:text-pink-600 font-medium ml-1">Inscrivez-vous</a>
-                    </p>
-                </div>
+                
             </div>
 
         </div>

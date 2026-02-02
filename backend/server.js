@@ -1,13 +1,20 @@
 import express from "express";
 import bcrypt from "bcrypt";
+import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const app = express();
-const port = 3000;
 
 app.use(express.json());
+
+app.use(cors({
+    origin: "http://localhost:3000",
+    methods:["GET","POST"],
+    credentials: true,
+}));
+
 
 app.post("/register", async (req, res) => {
     try {
@@ -40,5 +47,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(3001, () => {
-    console.log("Server is running...",)
+    console.log("Server is running...")
 })
