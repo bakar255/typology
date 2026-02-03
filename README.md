@@ -28,7 +28,7 @@ A modern, fully-functional e-commerce website built with Next.js, TypeScript, an
 
 ##  Tech Stack
 
-- **Framework**: Next.js 15 with App Router
+- **Framework**: Next.js 15 with App Router, NodeJs Express, Prisma
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **State Management**: React Context API
@@ -66,7 +66,6 @@ src/
 - Add/remove/update quantities
 - Real-time total calculations
 - Session persistence
----
 
 ### **Documentation**
 

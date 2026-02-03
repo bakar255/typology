@@ -3,6 +3,7 @@
 import { SendHorizontal, Mail, Facebook, TwitchIcon, Twitter } from "lucide-react"
 import { useState } from "react"
 import Logo from "./ui/logo"
+import Link from "next/link";
 
 export default function Footer() {
   const [email, setEmail] = useState("")
@@ -50,12 +51,12 @@ export default function Footer() {
 
           <div className="flex  items-center justify-center">
             
-            <Mail size={26} className="ml-15"/>
+            <Mail size={26} className="ml-12"/>
           <p className="ml-5 text-1xl text-foreground leading-5 tracking-tight uppercase">
               Soyez un des premiers à être informé à propos de nos derniers arrivages, tendances ainsi que nos offres exclusive.
            </p>
 
-           <button className="rounded-s-xs py-3 ml-15 px-2 bg-black text-white"> Sign Up</button>
+           <Link href="/register" className="rounded-s-xs py-3 ml-15 px-2 bg-black text-white cursor-pointer">S'inscrire </Link>
           </div>
             <div className="flex items-center ml-56 justify-end">
               <p className="ml-10 text-1xl text-foreground leading-5 tracking-tight uppercase mr-4">
