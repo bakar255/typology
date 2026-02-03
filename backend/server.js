@@ -58,7 +58,7 @@ app.post("/login", async (req, res) => {
 
 app.post("/register", async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, name } = req.body;
 
         const existingUser = await prisma.user.findUnique({where: {email}});
         if (existingUser) {
@@ -71,6 +71,7 @@ app.post("/register", async (req, res) => {
             data: {
                 email,
                 password: hashedPassword,
+                name,
             },
 
         });

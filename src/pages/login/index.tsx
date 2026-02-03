@@ -4,23 +4,22 @@ import Footer from "@/components/footer"
 import { useState } from "react"
 
 
-export default function Registrer() {
+export default function Login() {
 
 
     const [email, setEmail] = useState("");
     const [password, setPassword ] = useState("");
-    const [name, setName] = useState("");
 
-    const handleRegistrer = async (e:any) => {
+    const handleLogin = async (e:any) => {
         e.preventDefault();
 
         try {
-            const res = await fetch("http://localhost:3001/register", {
+            const res = await fetch("http://localhost:3001/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({email, password, name}),
+            body: JSON.stringify({email, password}),
             });
 
             const data = await res.json();
@@ -41,20 +40,9 @@ export default function Registrer() {
         <div className="flex items-center justify-center flex flex-col py-20 min-h-screen bg-gray-50">
 
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-                <h4 className="text-3xl  text-center mb-6 text-gray-800">Registrer</h4>
+                <h4 className="text-3xl  text-center mb-6 text-gray-800">Login</h4>
 
                 <form className="flex flex-col space-y-4">
-                    <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                        <input 
-                            onChange={(e) => setName(e.target.value)}
-                            type="text" 
-                            id="name"
-                            placeholder="Enter your name..."
-                            className="w-full text-gray-600 p-3 rounded-lg border-1 border-black focus:border-pink-500  focus:outline-none transition-colors text-sm"  
-                        />
-                    </div>
-
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                         <input 
@@ -79,7 +67,7 @@ export default function Registrer() {
 
                     <button 
                         type="submit"
-                        onClick={handleRegistrer}
+                        onClick={handleLogin}
                         className="py-3 w-full bg-pink-500  text-white rounded-lg text-sm font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
                     >
                         Continue
