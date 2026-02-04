@@ -1,67 +1,93 @@
 import * as cheerio from "cheerio";
 
 export async function scrapePage(url, category, subCategory) {
-  const response = await fetch(url, {
-    headers: {
-      "User-Agent": "Mozilla/5.0",
-    },
-  });
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+      },
+    });
 
-  const html = await response.text();
-  const $ = cheerio.load(html);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-  const products = [];
+    const html = await response.text();
+    const $ = cheerio.load(html);
 
-  $(".product-card").each((i, el) => {
-    const title = $(el)
-      .find(".product-item-title")
-      .text()
-      .trim();
+    const products = [];
 
-    const rawPrice = $(el)
-      .find(".price")
-      .text()
-      .trim();
-     
+    $(".product-card").each((i, el) => {
+      const title = $(el)
+        .find(".product-item-title")
+        .text()
+        .trim();
 
-        // Nettoyage (supprime espaces invisibles)
-        const cleanPrice = rawPrice.replace(/\s+/g, " ");
+      const brand = $(el)
+        .find(".product-item-brand")
+        .text()
+        .trim() || null;
 
-        // Regex
-        const oldPriceMatch = cleanPrice.match(/Prix de vente\s*:?([\d,]+)\s*€/i);
-        const currentPriceMatch = cleanPrice.match(/Prix\s*actuel\s*:?([\d,]+)\s*€/i);
-        const singlePriceMatch = cleanPrice.match(/([\d,]+)\s*€/);
+      const productUrl = $(el)
+        .find("a")
+        .attr("href");
 
-        // Conversion
-        const toNumber = (p) => (p ? parseFloat(p.replace(",", ".")) : null);
+      const rawPrice = $(el)
+        .find(".price")
+        .text()
+        .trim();
 
-        let oldPrice = null;
-        let currentPrice = null;
 
-        if (currentPriceMatch) {
+      // Nettoyage (supprime espaces invisibles)
+      const cleanPrice = rawPrice.replace(/\s+/g, " ");
+
+      // Regex
+      const oldPriceMatch = cleanPrice.match(/Prix de vente\s*:?([\d,]+)\s*€/i);
+      const currentPriceMatch = cleanPrice.match(/Prix\s*actuel\s*:?([\d,]+)\s*€/i);
+      const singlePriceMatch = cleanPrice.match(/([\d,]+)\s*€/);
+
+      // Conversion
+      const toNumber = (p) => (p ? parseFloat(p.replace(",", ".")) : null);
+
+      let oldPrice = null;
+      let currentPrice = null;
+
+      if (currentPriceMatch) {
         // CAS PROMO
         oldPrice = toNumber(oldPriceMatch?.[1]);
         currentPrice = toNumber(currentPriceMatch[1]);
-        } else if (singlePriceMatch) {
+      } else if (singlePriceMatch) {
         // CAS PRIX UNIQUE
         currentPrice = toNumber(singlePriceMatch[1]);
-        }
+      }
 
-    const image = $(el)
-      .find("img")
-      .attr("src");
+      const image = $(el)
+        .find("img")
+        .attr("src");
 
+      const description = $(el)
+        .find(".product-item-description")
+        .text()
+        .trim() || null;
 
-    products.push({
-      title,
-       oldPrice,
-       currentPrice,
-      image,
-      category,
-      subCategory,
+      if (title && currentPrice) {
+        products.push({
+          name: title,
+          brand,
+          price: currentPrice,
+          oldPrice,
+          currency: "EUR",
+          imageUrl: image,
+          productUrl: productUrl ? `https://www.lookfantastic.fr${productUrl}` : null,
+          category: `${category} > ${subCategory}`,
+          description,
+        });
+      }
     });
-  });
 
-
-  return products;
+    return products;
+  } catch (error) {
+    console.error(`Error scraping ${url}:`, error);
+    return [];
+  }
 }
