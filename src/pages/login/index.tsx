@@ -3,11 +3,13 @@
 import Footer from "@/components/footer"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react"
+import { useRouter } from "next/router";
+
 
 
 export default function Login() {
 
-    const navigate = useNavigate;
+    const router = useRouter();
 
     const [email, setEmail] = useState("");
     const [password, setPassword ] = useState("");
@@ -30,7 +32,7 @@ export default function Login() {
             if(res.ok) {
                 alert(`Bienvenue`)
                 console.log("Connecté", data);
-                navigate("/");
+                router.push("/");
             } else {
                 setError(true);
                 console.error("err:", data.message || data.error);

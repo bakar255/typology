@@ -1,13 +1,13 @@
 "use client";
 
 import Footer from "@/components/footer"
+import { useRouter } from "next/router";
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
+
+const router = useRouter();
 
 export default function Registrer() {
-
-    const navigate = useNavigate;
-
+    
     const [email, setEmail] = useState("");
     const [password, setPassword ] = useState("");
     const [name, setName] = useState("");
@@ -29,7 +29,7 @@ export default function Registrer() {
             if(res.ok) {
                 alert(`Bienvenue`)
                 console.log("Connecté", data);
-                navigate("/");
+                router.push("/dashboard");
             } else {
                 console.error("err:", data.message || data.error);
             }
