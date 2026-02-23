@@ -27,7 +27,6 @@ export default function Registrer() {
             const data = await res.json();
         
             if(res.ok) {
-                alert(`Bienvenue`)
                 console.log("Connecté", data);
                 router.push("/dashboard");
             } else {

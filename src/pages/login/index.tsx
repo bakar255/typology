@@ -4,6 +4,7 @@ import Footer from "@/components/footer"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react"
 import { useRouter } from "next/router";
+import WelcomeMessage from "@/components/Bienvenue";
 
 
 
@@ -30,7 +31,8 @@ export default function Login() {
             const data = await res.json();
         
             if(res.ok) {
-                alert(`Bienvenue`)
+                <WelcomeMessage username={data.user} />   
+                localStorage.setItem("token", data.token);           
                 console.log("Connecté", data);
                 router.push("/");
             } else {
