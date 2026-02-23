@@ -1,6 +1,7 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import cors from "cors";
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 
@@ -8,8 +9,7 @@ const prisma = new PrismaClient();
 
 const app = express();
 app.use(express.json());
-
-
+dotenv.config();
 
 app.use(cors({
     origin: "http://localhost:3000",
@@ -41,7 +41,7 @@ app.post("/login", async (req, res) => {
         const token = jwt.sign(
             {userId: user.id},
             process.env.JWT_SECRET,
-            {expiresIn:"7d"}
+            {expiresIn:"7d"},
         );
 
         res.json({

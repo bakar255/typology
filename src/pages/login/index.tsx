@@ -1,14 +1,17 @@
 "use client";
 
 import Footer from "@/components/footer"
+import { useNavigate } from "react-router-dom";
 import { useState } from "react"
 
 
 export default function Login() {
 
+    const navigate = useNavigate;
 
     const [email, setEmail] = useState("");
     const [password, setPassword ] = useState("");
+    const [error, setError] = useState (false);
 
     const handleLogin = async (e:any) => {
         e.preventDefault();
@@ -27,13 +30,16 @@ export default function Login() {
             if(res.ok) {
                 alert(`Bienvenue`)
                 console.log("Connecté", data);
+                navigate("/");
             } else {
+                setError(true);
                 console.error("err:", data.message || data.error);
             }
         }  catch (err) {
             console.error("Erreur")
         }
     }
+
 
     return (
    <div>
@@ -65,6 +71,11 @@ export default function Login() {
                         />
                     </div>
 
+                    {error &&(
+                        <div>
+                            <span className="text-red-800">Erreur lors du login, réessayez s'il vous plaît</span>
+                        </div>
+                    )}
                     <button 
                         type="submit"
                         onClick={handleLogin}

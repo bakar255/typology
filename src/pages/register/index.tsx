@@ -2,10 +2,11 @@
 
 import Footer from "@/components/footer"
 import { useState } from "react"
-
+import { useNavigate } from "react-router-dom";
 
 export default function Registrer() {
 
+    const navigate = useNavigate;
 
     const [email, setEmail] = useState("");
     const [password, setPassword ] = useState("");
@@ -28,6 +29,7 @@ export default function Registrer() {
             if(res.ok) {
                 alert(`Bienvenue`)
                 console.log("Connecté", data);
+                navigate("/");
             } else {
                 console.error("err:", data.message || data.error);
             }
