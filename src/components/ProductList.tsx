@@ -8,7 +8,6 @@ const categories = [
   { id: 3, name: "Parfums" },
   { id: 4, name: "Bodycare" },
   { id: 5, name: "Skincare" },
-  {id: 6, name: "Crème de jour"}
 ];
 
 const bundles = [
@@ -87,7 +86,7 @@ export default function ProductList() {
           <button
             key={item.id}
             onClick={() => setSelectedCategory(item.name)}
-            className=" py-2 px-5 cursor-pointer hover:bg-amber-900 w-32 "
+            className=" py-2 px-5 cursor-pointer hover:bg-amber-700 font-medium  w-32 "
           >
             {item.name}
           </button>
@@ -142,7 +141,7 @@ export default function ProductList() {
 
               <div className="flex flex-col gap-2 justify-center items-center">
                 <span className="font-medium text-center text-2xl">{bundle.title}</span>
-                <span className="text-sm text-center text-2xl uppercase mt-2 font-medium ">{bundle.subtitle}</span>
+                <span className="text-sm text-center  uppercase mt-2 font-medium ">{bundle.subtitle}</span>
                 <span className="text-center text-sm font-medium  text-gray-900 ">{bundle.description}</span>
               </div>
 

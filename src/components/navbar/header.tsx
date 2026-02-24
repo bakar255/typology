@@ -6,8 +6,15 @@ import SearchInput from './searchInput';
 import NavigationSection from './navigationSection';
 import Logo from '../ui/logo';
 
+
+interface User {
+  name: String
+}
+
 export default function Header() {
 
+  const [connected, isConnected] = useState(false);
+  const [User, setUser ] = useState([]);
 
   return (
     <div className="w-full">
@@ -18,7 +25,7 @@ export default function Header() {
              
               <Logo />
 
-              <div className="flex items-center gap-2 md:gap-7">
+              <div className="absolute top-4 right-5 flex items-center gap-2 md:gap-7">
                {/* Selection langues*/}
               <label htmlFor="languages" className="block mb-1 text-sm text-muted-foreground">
                 Français <ChevronDown size={16} className="inline-block ml-1"/>

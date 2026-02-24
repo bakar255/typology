@@ -8,30 +8,7 @@ export default function SecondProprety() {
     <div className="container mx-auto max-w-7xl px-4 py-16">
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
     
-    {/* Colonne de texte à gauche */}
-       <div className="space-y-6 max-w-2xl">
-        <h2 className="text-5xl font-medium text-black">DUO, TRIO ET KITS</h2>
-        <p className="text-2xl text-gray-900 leading-relaxed">
-          Découvrez nos duos et trios de soins et parfums, conçus pour répondre efficacement à vos besoins spécifiques.
-        </p>
-        <p className=" text-3xl text-gray-900 font-medium leading-relaxed">
-          Chaque produit est soigneusement sélectionné et associé pour répondre efficacement à vos besoins personelles.
-        </p>
-        <p className="text-sm text-gray-600 italic">
-          Disponible exclusivement en ligne.
-        </p>
-        </div>
-
-        {/* Colonne d'image a droite */}
-        <div>
-          <Image 
-          src="/coffret.webp"
-          alt="coffret"
-          width={600}
-          height={500}
-          className="max-w-5xl w-full object-cover max-h-[500px] h-full "
-           />
-        </div>
+  
 
         <div className="flex justify-center gap-8 mt-8 mx-auto space-x-52">
         <div className="flex flex-col items-center">
@@ -52,6 +29,8 @@ export default function SecondProprety() {
         <span className="text-sm font-medium">
         Optez pour les produits qui travaillent plus dur – formulés par la marque qui sait créer une brillance qui attire tous les regards.
         </span>
+
+        <button className=" mt-5 border border-black py-2 px-4 font-medium cursor-pointer">En savoir plus</button>
 
       </div>
 
@@ -75,8 +54,7 @@ export default function SecondProprety() {
         Faites des économies avec les coffrets de soins capillaires RED, adaptés à tous les types et textures de cheveux.
         </span>
 
-
-
+        <button className=" mt-5 border border-black py-2 px-4 font-medium cursor-pointer">En savoir plus</button>
   </div>
 </div>
 </div>

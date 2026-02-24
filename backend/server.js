@@ -42,6 +42,7 @@ app.post("/login", async (req, res) => {
             {userId: user.id},
             process.env.JWT_SECRET,
             {expiresIn:"7d"},
+            console.log(user.id)
         );
 
         res.json({
@@ -82,6 +83,26 @@ app.post("/register", async (req, res) => {
         res.status(500).json({message: "Erreur Serveur"})
     }
 });
+
+app.get("/user", async (req, res) => {
+
+    const id = parseInt(req.query.id);
+
+    try {
+        const user = await prisma.user.findUnique({
+            where: {id}
+        });
+
+        res.json({
+            name: user.name
+        })  
+        
+    } catch (err) {
+        console.error();
+    }
+})
+
+
 
 
 app.listen(3001, () => {
