@@ -12,13 +12,13 @@ export default function Header() {
   return (
     <div className="w-full">
         <div className="py-4 px-4">
-            <div className="flex items-center justify-between max-w-[1700px] mx-auto relative">
+            <div className="flex flex-col md:flex-row items-center justify-between max-w-[1700px] mx-auto relative">
 
               <SearchInput />
              
               <Logo />
 
-              <div className="flex items-center gap-7">
+              <div className="flex items-center gap-2 md:gap-7">
                {/* Selection langues*/}
               <label htmlFor="languages" className="block mb-1 text-sm text-muted-foreground">
                 Français <ChevronDown size={16} className="inline-block ml-1"/>

@@ -1,7 +1,6 @@
 "use client";
 
 import Footer from "@/components/footer"
-import { useNavigate } from "react-router-dom";
 import { useState } from "react"
 import { useRouter } from "next/router";
 import WelcomeMessage from "@/components/Bienvenue";

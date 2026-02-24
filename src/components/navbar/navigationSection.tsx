@@ -218,7 +218,7 @@ export default function NavigationSection() {
 
     <div className=" ">
       <div className="max-w-[1700px] mx-auto px-4 py-1 relative">
-        <nav className="flex items-center justify-center">
+        <nav className="hidden md:flex items-center justify-center">
 
           <div className="flex gap-8">
 

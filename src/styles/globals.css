@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 
 @import "tailwindcss";
+
+
 
 :root {
   --background: #ffffff;
@@ -20,6 +23,7 @@ body, html {
   padding: 0;
   font-family: 'Inter', sans-serif; 
 }
+
 
 .playfair-family {
    font-family: "Playfair Display", serif;
@@ -157,4 +161,16 @@ body, html {
 
 .animate-progress-bar {
   animation: progress-bar 5s linear infinite;
+}
+
+
+.font-medium {
+  font-family: "Figtree", sans-serif;
+  font-weight: 300; 
+  font-style: normal;
+  color: #333; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: 0.5px; 
 }

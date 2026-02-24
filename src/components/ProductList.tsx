@@ -77,19 +77,17 @@ export default function ProductList() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto mt-10">
       {/* Section titres */}
       <div className="text-center mb-5">
-        <h1 className="text-5xl mb-2 font-bold playfair-family">Une sélection d'objets de qualité</h1>
-        <h2 className="text-3xl mt-8 font-medium">Choisis pour vous !</h2>
       </div>
 
-      <div className="flex justify-center items-center space-x-5 mb-0 flex-wrap mt-6">
+      <div className="flex gap-1 justify-center items-center font-medium  mt-6">
         {categories.map((item) => (
           <button
             key={item.id}
             onClick={() => setSelectedCategory(item.name)}
-            className="rounded-full border border-black py-2 px-4 cursor-pointer ml-4 mt-4 shadow-sm"
+            className=" py-2 px-5 cursor-pointer hover:bg-amber-900 w-32 "
           >
             {item.name}
           </button>
@@ -98,7 +96,7 @@ export default function ProductList() {
       
       {/* Affichage des produits ou bundles selon la catégorie sélectionnée */}
       {loading ? (
-        <div className="text-center py-10">
+        <div className="text-center py-10 mt-1">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
           <p className="text-gray-600">Chargement des produits...</p>
         </div>
@@ -137,15 +135,15 @@ export default function ProductList() {
           ))}
         </div>
       ) : !selectedCategory ? (
-        <div className="px-4 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-center items-start mt-10 mb-12">
+        <div className="px-4 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-center items-start mt-5">
           {bundles.map((bundle) => (
-            <div key={bundle.id} className="flex flex-col gap-2 w-full py-5 items-center">
+            <div key={bundle.id} className="flex flex-col gap-2 w-full py-5 items-center font-medium">
               <img src={bundle.image} alt={bundle.title} className="bg-amber-100 w-72" />
 
               <div className="flex flex-col gap-2 justify-center items-center">
-                <span className="font-bold text-center text-2xl">{bundle.title}</span>
-                <span className="text-sm text-center text-2xl uppercase mt-2 ">{bundle.subtitle}</span>
-                <span className="text-center text-1xl ">{bundle.description}</span>
+                <span className="font-medium text-center text-2xl">{bundle.title}</span>
+                <span className="text-sm text-center text-2xl uppercase mt-2 font-medium ">{bundle.subtitle}</span>
+                <span className="text-center text-sm font-medium  text-gray-900 ">{bundle.description}</span>
               </div>
 
               <button className="bg-white cursor-pointer text-black border border-black px-2 w-30 py-2 mt-12">

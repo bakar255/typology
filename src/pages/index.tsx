@@ -15,8 +15,8 @@ export default function Home() {
         <Hero />
         <BestSellers />
         <AnimatedHero />
-        <SecondProprety />
         <ProductList />
+        <SecondProprety />
         <Footer />
       </div>
     </div>

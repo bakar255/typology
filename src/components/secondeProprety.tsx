@@ -3,18 +3,18 @@ import Image from "next/image";
 
 export default function SecondProprety() {
     return (
-        <div className="text-center mt-11">
+        <div className="text-center mt-1">
 
     <div className="container mx-auto max-w-7xl px-4 py-16">
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
     
     {/* Colonne de texte à gauche */}
        <div className="space-y-6 max-w-2xl">
-        <h2 className="text-5xl font-bold text-black">DUO, TRIO ET KITS</h2>
-        <p className="text-2xl text-black leading-relaxed">
+        <h2 className="text-5xl font-medium text-black">DUO, TRIO ET KITS</h2>
+        <p className="text-2xl text-gray-900 leading-relaxed">
           Découvrez nos duos et trios de soins et parfums, conçus pour répondre efficacement à vos besoins spécifiques.
         </p>
-        <p className=" text-3xl text-black leading-relaxed">
+        <p className=" text-3xl text-gray-900 font-medium leading-relaxed">
           Chaque produit est soigneusement sélectionné et associé pour répondre efficacement à vos besoins personelles.
         </p>
         <p className="text-sm text-gray-600 italic">
@@ -42,10 +42,10 @@ export default function SecondProprety() {
           height={300}
           className="max-w-5xl"
         />
-        <span className="uppercase text-sm mt-2 ">
+        <span className="uppercase text-sm font-medium mt-2 ">
           IN THE SPOTLIGHT
         </span>
-        <span className="playfair-family mt-4 text-2xl text-center mb-2">
+        <span className="playfair-family mt-4 font-medium text-2xl text-center mb-2">
           La meilleur box de l'année 2025
         </span>
 
