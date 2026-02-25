@@ -23,7 +23,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             </div>
 
             {/* Content */}
-            <div className="flex flex-col flex-grow">
+            <div className="flex flex-col ">
                 <div className="flex justify-between items-start mb-2">
                     <h3 className="text-lg font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
                         {product.titre}

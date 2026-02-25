@@ -46,7 +46,7 @@ export default function Login() {
 
     return (
    <div>
-        <div className="flex items-center justify-center flex flex-col py-20 min-h-screen bg-gray-50">
+        <div className="flex items-center justify-center flex-col py-20 min-h-screen bg-gray-50">
 
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <h4 className="text-3xl  text-center mb-6 text-gray-800">Login</h4>
