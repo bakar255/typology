@@ -13,7 +13,11 @@ export default function Cart() {
         onClick={() => setIsCartOpen(!isCartOpen)}
         className="relative cursor-pointer"
       >
-        <ShoppingBasketIcon size={25} className='cursor-pointer mt-1.5'/>
+
+      <div className='flex items-center gap-2 hover:bg-gray-100 py-2 px-4'>
+        <ShoppingBasketIcon size={25} className='cursor-pointer mt-0'/>
+        <span className='font-medium'>Panier</span>
+       </div>
         {getTotalItems() > 0 && (
           <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
             {getTotalItems()}

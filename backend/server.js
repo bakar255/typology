@@ -41,9 +41,10 @@ app.post("/login", async (req, res) => {
         const token = jwt.sign(
             {userId: user.id},
             process.env.JWT_SECRET,
-            {expiresIn:"7d"},
-            console.log(user.id)
+            {expiresIn:"7d"}
         );
+
+        console.log(user.id)
 
         res.json({
             message: "Login réussi",
@@ -91,10 +92,10 @@ app.get("/user", async (req, res) => {
          // Récupère le token du header Authorization
         const authHeader = req.headers.authorization;
 
-        if(!AuthHeader) {
+        if(!authHeader) {
             return res.status(401).json({message:"Token missing"})
         }
-        
+
         const token = authHeader.split(" ")[1];
 
         // Vérifier et décoder le token
@@ -105,7 +106,7 @@ app.get("/user", async (req, res) => {
 
         
         const user = await prisma.user.findUnique({
-            where: {id}
+            where: {id: userId}
         });
 
         if(!user) {
@@ -113,7 +114,7 @@ app.get("/user", async (req, res) => {
         }
 
         res.json({
-            id: id,
+            id: userId,
             name: user.name,
             email: user.email,
         })  

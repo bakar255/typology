@@ -31,7 +31,7 @@ export default function Header() {
               console.log("Token missing")
               return
             }
-            const URL = "http://localhost/3001/user"
+            const URL = "http://localhost:3001/user"
 
             const response = await fetch(URL, {
               headers: {
@@ -41,6 +41,7 @@ export default function Header() {
 
             if(response.ok) {
               const data = await response.json();
+              console.log("Connection sucessful")
               setUser(data);
               setConnected(true);
             } else {
@@ -70,7 +71,7 @@ export default function Header() {
 
               <div className="absolute top-4 right-5 flex items-center gap-2 md:gap-5">
                {/* Selection langues*/}
-              <label htmlFor="languages" className="block mb-1 text-sm text-muted-foreground">
+              <label htmlFor="languages" className="block mb-1 font-medium text-muted-foreground">
                 Français <ChevronDown size={16} className="inline-block ml-1"/>
               </label>
 
@@ -93,10 +94,7 @@ export default function Header() {
               </div>
 
                 {/* Cart */}
-                <div className='flex items-center gap-2 hover:bg-gray-100'>
                     <Cart />
-                   <span className='font-medium'>Panier</span>
-                </div>
 
               </div>
             </div>
