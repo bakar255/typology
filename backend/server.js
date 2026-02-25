@@ -86,19 +86,41 @@ app.post("/register", async (req, res) => {
 
 app.get("/user", async (req, res) => {
 
-    const id = parseInt(req.query.id);
-
     try {
+
+         // Récupère le token du header Authorization
+        const authHeader = req.headers.authorization;
+
+        if(!AuthHeader) {
+            return res.status(401).json({message:"Token missing"})
+        }
+        
+        const token = authHeader.split(" ")[1];
+
+        // Vérifier et décoder le token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+           // decoded contient { userId: id_de_l_utilisateur }
+        const userId = decoded.userId;
+
+        
         const user = await prisma.user.findUnique({
             where: {id}
         });
 
+        if(!user) {
+            return res.status(500).json({message: "Cannot fetch user's data"})
+        }
+
         res.json({
-            name: user.name
+            id: id,
+            name: user.name,
+            email: user.email,
         })  
         
     } catch (err) {
-        console.error();
+        console.error(err);
+        res.status(500).json({message: "Error server" })
     }
 })
 

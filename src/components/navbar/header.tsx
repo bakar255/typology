@@ -1,20 +1,63 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { User, Search, ChevronDown, CircleUserIcon, Heart } from 'lucide-react';
 import { ButtonHeader } from '../ui/headerButton';
 import Cart from './cart';
 import SearchInput from './searchInput';
 import NavigationSection from './navigationSection';
 import Logo from '../ui/logo';
+import { useRouter } from "next/router"
 
 
 interface User {
-  name: String
+  name: string;
+  id: number;
+  email: string
 }
 
 export default function Header() {
 
-  const [connected, isConnected] = useState(false);
-  const [User, setUser ] = useState([]);
+  const [connected, setConnected] = useState(false);
+  const [User, setUser ] = useState<User | null>(null);
+
+
+      const router = useRouter();
+
+      const fetchProfile = async () => {
+        try {
+           // Fetch token from localstorage
+            const token = localStorage.getItem("token");
+
+            if(!token) {
+              console.log("Token missing")
+              return
+            }
+            const URL = "http://localhost/3001/user"
+
+            const response = await fetch(URL, {
+              headers: {
+                 'Authorization' : `Bearer  ${token}`
+              }
+            })
+
+            if(response.ok) {
+              const data = await response.json();
+              setUser(data);
+              setConnected(true);
+            } else {
+               console.log("Error can't fetch profile's data");
+               localStorage.removeItem('token');
+            }
+
+        } catch (err) {
+            console.error;
+            console.log("Error : Can't fetch user's profile data")
+        }
+    }
+
+    useEffect(() => {
+      fetchProfile();
+    }, []);
+
 
   return (
     <div className="w-full">
@@ -25,16 +68,36 @@ export default function Header() {
              
               <Logo />
 
-              <div className="absolute top-4 right-5 flex items-center gap-2 md:gap-7">
+              <div className="absolute top-4 right-5 flex items-center gap-2 md:gap-5">
                {/* Selection langues*/}
               <label htmlFor="languages" className="block mb-1 text-sm text-muted-foreground">
                 Français <ChevronDown size={16} className="inline-block ml-1"/>
               </label>
 
+              <div
+              onClick={() => router.push("/login")}  
+              className='flex gap-2 cursor-pointer hover:bg-gray-100 py-2 px-4'
+              > 
+
               <CircleUserIcon className='cursor-pointer' />
-              <Heart className='cursor-pointer'/>
+
+              {connected && User ? (
+                <div className='flex'>
+                  ${User.name}
+                 </div>
+              ) : (
+                <div>
+                   <span className='font-medium text-1xl'>Se connecter</span>
+                </div>
+              )}
+              </div>
+
                 {/* Cart */}
-                <Cart />
+                <div className='flex items-center gap-2 hover:bg-gray-100'>
+                    <Cart />
+                   <span className='font-medium'>Panier</span>
+                </div>
+
               </div>
             </div>
         </div>
