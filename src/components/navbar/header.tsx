@@ -6,6 +6,7 @@ import SearchInput from './searchInput';
 import NavigationSection from './navigationSection';
 import Logo from '../ui/logo';
 import { useRouter } from "next/router"
+import { useAuth } from '@/context/AuthContext';
 
 
 interface User {
@@ -16,9 +17,8 @@ interface User {
 
 export default function Header() {
 
-  const [connected, setConnected] = useState(false);
-  const [User, setUser ] = useState<User | null>(null);
 
+      const {user, isAuthenticated, login, logout } = useAuth(); 
 
       const router = useRouter();
 
@@ -39,11 +39,11 @@ export default function Header() {
               }
             })
 
+            const data = await response.json()
+
             if(response.ok) {
-              const data = await response.json();
-              console.log("Connection sucessful")
-              setUser(data);
-              setConnected(true);
+              const user = data.user; 
+              login(user, token)
             } else {
                console.log("Error can't fetch profile's data");
                localStorage.removeItem('token');

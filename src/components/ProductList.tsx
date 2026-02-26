@@ -136,16 +136,17 @@ export default function ProductList() {
       ) : !selectedCategory ? (
         <div className="px-4 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-center items-start mt-5">
           {bundles.map((bundle) => (
-            <div key={bundle.id} className="flex flex-col gap-2 w-full py-5 items-center font-medium">
-              <img src={bundle.image} alt={bundle.title} className="bg-amber-100 w-72" />
+            <div key={bundle.id} className="flex flex-col w-full py-5 items-center text-center h-full">
 
-              <div className="flex flex-col gap-2 justify-center items-center">
+              <img src={bundle.image} alt={bundle.title} className="bg-amber-100 w-72" />
+              <div className="flex flex-col gap-3 justify-center items-center">
+
                 <span className="font-medium text-center text-2xl">{bundle.title}</span>
-                <span className="text-sm text-center  uppercase mt-2 font-medium ">{bundle.subtitle}</span>
+                <span className="text-sm text-center  uppercase font-medium ">{bundle.subtitle}</span>
                 <span className="text-center text-sm font-medium  text-gray-900 ">{bundle.description}</span>
               </div>
 
-              <button className="bg-white cursor-pointer text-black border border-black px-2 w-30 py-2 mt-12">
+              <button className="bg-white cursor-pointer text-black border border-black px-2 w-30 py-2 mt-auto">
                 ACHETER
               </button>
             </div>
