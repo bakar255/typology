@@ -92,11 +92,14 @@ app.get("/user", async (req, res) => {
          // Récupère le token du header Authorization
         const authHeader = req.headers.authorization;
 
-        if(!authHeader) {
+        if(!authHeader || !authHeader.startsWith("Bearer ")) {
             return res.status(401).json({message:"Token missing"})
         }
 
         const token = authHeader.split(" ")[1];
+        if (!token) {
+            return res.status(401).json({message:"Token missing"})
+        }
 
         // Vérifier et décoder le token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);

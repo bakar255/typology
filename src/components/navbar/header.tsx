@@ -50,8 +50,7 @@ export default function Header() {
             }
 
         } catch (err) {
-            console.error;
-            console.log("Error : Can't fetch user's profile data")
+            console.error(err);
         }
     }
 
@@ -82,7 +81,7 @@ export default function Header() {
 
               <CircleUserIcon className='cursor-pointer' />
 
-              {connected && User ? (
+              {isAuthenticated && User ? (
                 <div className='flex'>
                   ${User.name}
                  </div>
@@ -95,7 +94,6 @@ export default function Header() {
 
                 {/* Cart */}
                     <Cart />
-
               </div>
             </div>
         </div>
