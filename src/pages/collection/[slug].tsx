@@ -56,11 +56,11 @@ export default function SlugPage({ title, subtitle, products }: SlugProps) {
           <option>Unisexe</option>
         </select>
         <div className="ml-auto flex gap-2">
-          <button className="flex cursor-pointer items-center justify-center px-4 py-2 border border-black bg-white text-sm hover:bg-gray-50">
+          <button className="flex cursor-pointer text-gray-700 items-center justify-center px-4 py-2 border border-black bg-white  hover:bg-gray-50">
             Filtrer
             <Filter size={16} className="ml-2" />
           </button>
-          <button className="flex items-center cursor-pointer justify-center px-4 py-2 border border-black bg-white text-sm hover:bg-gray-50">
+          <button className="flex items-center cursor-pointer justify-center px-4 py-2 border border-black bg-white hover:bg-gray-50">
             Trier
             <ArrowUpDown size={16} className="ml-2" />
           </button>

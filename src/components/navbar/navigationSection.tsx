@@ -144,7 +144,7 @@ const navigationItems = [
         ]
       },
       {
-        subItems: 'Parfum H',
+        subItems: 'Parfum Homme',
         subSlug: 'oriental',
         items: [
           { name: 'Essence vanille', slug: 'vanilla-essence' },

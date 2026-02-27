@@ -48,11 +48,12 @@ export default function Footer() {
   return (
     <div>
         <div className="flex w-screen h-30 bg-[#f8efdf] ">
-
+          
+          {/* Connect with Us part */}
           <div className="flex  items-center justify-center">
             
             <Mail size={26} className="ml-12"/>
-          <p className="ml-5 text-1xl text-foreground leading-5 tracking-tight uppercase">
+           <p className="ml-5 text-1xl text-foreground leading-5 tracking-tight uppercase">
               Soyez un des premiers à être informé à propos de nos derniers arrivages, tendances ainsi que nos offres exclusive.
            </p>
 
@@ -69,10 +70,9 @@ export default function Footer() {
            </div>
         </div>
 
+
       <footer className="bg-gradient-to-br from-gray-50 to-gray-100 relative">
         <div className="py-16 px-16 grid md:grid-cols-2 lg:grid-cols-5 mx-auto">
-
-            
              <div>
                <span className="heading text-2xl">Typology Paris</span>
                 <p className="text-gray-600 text-xs mt-2 mr-5 tracking-wider">
