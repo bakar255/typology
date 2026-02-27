@@ -4,6 +4,7 @@ import { SendHorizontal, Mail, Facebook, TwitchIcon, Twitter } from "lucide-reac
 import { useState } from "react"
 import Logo from "./ui/logo"
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Footer() {
   const [email, setEmail] = useState("")
@@ -45,8 +46,13 @@ export default function Footer() {
     { name: 'Rejoindre l\'équipe', href: '#' },
   ]
 
+  const { isAuthenticated } = useAuth();
+
   return (
     <div>
+      
+      {!isAuthenticated && (
+
         <div className="flex w-screen h-30 bg-[#f8efdf] ">
           
           {/* Connect with Us part */}
@@ -69,8 +75,8 @@ export default function Footer() {
               </div>
            </div>
         </div>
-
-
+      )}
+      
       <footer className="bg-gradient-to-br from-gray-50 to-gray-100 relative">
         <div className="py-16 px-16 grid md:grid-cols-2 lg:grid-cols-5 mx-auto">
              <div>
