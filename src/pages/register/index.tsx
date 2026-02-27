@@ -4,9 +4,10 @@ import Footer from "@/components/footer"
 import { useRouter } from "next/router";
 import { useState } from "react"
 
-const router = useRouter();
 
 export default function Registrer() {
+const router = useRouter();
+
     
     const [email, setEmail] = useState("");
     const [password, setPassword ] = useState("");
