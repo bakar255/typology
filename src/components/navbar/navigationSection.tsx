@@ -46,15 +46,7 @@ const navigationItems = [
           { name: 'Eau micellaire', slug: 'micellar-water' }
         ]
       },
-      {
-        subItems: 'Hydratants',
-        subSlug: 'moisturizers',
-        items: [
-          { name: 'Crème de jour', slug: 'day-cream' },
-          { name: 'Crème de nuit', slug: 'night-cream' },
-          { name: 'Lotion hydratante', slug: 'hydrating-lotion' }
-        ]
-      },
+      
       {
         subItems: 'Sérums',
         subSlug: 'serums',
@@ -98,24 +90,8 @@ const navigationItems = [
           { name: 'Pack hydratation', slug: 'hydration-pack' }
         ]
       },
-      {
-        subItems: 'Coffrets cadeaux',
-        subSlug: 'gift-sets',
-        items: [
-          { name: 'Boîte cadeau luxe', slug: 'luxury-gift-box' },
-          { name: 'Ensemble taille voyage', slug: 'travel-size-set' },
-          { name: 'Spécial fêtes', slug: 'holiday-special' }
-        ]
-      },
-      {
-        subItems: 'Saisonnier',
-        subSlug: 'seasonal',
-        items: [
-          { name: 'Ensemble éclat été', slug: 'summer-glow-set' },
-          { name: 'Lot soin hiver', slug: 'winter-care-bundle' },
-          { name: 'Kit renouvellement printemps', slug: 'spring-renewal-kit' }
-        ]
-      }
+      
+     
     ]
   },
 
@@ -150,15 +126,7 @@ const navigationItems = [
           { name: 'Fard à paupières crème', slug: 'cream-eyeshadow' }
         ]
       },
-      {
-        subItems: 'Pinceaux',
-        subSlug: 'brushes',
-        items: [
-          { name: 'Pinceau fond de teint', slug: 'foundation-brush' },
-          { name: 'Jeu de pinceaux fard à paupières', slug: 'eyeshadow-brush-set' },
-          { name: 'Pinceau à lèvres', slug: 'lip-brush' }
-        ]
-      }
+      
     ]
   },
 
@@ -167,7 +135,7 @@ const navigationItems = [
     slug: 'parfums',
     sectionItems: [
       {
-        subItems: 'Floral',
+        subItems: 'Parfum Femme',
         subSlug: 'floral',
         items: [
           { name: 'Parfum rose', slug: 'rose-perfume' },
@@ -176,7 +144,7 @@ const navigationItems = [
         ]
       },
       {
-        subItems: 'Oriental',
+        subItems: 'Parfum H',
         subSlug: 'oriental',
         items: [
           { name: 'Essence vanille', slug: 'vanilla-essence' },
@@ -184,24 +152,7 @@ const navigationItems = [
           { name: 'Épice ambre', slug: 'amber-spice' }
         ]
       },
-      {
-        subItems: 'Frais',
-        subSlug: 'fresh',
-        items: [
-          { name: 'Explosion d\'agrumes', slug: 'citrus-blast' },
-          { name: 'Brise océane', slug: 'ocean-breeze' },
-          { name: 'Thé vert', slug: 'green-tea' }
-        ]
-      },
-      {
-        subItems: 'Boisé',
-        subSlug: 'woody',
-        items: [
-          { name: 'Cèdre', slug: 'cedarwood' },
-          { name: 'Forêt de pins', slug: 'pine-forest' },
-          { name: 'Mousse de chêne', slug: 'oak-moss' }
-        ]
-      }
+      
     ]
   }
 ];

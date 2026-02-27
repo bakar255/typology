@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Product {
@@ -17,6 +17,7 @@ model Product {
   imageUrl    String?
   productUrl  String   @unique
   category    String?
+  subcategory String?
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
