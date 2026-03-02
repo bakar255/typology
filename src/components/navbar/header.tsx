@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 import { useAuth } from '@/context/AuthContext';
 
 
-interface User {
+interface UserType {
   name: string;
   id: number;
   email: string
@@ -17,46 +17,45 @@ interface User {
 
 export default function Header() {
 
-
-      const {user, isAuthenticated, login, logout } = useAuth(); 
+      const {user, isAuthenticated, login, logout, isLoading } = useAuth(); 
 
       const router = useRouter();
 
-      const fetchProfile = async () => {
+      const fetchProfile = async (token: string) => {
         try {
-           // Fetch token from localstorage
-            const token = localStorage.getItem("token");
-
-            if(!token) {
-              console.log("Token missing")
-              return
-            }
             const URL = "http://localhost:3001/user"
 
             const response = await fetch(URL, {
               headers: {
-                 'Authorization' : `Bearer  ${token}`
+                 'Authorization' : `Bearer ${token}`
               }
             })
 
             const data = await response.json()
 
             if(response.ok) {
-              const user = data.user; 
-              login(user, token)
+              const userData = data.user; 
+              login(userData, token)
             } else {
                console.log("Error can't fetch profile's data");
-               localStorage.removeItem('token');
+               logout();
             }
 
         } catch (err) {
             console.error(err);
+            logout();
         }
     }
 
     useEffect(() => {
-      fetchProfile();
-    }, []);
+      
+      if (!isAuthenticated && !isLoading) {
+        const token = localStorage.getItem("token");
+        if (token) {
+          fetchProfile(token);
+        }
+      }
+    }, [isLoading, isAuthenticated]);
 
 
   return (
@@ -75,19 +74,19 @@ export default function Header() {
               </label>
 
               <div
-              onClick={() => router.push("/login")}  
-              className='flex gap-2 cursor-pointer hover:bg-gray-100 py-2 px-4'
+              onClick={() => !isAuthenticated && router.push("/login")}  
+              className='flex gap-2 cursor-pointer hover:bg-gray-100 py-2 px-4 rounded'
               > 
 
               <CircleUserIcon className='cursor-pointer' />
 
-              {isAuthenticated && User ? (
-                <div className='flex'>
-                  ${User.name}
+              {isAuthenticated && user ? (
+                <div className='flex items-center'>
+                  <span className='font-medium text-sm'>{user.name}</span>
                  </div>
               ) : (
                 <div>
-                   <span className='font-medium text-1xl'>Se connecter</span>
+                   <span className='font-medium text-sm'>Se connecter</span>
                 </div>
               )}
               </div>

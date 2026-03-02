@@ -106,8 +106,8 @@ export async function getStaticPaths() {
   const paths = slugData.map((item) => ({
     params: { slug: item.slug },
   }));
-
-  return { paths, fallback: false }; // false = 404
+ 
+  return { paths, fallback: false }; 
 }
 
 export async function getStaticProps({ params }: { params: { slug: string } }) {

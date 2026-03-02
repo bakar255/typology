@@ -3,18 +3,23 @@
 import Footer from "@/components/footer"
 import { useRouter } from "next/router";
 import { useState } from "react"
-
+import { useAuth } from "@/context/AuthContext";
 
 export default function Registrer() {
 const router = useRouter();
+const { login } = useAuth();
 
     
     const [email, setEmail] = useState("");
     const [password, setPassword ] = useState("");
     const [name, setName] = useState("");
+    const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleRegistrer = async (e:any) => {
         e.preventDefault();
+        setError(false);
+        setIsLoading(true);
 
         try {
             const res = await fetch("http://localhost:3001/register", {
@@ -29,12 +34,22 @@ const router = useRouter();
         
             if(res.ok) {
                 console.log("Connecté", data);
-                router.push("/dashboard");
+                // Use AuthContext to store user and token
+                if (data.user && data.token) {
+                    login(data.user, data.token);
+                    router.push("/");
+                } else {
+                    router.push("/login");
+                }
             } else {
+                setError(true);
                 console.error("err:", data.message || data.error);
             }
         }  catch (err) {
-            console.error("Erreur")
+            console.error("Erreur", err);
+            setError(true);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -79,12 +94,19 @@ const router = useRouter();
                         />
                     </div>
 
+                    {error && (
+                        <div>
+                            <span className="text-red-800">Erreur lors du registre, réessayez s'il vous plaît</span>
+                        </div>
+                    )}
+
                     <button 
                         type="submit"
                         onClick={handleRegistrer}
-                        className="py-3 w-full bg-pink-500  text-white rounded-lg text-sm font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
+                        disabled={isLoading}
+                        className="py-3 w-full bg-pink-500 hover:bg-pink-600 disabled:bg-pink-300 text-white rounded-lg text-sm font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
                     >
-                        Continue
+                        {isLoading ? "Inscription..." : "Continue"}
                     </button>
                 </form>
 
