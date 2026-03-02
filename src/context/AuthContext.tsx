@@ -9,7 +9,9 @@ interface User {
 interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
-    login: (user: User, token?: string) => void;
+    isLoading: boolean;
+    token: string | null;
+    login: (user: User, token: string) => void;
     logout: () => void;
 }
 
@@ -26,18 +28,54 @@ export const useAuth = () => {
 export const AuthProvider = ({ children } : { children: ReactNode}) =>  {
 
     const [user, setUser ] = useState<User | null>(null);
+    const [token, setToken] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const login = (userData: User, token?: string) => {
-     setUser(userData);
-     localStorage.setItem("token_user", JSON.stringify(userData));
-    }
+    // Initialize auth on mount
+    useEffect(() => {
+        const initAuth = () => {
+            try {
+                const savedToken = localStorage.getItem("token");
+                const savedUser = localStorage.getItem("token_user");
+
+                if (savedToken && savedUser) {
+                    setToken(savedToken);
+                    setUser(JSON.parse(savedUser));
+                }
+            } catch (error) {
+                console.error("Error initializing auth:", error);
+                localStorage.removeItem("token");
+                localStorage.removeItem("token_user");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        initAuth();
+    }, []);
+
+    const login = (userData: User, authToken: string) => {
+        setUser(userData);
+        setToken(authToken);
+        localStorage.setItem("token", authToken);
+        localStorage.setItem("token_user", JSON.stringify(userData));
+    };
 
     const logout = () => {
        setUser(null);
+       setToken(null);
+       localStorage.removeItem("token");
        localStorage.removeItem("token_user");
-    }
+    };
 
-    const value: AuthContextType = {user, login, logout, isAuthenticated: !!user}
+    const value: AuthContextType = {
+        user, 
+        token,
+        isLoading,
+        login, 
+        logout, 
+        isAuthenticated: !!user && !!token
+    };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

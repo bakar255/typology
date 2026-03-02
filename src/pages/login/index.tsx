@@ -4,19 +4,22 @@ import Footer from "@/components/footer"
 import { useState } from "react"
 import { useRouter } from "next/router";
 import WelcomeMessage from "@/components/Bienvenue";
-
-
+import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
 
     const router = useRouter();
+    const { login } = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword ] = useState("");
     const [error, setError] = useState (false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleLogin = async (e:any) => {
         e.preventDefault();
+        setError(false);
+        setIsLoading(true);
 
         try {
             const res = await fetch("http://localhost:3001/login", {
@@ -30,8 +33,8 @@ export default function Login() {
             const data = await res.json();
         
             if(res.ok) {
-                <WelcomeMessage username={data.user} />   
-                localStorage.setItem("token", data.token);           
+                // Use AuthContext to store user and token
+                login(data.user, data.token);
                 console.log("Connecté", data);
                 router.push("/");
             } else {
@@ -39,7 +42,10 @@ export default function Login() {
                 console.error("err:", data.message || data.error);
             }
         }  catch (err) {
-            console.error("Erreur")
+            console.error("Erreur", err);
+            setError(true);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -82,9 +88,10 @@ export default function Login() {
                     <button 
                         type="submit"
                         onClick={handleLogin}
-                        className="py-3 w-full bg-pink-500  text-white rounded-lg text-sm font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
+                        disabled={isLoading}
+                        className="py-3 w-full bg-pink-500 hover:bg-pink-600 disabled:bg-pink-300 text-white rounded-lg text-sm font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
                     >
-                        Continue
+                        {isLoading ? "Connexion..." : "Continue"}
                     </button>
                 </form>
 
