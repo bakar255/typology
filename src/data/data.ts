@@ -256,3 +256,67 @@ export const slugData = [
     categoryKey: "Parfums > Parfum Homme",
   },
 ];
+
+/**
+ * Fonction pour mapper les produits à leurs slugs respectifs
+ * @param product - Produit à mapper
+ * @returns slug correspondant ou undefined
+ */
+export function getProductSlug(product: { category: string; subcategory?: string; titre: string; description: string }): string | undefined {
+  const categoryMap: { [key: string]: { [key: string]: string } } = {
+    Skincare: {
+      "Nettoyants": "foam-cleanser",
+      "Sérums": "hyaluronic-acid",
+      "Toniques": "toners",
+      "Masques": "clay-mask",
+    },
+    Bodycare: {
+      "Savons": "soap",
+      "Gommages": "scrubs",
+      "Lotions": "body-lotion",
+      "Huiles": "body-oils",
+    },
+    Maquillage: {
+      "Rouge à lèvres": "matte-lipstick",
+      "Fond de teint": "liquid-foundation",
+      "Fard à paupières": "eyeshadow-palette",
+    },
+    Parfums: {
+      "Parfum Femme": "rose-perfume",
+      "Parfum Homme": "vanilla-essence",
+    },
+    Lots: {
+      "Ensembles soins": "anti-aging-kit",
+    },
+  };
+
+  const slug = categoryMap[product.category]?.[product.subcategory || ""];
+  return slug;
+}
+
+/**
+ * Fonction pour mapper un slug et retourner tous les produits correspondants
+ * @param slug - Le slug à chercher
+ * @returns Object contenant les métadonnées et les produits associés
+ */
+export function getProductsBySlug(slug: string, allProducts: any[]): { slug: string; title: string; subtitle: string; products: any[] } | null {
+  const slugItem = slugData.find((item) => item.slug === slug);
+  
+  if (!slugItem) return null;
+
+  // Extraire la catégorie principale du categoryKey (avant le >)
+  const [mainCategory] = slugItem.categoryKey.split(">").map((s) => s.trim());
+  
+  // Trouver tous les produits qui correspondent à cette catégorie
+  const matchedProducts = allProducts.filter((product) => {
+    const productMainCategory = product.category.toLowerCase();
+    return productMainCategory === mainCategory.toLowerCase() || productMainCategory === mainCategory.replace("Beautés", "Beauté").toLowerCase();
+  });
+
+  return {
+    slug,
+    title: slugItem.title,
+    subtitle: slugItem.subtitle,
+    products: matchedProducts,
+  };
+}
