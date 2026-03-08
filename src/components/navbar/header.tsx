@@ -68,11 +68,7 @@ export default function Header() {
               <Logo />
 
               <div className="absolute top-4 right-5 flex items-center gap-2 md:gap-5">
-               {/* Selection langues*/}
-              <label htmlFor="languages" className="block mb-1 font-medium text-muted-foreground">
-                Français <ChevronDown size={16} className="inline-block ml-1"/>
-              </label>
-
+           
               <div
               onClick={() => !isAuthenticated && router.push("/login")}  
               className='flex gap-2 cursor-pointer hover:bg-gray-100 py-2 px-4 rounded'

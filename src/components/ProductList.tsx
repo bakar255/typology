@@ -108,27 +108,8 @@ export default function ProductList() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Notre Catalogue</h1>
-          <p className="text-gray-300">Découvrez notre sélection complète de produits beauté et cosmétiques</p>
-        </div>
-      </div>
-
+      
       <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Search Bar */}
-        <div className="mb-8 flex gap-4">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Rechercher un produit..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-            />
-          </div>
-        </div>
 
         {/* Filters Section */}
         <div className="mb-8 pb-8 border-b border-gray-200">
@@ -163,27 +144,7 @@ export default function ProductList() {
           </div>
 
           {/* Sort */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-900 mb-4">Trier par</h3>
-            <select
-              value={selectedSort}
-              onChange={(e) => setSelectedSort(e.target.value)}
-              className="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-black appearance-none cursor-pointer"
-              style={{
-                backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "right 8px center",
-                backgroundSize: "20px",
-                paddingRight: "32px",
-              }}
-            >
-              {sortOptions.map((opt) => (
-                <option key={opt.id} value={opt.value}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          
         </div>
 
         {/* Content */}

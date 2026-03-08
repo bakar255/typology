@@ -9,7 +9,8 @@ export async function scrapePage(url, category, subCategory) {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      console.warn(`⚠️ HTTP ${response.status} pour ${url} - Skipping...`);
+      return [];
     }
 
     const html = await response.text();
@@ -17,70 +18,98 @@ export async function scrapePage(url, category, subCategory) {
 
     const products = [];
 
-    $(".product-card").each((i, el) => {
-      const title = $(el)
-        .find(".product-item-title")
+    // Essayer différents sélecteurs pour les cartes produit
+    const productElements = $("[data-testid='product-tile']").length > 0 
+      ? $("[data-testid='product-tile']")
+      : $("[class*='ProductCard']").length > 0
+      ? $("[class*='ProductCard']")
+      : $(".product-card").length > 0
+      ? $(".product-card")
+      : $("[class*='product']");
+
+    if (productElements.length === 0) {
+      console.warn(`⚠️ Aucun produit trouvé sur ${url}`);
+      return [];
+    }
+
+    productElements.each((i, el) => {
+      // Extraire le titre avec plusieurs stratégies
+      let title = $(el)
+        .find("h2, h3, [class*='title'], [class*='name']")
+        .first()
         .text()
         .trim();
 
+      if (!title) {
+        title = $(el)
+          .find("a")
+          .first()
+          .attr("title") || $(el)
+          .find("a")
+          .first()
+          .text()
+          .trim();
+      }
+
       const brand = $(el)
-        .find(".product-item-brand")
+        .find("[class*='brand']")
         .text()
         .trim() || null;
 
       const productUrl = $(el)
         .find("a")
+        .first()
         .attr("href");
 
+      // Chercher les prix de plusieurs manières
       const rawPrice = $(el)
-        .find(".price")
+        .find("[class*='price'], span:contains('€')")
+        .first()
         .text()
         .trim();
 
-
-      // Nettoyage (supprime espaces invisibles)
+      // Nettoyage
       const cleanPrice = rawPrice.replace(/\s+/g, " ");
 
-      // Regex
-      const oldPriceMatch = cleanPrice.match(/Prix de vente\s*:?([\d,]+)\s*€/i);
-      const currentPriceMatch = cleanPrice.match(/Prix\s*actuel\s*:?([\d,]+)\s*€/i);
-      const singlePriceMatch = cleanPrice.match(/([\d,]+)\s*€/);
+      // Regex pour extraire les prix
+      const priceMatch = cleanPrice.match(/([\d,]+)\s*€/);
+      const currentPrice = priceMatch ? parseFloat(priceMatch[1].replace(",", ".")) : null;
 
-      // Conversion
-      const toNumber = (p) => (p ? parseFloat(p.replace(",", ".")) : null);
+      // Chercher l'image
+      let imageUrl = null;
+      const imgSrc = $(el)
+        .find("img")
+        .first()
+        .attr("src") || $(el)
+        .find("img")
+        .first()
+        .attr("data-src");
 
-      let oldPrice = null;
-      let currentPrice = null;
-
-      if (currentPriceMatch) {
-        // CAS PROMO
-        oldPrice = toNumber(oldPriceMatch?.[1]);
-        currentPrice = toNumber(currentPriceMatch[1]);
-      } else if (singlePriceMatch) {
-        // CAS PRIX UNIQUE
-        currentPrice = toNumber(singlePriceMatch[1]);
+      if (imgSrc) {
+        if (imgSrc.startsWith('http')) {
+          imageUrl = imgSrc;
+        } else if (imgSrc.startsWith('//')) {
+          imageUrl = 'https:' + imgSrc;
+        } else if (imgSrc.startsWith('/')) {
+          imageUrl = 'https://www.lookfantastic.fr' + imgSrc;
+        } else {
+          imageUrl = 'https://www.lookfantastic.fr/' + imgSrc;
+        }
       }
 
-      const image = $(el)
-        .find("img")
-        .attr("src");
-
-      const description = $(el)
-        .find(".product-item-description")
-        .text()
-        .trim() || null;
-
+      // Sauvegarder si on a titre et prix
       if (title && currentPrice) {
         products.push({
           name: title,
           brand,
           price: currentPrice,
-          oldPrice,
           currency: "EUR",
-          imageUrl: image,
-          productUrl: productUrl ? `https://www.lookfantastic.fr${productUrl}` : null,
+          imageUrl: imageUrl || 'https://via.placeholder.com/300x400?text=' + encodeURIComponent(title),
+          productUrl: productUrl ? (productUrl.startsWith('http') ? productUrl : `https://www.lookfantastic.fr${productUrl}`) : null,
           category: `${category} > ${subCategory}`,
-          description,
+          description: null,
+          pricePerUnit: null,
+          fuild: false,
         });
       }
     });
