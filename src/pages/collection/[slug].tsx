@@ -118,28 +118,36 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
     return { notFound: true };
   }
 
-  // On récupère les produits réels depuis la DB en filtrant par categoryKey
-  const productsFromDb = await prisma.product.findMany({
-    where: data.categoryKey
-      ? {
-          category: {
-            contains: data.categoryKey,
-          },
-        }
-      : {},
-    orderBy: {
-      createdAt: "desc",
-    },
-    take: 24,
-  });
+  let products: ProductCardProps[] = [];
 
-  const products = productsFromDb.map((p) => ({
-    id: p.id,
-    name: p.name,
-    price: p.price ?? 0,
-    imageUrl: p.imageUrl ?? "/placeholder.jpg",
-    brand: p.brand,
-  }));
+  try {
+    // On récupère les produits réels depuis la DB en filtrant par categoryKey
+    const productsFromDb = await prisma.product.findMany({
+      where: data.categoryKey
+        ? {
+            category: {
+              contains: data.categoryKey,
+            },
+          }
+        : {},
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 24,
+    });
+
+    products = productsFromDb.map((p) => ({
+      id: p.id,
+      name: p.name,
+      price: p.price ?? 0,
+      imageUrl: p.imageUrl ?? "/placeholder.jpg",
+      brand: p.brand,
+    }));
+  } catch (error) {
+    // If database is unavailable during build, return empty products
+    console.error("Failed to fetch products from database:", error);
+    products = [];
+  }
 
   return {
     props: {
@@ -147,5 +155,6 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
       subtitle: data.subtitle,
       products,
     },
+    revalidate: 3600, // Revalidate every hour
   };
 }
