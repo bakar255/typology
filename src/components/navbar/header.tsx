@@ -55,24 +55,14 @@ export default function Header() {
   const favCount = favoriteIds.length;
 
   return (
-    <div className="w-full">
+    <div className="w-full sticky top-0 z-50 bg-white border-b border-gray-100">
       <div className="py-4 px-4">
         <div className="flex flex-col md:flex-row items-center justify-between max-w-[1700px] mx-auto relative">
 
           <SearchInput />
           <Logo />
 
-          <div className="absolute top-4 right-5 flex items-center gap-4">
-
-            {/* Favoris */}
-            <Link href="/favorites" className="relative p-1 hover:text-gray-500 transition-colors">
-              <Heart size={20} />
-              {favCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
-                  {favCount > 9 ? '9+' : favCount}
-                </span>
-              )}
-            </Link>
+          <div className="absolute top-1/2 -translate-y-1/2 right-5 flex items-center gap-1">
 
             {/* Panier */}
             <Cart />
@@ -81,9 +71,9 @@ export default function Header() {
             <div className="relative" ref={menuRef}>
               <button
                 onClick={() => isAuthenticated ? setUserMenuOpen((v) => !v) : router.push('/login')}
-                className="flex items-center gap-2 hover:bg-gray-100 py-1.5 px-3 rounded transition-colors"
+                className="flex items-center gap-2 font-medium hover:bg-gray-100 py-2 px-3 rounded transition-colors cursor-pointer"
               >
-                <CircleUserIcon size={20} />
+                <CircleUserIcon size={28} />
                 {isAuthenticated && user ? (
                   <span className="font-medium text-sm hidden md:block">{user.name || user.email}</span>
                 ) : (

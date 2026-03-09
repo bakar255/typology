@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ShoppingBasketIcon, X, Plus, Minus } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import Link from 'next/link';
@@ -6,18 +6,29 @@ import Link from 'next/link';
 export default function Cart() {
   const { cartItems, removeFromCart, updateQuantity, getTotalItems } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const cartRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (cartRef.current && !cartRef.current.contains(e.target as Node)) {
+        setIsCartOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={cartRef}>
       <button
         onClick={() => setIsCartOpen(!isCartOpen)}
         className="relative cursor-pointer"
       >
 
-      <div className='flex items-center gap-2 hover:bg-gray-100 py-2 px-4'>
-        <ShoppingBasketIcon size={25} className='cursor-pointer mt-0'/>
-        <span className='font-medium'>Panier</span>
-       </div>
+      <div className='flex items-center gap-2  py-2 px-4'>
+        <ShoppingBasketIcon size={28} className='cursor-pointer mt-0'/>
+        <span className='font-medium '>Panier</span>
+      </div>
         {getTotalItems() > 0 && (
           <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
             {getTotalItems()}
@@ -32,8 +43,8 @@ export default function Cart() {
             <div className="flex items-center justify-between mb-4">
               <h3 className="">Panier ({getTotalItems()} articles)</h3>
               <button
-                onClick={() => setIsCartOpen(false)}
-                className="text-gray-500 hover:text-gray-700"
+                onClick={(e) => { e.stopPropagation(); setIsCartOpen(false); }}
+                className="cursor-pointer text-gray-500 hover:text-gray-700"
               >
                 <X size={20} />
               </button>

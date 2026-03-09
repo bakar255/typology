@@ -111,40 +111,33 @@ export default function ProductList() {
       
       <div className="max-w-7xl mx-auto px-4 py-12">
 
-        {/* Filters Section */}
-        <div className="mb-8 pb-8 border-b border-gray-200">
-          {/* Categories */}
-          <div className="mb-6">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-900 mb-4">Catégories</h3>
-            <div className="flex flex-wrap gap-2">
+        {/* Categories Tab Nav */}
+        <div className="mb-8 border-b border-gray-200 mx-auto">
+          <div className="flex gap-8 overflow-x-auto">
+            <button
+              onClick={() => setSelectedCategory(null)}
+              className={`relative pb-4 text-sm font-bold uppercase tracking-widest whitespace-nowrap transition-colors duration-200 ${
+                selectedCategory === null
+                  ? "text-black after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-black"
+                  : "text-gray-400 hover:text-gray-700"
+              }`}
+            >
+              Tous
+            </button>
+            {categories.map((cat) => (
               <button
-                onClick={() => setSelectedCategory(null)}
-                className={`px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm ${
-                  selectedCategory === null
-                    ? "bg-black text-white"
-                    : "bg-gray-200 text-gray-900 hover:bg-gray-300"
+                key={cat.id}
+                onClick={() => handleCategorySelect(cat.name)}
+                className={`relative pb-4 text-sm font-bold uppercase tracking-widest whitespace-nowrap transition-colors duration-200 ${
+                  selectedCategory === cat.name
+                    ? "text-black after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-black"
+                    : "text-gray-400 hover:text-gray-700"
                 }`}
               >
-                Tous
+                {cat.name}
               </button>
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => handleCategorySelect(cat.name)}
-                  className={`px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm ${
-                    selectedCategory === cat.name
-                      ? "bg-black text-white"
-                      : "bg-gray-200 text-gray-900 hover:bg-gray-300"
-                  }`}
-                >
-                  {cat.name}
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
-
-          {/* Sort */}
-          
         </div>
 
         {/* Content */}
@@ -205,7 +198,6 @@ export default function ProductList() {
                   <ProductCard
                     key={product.id}
                     product={product}
-                    onAddToCart={() => console.log("Added to cart:", product.titre)}
                   />
                 ))}
               </div>

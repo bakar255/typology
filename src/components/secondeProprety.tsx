@@ -1,66 +1,167 @@
-
 import Image from "next/image";
+import { useState, useEffect } from "react";
+
+const slides = [
+  {
+    src: "/red.webp",
+    label: "IN THE SPOTLIGHT",
+    title: "La meilleur box de l'année 2025",
+    description:
+      "Optez pour les produits qui travaillent plus dur – formulés par la marque qui sait créer une brillance qui attire tous les regards.",
+    cta: "En savoir plus",
+  },
+  {
+    src: "/box.webp",
+    label: "ON THE WISHLIST",
+    title: "La meilleur box de l'année 2024",
+    description:
+      "Faites des économies avec les coffrets de soins capillaires RED, adaptés à tous les types et textures de cheveux.",
+    cta: "En savoir plus",
+  },
+  {
+    src: "/red.webp",
+    label: "FEATURED",
+    title: "Les essentiels beauté 2025",
+    description:
+      "Découvrez notre sélection des produits incontournables de la saison pour sublimer votre routine quotidienne.",
+    cta: "Découvrir",
+  },
+  {
+    src: "/box.webp",
+    label: "NEW ARRIVALS",
+    title: "Collection Printemps 2025",
+    description:
+      "Des nouveautés fraîches et légères pour accueillir la belle saison avec éclat et légèreté.",
+    cta: "Voir la collection",
+  },
+];
 
 export default function SecondProprety() {
-    return (
-        <div className="text-center mt-1">
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-    <div className="container mx-auto max-w-7xl px-4 py-2">
-     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-    
-  
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
-        <div className="flex justify-center gap-1 ml-13 mb-7 mt-2 mx-auto space-x-20">
-        <div className="flex flex-col items-center">
-        <Image 
-          src="/red.webp"
-          alt="redbox"
-          width={500}
-          height={200}
-          className="max-w-5xl"
-        />
-        <span className="uppercase text-sm font-medium mt-2 ">
-          IN THE SPOTLIGHT
-        </span>
-        <span className="playfair-family mt-4 font-medium text-2xl text-center mb-2">
-          La meilleur box de l'année 2025
-        </span>
+  const itemsPerView = isMobile ? 1 : 2;
+  const maxIndex = slides.length - itemsPerView;
+  const slidePercent = 100 / itemsPerView;
 
-        <span className="text-sm font-medium">
-        Optez pour les produits qui travaillent plus dur – formulés par la marque qui sait créer une brillance qui attire tous les regards.
-        </span>
+  const prev = () => setCurrentIndex((i) => Math.max(0, i - 1));
+  const next = () => setCurrentIndex((i) => Math.min(maxIndex, i + 1));
 
-        <button className=" mt-5 border border-black py-2 px-4 font-medium cursor-pointer">En savoir plus</button>
+  return (
+    <section className="py-16 px-6 max-w-7xl mx-auto">
+      {/* Header row */}
+      <div className="flex items-end justify-between mb-8">
+        <div>
+          <span className="uppercase text-xs tracking-[0.2em] text-gray-400 font-medium">
+            Sélection du moment
+          </span>
+          <h2 className="playfair-family text-3xl mt-1">Nos Coups de Cœur</h2>
+        </div>
 
+        {/* Arrow navigation */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={prev}
+            disabled={currentIndex === 0}
+            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:border-black transition-colors duration-200 disabled:opacity-25 cursor-pointer"
+            aria-label="Précédent"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          <button
+            onClick={next}
+            disabled={currentIndex === maxIndex}
+            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:border-black transition-colors duration-200 disabled:opacity-25 cursor-pointer"
+            aria-label="Suivant"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
       </div>
 
-  <div className="flex flex-col items-center">
-    <Image 
-      src="/box.webp"
-      alt="box"
-      width={500}
-      height={200}
-      className="max-w-5xl"
-    />
-  
-    <span className="uppercase text-sm mt-2 ">
-          ON the wishlist
-        </span>
-        <span className="playfair-family mt-4 text-2xl text-center mb-2">
-          La meilleur box de l'année 2024
-        </span>
+      {/* Carousel track */}
+      <div className="overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{
+            transform: `translateX(-${currentIndex * slidePercent}%)`,
+          }}
+        >
+          {slides.map((slide, i) => (
+            <div
+              key={i}
+              style={{ minWidth: `${slidePercent}%` }}
+              className={`${i === 0 ? "pr-4" : i === slides.length - 1 ? "pl-4" : "px-4"}`}
+            >
+              <div className="flex flex-col group cursor-pointer">
+                {/* Image */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+                  <Image
+                    src={slide.src}
+                    alt={slide.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                  />
+                </div>
 
-        <span className="text-sm font-medium">
-        Faites des économies avec les coffrets de soins capillaires RED, adaptés à tous les types et textures de cheveux.
-        </span>
+                {/* Content */}
+                <div className="pt-5">
+                  <span className="uppercase text-[10px] tracking-[0.2em] text-gray-400 font-medium">
+                    {slide.label}
+                  </span>
+                  <h3 className="playfair-family text-xl mt-2 mb-3 leading-snug text-gray-900">
+                    {slide.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-5 font-light">
+                    {slide.description}
+                  </p>
+                  <button className="border border-black px-6 py-2.5 text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer">
+                    {slide.cta}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-        <button className=" mt-5 border border-black py-2 px-4 font-medium cursor-pointer">En savoir plus</button>
-  </div>
-</div>
-</div>
-</div>
-</div>
-
-         
-     )
+      {/* Progress bar */}
+      <div className="mt-10 flex gap-1.5">
+        {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            className="h-[1.5px] flex-1 cursor-pointer transition-colors duration-300"
+            style={{ backgroundColor: i === currentIndex ? "#111" : "#e5e7eb" }}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </section>
+  );
 }
