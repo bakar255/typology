@@ -1,64 +1,80 @@
-import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
+import { Heart } from "lucide-react";
 import { Product } from "@/data/products";
+import { useCart } from "@/context/CartContext";
+import { useFavorites } from "@/context/FavoritesContext";
 
 interface ProductCardProps {
-    product: Product;
-    onAddToCart?: () => void;
+  product: Product;
 }
 
-export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
-    const [isAdded, setIsAdded] = useState(false);
+export default function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const [isAdded, setIsAdded] = useState(false);
 
-    const handleAddToCart = () => {
-        setIsAdded(true);
-        onAddToCart?.();
-        setTimeout(() => setIsAdded(false), 1500);
-    };
+  const favorited = isFavorite(product.id);
 
-    return (
-        <div className="group relative flex flex-col cursor-pointer justify-between border border-transparent transition-all duration-300 p-6 h-full">
-            {/* Image Container */}
-            <div className="relative w-full aspect-[3/4] overflow-hidden bg-gray-50 mb-5">
-                <img
-                    src={product.image}
-                    alt={product.titre}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                />
-                {product.isBestSeller && (
-                    <span className="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 uppercase tracking-wider">
-                        Best Seller
-                    </span>
-                )}
-            </div>
+  const handleAddToCart = () => {
+    addToCart(product);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 1500);
+  };
 
-            {/* Content */}
-            <div className="flex flex-col flex-grow">
-                <div className="flex flex-col mb-2">
-                    <h3 className="text-lg font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
-                        {product.titre}
-                    </h3>
+  return (
+    <div className="group relative flex flex-col cursor-pointer justify-between transition-all duration-300 h-full bg-white hover:shadow-lg rounded-sm">
+      {/* Image */}
+      <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#f8f6f3] mb-4">
+        <img
+          src={product.image}
+          alt={product.titre}
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+        />
+        {product.isBestSeller && (
+          <span className="absolute top-3 left-3 bg-black text-white text-[10px] px-3 py-1 uppercase tracking-widest">
+            Best Seller
+          </span>
+        )}
+        {/* Bouton favori */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleFavorite(product.id);
+          }}
+          className="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-full hover:bg-white transition-colors"
+        >
+          <Heart
+            size={15}
+            className={favorited ? "fill-black text-black" : "text-gray-400"}
+          />
+        </button>
+      </div>
 
-                    <span className="text-sm font-semibold whitespace-nowrap gap-2">
-                        {product.price.toFixed(2)} €
-                    </span>
-                </div>
+      {/* Content */}
+      <div className="flex flex-col flex-grow px-4 pb-5">
+        <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-1">
+          {product.brand || product.category}
+        </p>
+        <h3 className="text-sm font-medium text-gray-900 leading-snug">
+          {product.titre}
+        </h3>
+        {product.volume && (
+          <span className="text-xs text-gray-400 mt-0.5 mb-1">{product.volume}</span>
+        )}
+        <p className="text-xs text-gray-400 mb-2 line-clamp-2 flex-grow">
+          {product.description}
+        </p>
+        <span className="text-base font-bold text-gray-900 mb-3">
+          {product.price.toFixed(2)} €
+        </span>
 
-                <p className="text-sm text-gray-500 mb-3 flex-grow line-clamp-2">
-                    {product.description}
-                </p>
-
-                {/* Rating */}
-                <div className="flex items-center mb-4">
-                    <div className="flex items-center text-yellow-500 mr-2">
-                    </div>
-                </div>
-
-                {/* Action Button */}
-                <button className="w-full bg-white border cursor-pointer border-black text-black py-3 px-4 uppercase text-xs tracking-widest font-bold flex items-center justify-center gap-2 group/btn">
-                    <span>Ajouter au panier</span>
-                </button>
-            </div>
-        </div>
-    );
+        <button
+          onClick={handleAddToCart}
+          className="w-full bg-black text-white py-3 px-4 text-[11px] uppercase tracking-widest font-semibold hover:bg-gray-800 transition-colors duration-200 cursor-pointer"
+        >
+          {isAdded ? "Ajouté ✓" : "Ajouter au panier"}
+        </button>
+      </div>
+    </div>
+  );
 }

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
+import { extractVolume } from '@/data/products';
 
 export default async function handler(
   req: NextApiRequest,
@@ -48,6 +49,7 @@ export default async function handler(
       reviews: 0,
       category: product.category || undefined,
       isBestSeller: false,
+      volume: extractVolume(product.name),
       brand: product.brand,
       currency: product.currency,
       productUrl: product.productUrl,

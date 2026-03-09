@@ -1,74 +1,92 @@
+/**
+ * slugData — table de correspondance slug ↔ categoryKey (DB)
+ *
+ * categoryKey doit correspondre exactement (ou être contenu dans)
+ * la valeur "category > subCategory" stockée par le scraper.
+ *
+ * Règle : `prisma.product.findMany({ where: { category: { contains: categoryKey } } })`
+ *
+ * Les slugs "all-*" utilisent uniquement le nom de la catégorie principale
+ * afin de matcher tous les produits de cette catégorie (toutes sous-cats confondues).
+ */
+
 export const slugData = [
-  // === BODYCARE ===
-  // Savons et nettoyants
+  // ══════════════════════════════════════════════════════════════════════════
+  // BODYCARE
+  // ══════════════════════════════════════════════════════════════════════════
   {
-    slug: "soap",
-    title: "Savons Naturels",
-    subtitle: "100% bio, faits à la main",
-    categoryKey: "Bodycare > Savons et nettoyants",
+    slug: "all-bodycare",
+    title: "Bodycare",
+    subtitle: "Tous nos soins pour le corps",
+    categoryKey: "Bodycare",
+  },
+
+  // Savons & Nettoyants
+  {
+    slug: "bar-soap",
+    title: "Savons en barre",
+    subtitle: "Nettoyage doux et naturel",
+    categoryKey: "Bodycare > Savons & Nettoyants",
   },
   {
+    slug: "body-wash",
+    title: "Gels douche",
+    subtitle: "Fraîcheur et douceur en un geste",
+    categoryKey: "Bodycare > Savons & Nettoyants",
+  },
+  {
+    slug: "body-scrub",
+    title: "Gommages corporels",
+    subtitle: "Exfoliation douce et régénérante",
+    categoryKey: "Bodycare > Savons & Nettoyants",
+  },
+
+  // Soins hydratants
+  {
     slug: "body-lotion",
-    title: "Lotions Corporelles",
+    title: "Lotions corporelles",
     subtitle: "Hydratation douce et longue durée",
-    categoryKey: "Bodycare > Savons et nettoyants",
+    categoryKey: "Bodycare > Soins hydratants",
   },
   {
     slug: "body-oils",
     title: "Huiles pour le corps",
     subtitle: "Nutrition intense et peau satinée",
-    categoryKey: "Bodycare > Savons et nettoyants",
+    categoryKey: "Bodycare > Soins hydratants",
   },
   {
-    slug: "scrubs",
-    title: "Gommages Corporels",
-    subtitle: "Exfoliation douce et régénérante",
-    categoryKey: "Bodycare > Savons et nettoyants",
+    slug: "body-butter",
+    title: "Beurres corporels",
+    subtitle: "Soin riche pour peaux très sèches",
+    categoryKey: "Bodycare > Soins hydratants",
   },
 
-  // Beauté coréenne
+  // ══════════════════════════════════════════════════════════════════════════
+  // SKINCARE
+  // ══════════════════════════════════════════════════════════════════════════
   {
-    slug: "sheet-masks",
-    title: "Masques en feuilles",
-    subtitle: "Hydratation intense immédiate",
-    categoryKey: "Bodycare > Beauté coréenne",
-  },
-  {
-    slug: "essences",
-    title: "Essences Coréennes",
-    subtitle: "Première étape d'hydratation",
-    categoryKey: "Bodycare > Beauté coréenne",
-  },
-  {
-    slug: "toners",
-    title: "Toniques Coréens",
-    subtitle: "Prépare et équilibre la peau",
-    categoryKey: "Bodycare > Beauté coréenne",
-  },
-  {
-    slug: "ampoules",
-    title: "Ampoules Concentrées",
-    subtitle: "Soin ciblé intense",
-    categoryKey: "Bodycare > Beauté coréenne",
+    slug: "all-skincare",
+    title: "Skincare",
+    subtitle: "Tous nos soins pour le visage",
+    categoryKey: "Skincare",
   },
 
-  // === SKINCARE ===
   // Nettoyants
   {
-    slug: "foam-cleanser",
-    title: "Nettoyants Moussants",
-    subtitle: "Nettoie en douceur sans agresser",
-    categoryKey: "Skincare > Nettoyants",
-  },
-  {
     slug: "gel-cleanser",
-    title: "Nettoyants en Gel",
+    title: "Nettoyants en gel",
     subtitle: "Fraîcheur et légèreté",
     categoryKey: "Skincare > Nettoyants",
   },
   {
+    slug: "foam-cleanser",
+    title: "Nettoyants moussants",
+    subtitle: "Nettoie en douceur sans agresser",
+    categoryKey: "Skincare > Nettoyants",
+  },
+  {
     slug: "micellar-water",
-    title: "Eaux Micellaires",
+    title: "Eaux micellaires",
     subtitle: "Démaquillage et nettoyage en un geste",
     categoryKey: "Skincare > Nettoyants",
   },
@@ -76,85 +94,33 @@ export const slugData = [
   // Sérums
   {
     slug: "vitamin-c-serum",
-    title: "Sérums à la Vitamine C",
-    subtitle: "Éclat et anti-oxydation",
+    title: "Sérums à la vitamine C",
+    subtitle: "Éclat et protection antioxydante",
     categoryKey: "Skincare > Sérums",
   },
   {
     slug: "hyaluronic-acid",
-    title: "Acide Hyaluronique",
-    subtitle: "Hydratation repulpante",
+    title: "Acide hyaluronique",
+    subtitle: "Hydratation repulpante et intense",
     categoryKey: "Skincare > Sérums",
   },
   {
     slug: "retinol-serum",
-    title: "Sérums au Rétinol",
+    title: "Sérums au rétinol",
     subtitle: "Anti-âge et renouvellement cellulaire",
     categoryKey: "Skincare > Sérums",
   },
 
-  // Masques
+  // ══════════════════════════════════════════════════════════════════════════
+  // MAQUILLAGE
+  // ══════════════════════════════════════════════════════════════════════════
   {
-    slug: "clay-mask",
-    title: "Masques à l'Argile",
-    subtitle: "Purification et matité",
-    categoryKey: "Skincare > Masques",
-  },
-  {
-    slug: "sheet-mask",
-    title: "Masques en Feuille",
-    subtitle: "Hydratation express",
-    categoryKey: "Skincare > Masques",
-  },
-  {
-    slug: "sleeping-mask",
-    title: "Masques de Nuit",
-    subtitle: "Soin intense pendant le sommeil",
-    categoryKey: "Skincare > Masques",
+    slug: "all-maquillage",
+    title: "Maquillage",
+    subtitle: "Toute notre gamme maquillage",
+    categoryKey: "Maquillage",
   },
 
-  // === LOTS ===
-  // Ensembles soins de la peau
-  {
-    slug: "anti-aging-kit",
-    title: "Kits Anti-Âge",
-    subtitle: "Routine complète pour peaux matures",
-    categoryKey: "Lots > Ensembles soins de la peau",
-  },
-  {
-    slug: "acne-treatment-set",
-    title: "Ensembles Traitement Acné",
-    subtitle: "Solutions ciblées pour peaux à problèmes",
-    categoryKey: "Lots > Ensembles soins de la peau",
-  },
-  {
-    slug: "brightening-bundle",
-    title: "Lots Éclaircissants",
-    subtitle: "Uniformise et illumine le teint",
-    categoryKey: "Lots > Ensembles soins de la peau",
-  },
-
-  // Ensembles soins du corps
-  {
-    slug: "relaxation-spa-set",
-    title: "Ensembles Spa Relaxation",
-    subtitle: "Détente et bien-être à la maison",
-    categoryKey: "Lots > Ensembles soins du corps",
-  },
-  {
-    slug: "exfoliation-kit",
-    title: "Kits Exfoliation",
-    subtitle: "Peau lisse et renouvelée",
-    categoryKey: "Lots > Ensembles soins du corps",
-  },
-  {
-    slug: "hydration-pack",
-    title: "Packs Hydratation",
-    subtitle: "Soin intense pour peaux sèches",
-    categoryKey: "Lots > Ensembles soins du corps",
-  },
-
-  // === MAQUILLAGE ===
   // Fond de teint
   {
     slug: "liquid-foundation",
@@ -165,13 +131,13 @@ export const slugData = [
   {
     slug: "cream-foundation",
     title: "Fonds de teint crème",
-    subtitle: "Confort et hydratation",
+    subtitle: "Confort, couvrance et hydratation",
     categoryKey: "Maquillage > Fond de teint",
   },
   {
     slug: "tinted-moisturizer",
-    title: "Hydratants Teintés",
-    subtitle: "Soin et couleur légère",
+    title: "Hydratants teintés",
+    subtitle: "Soin et couleur légère au quotidien",
     categoryKey: "Maquillage > Fond de teint",
   },
 
@@ -190,7 +156,7 @@ export const slugData = [
   },
   {
     slug: "tinted-balm",
-    title: "Baumes Teintés",
+    title: "Baumes teintés",
     subtitle: "Hydratation et touche de couleur",
     categoryKey: "Maquillage > Rouge à lèvres",
   },
@@ -198,14 +164,8 @@ export const slugData = [
   // Fard à paupières
   {
     slug: "eyeshadow-palette",
-    title: "Palettes de Fards",
+    title: "Palettes de fards",
     subtitle: "Multiples nuances pour tous les looks",
-    categoryKey: "Maquillage > Fard à paupières",
-  },
-  {
-    slug: "single-eyeshadow",
-    title: "Fards à paupières individuels",
-    subtitle: "Nuances uniques à composer",
     categoryKey: "Maquillage > Fard à paupières",
   },
   {
@@ -214,104 +174,124 @@ export const slugData = [
     subtitle: "Faciles à appliquer, longue tenue",
     categoryKey: "Maquillage > Fard à paupières",
   },
+  {
+    slug: "mascara",
+    title: "Mascaras",
+    subtitle: "Volume, longueur et courbe",
+    categoryKey: "Maquillage > Fard à paupières",
+  },
 
-  // === PARFUMS ===
-  // Parfum Femme
+  // ══════════════════════════════════════════════════════════════════════════
+  // PARFUMS
+  // ══════════════════════════════════════════════════════════════════════════
+  {
+    slug: "all-parfums",
+    title: "Parfums",
+    subtitle: "Toute notre sélection de fragrances",
+    categoryKey: "Parfums",
+  },
+
+  // Femme
   {
     slug: "rose-perfume",
-    title: "Parfums à la Rose",
+    title: "Parfums à la rose",
     subtitle: "Féminité et romantisme",
-    categoryKey: "Parfums > Parfum Femme",
+    categoryKey: "Parfums > Femme",
   },
   {
     slug: "jasmine-perfume",
-    title: "Parfums au Jasmin",
+    title: "Parfums au jasmin",
     subtitle: "Sensualité envoûtante",
-    categoryKey: "Parfums > Parfum Femme",
+    categoryKey: "Parfums > Femme",
   },
   {
-    slug: "lavender-mist",
-    title: "Brumes à la Lavande",
-    subtitle: "Fraîcheur relaxante",
-    categoryKey: "Parfums > Parfum Femme",
+    slug: "floral-perfume",
+    title: "Parfums floraux",
+    subtitle: "Légèreté et fraîcheur printanière",
+    categoryKey: "Parfums > Femme",
   },
 
-  // Parfum Homme
-  {
-    slug: "vanilla-essence",
-    title: "Essences de Vanille",
-    subtitle: "Chaleur et réconfort",
-    categoryKey: "Parfums > Parfum Homme",
-  },
+  // Homme
   {
     slug: "sandalwood",
-    title: "Santal",
+    title: "Parfums au santal",
     subtitle: "Boisé et raffiné",
-    categoryKey: "Parfums > Parfum Homme",
+    categoryKey: "Parfums > Homme",
   },
   {
     slug: "amber-spice",
-    title: "Épices Ambrées",
+    title: "Épices ambrées",
     subtitle: "Caractère et intensité",
-    categoryKey: "Parfums > Parfum Homme",
+    categoryKey: "Parfums > Homme",
+  },
+  {
+    slug: "woody-perfume",
+    title: "Parfums boisés",
+    subtitle: "Profondeur et élégance masculine",
+    categoryKey: "Parfums > Homme",
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // LOTS
+  // ══════════════════════════════════════════════════════════════════════════
+  {
+    slug: "all-lots",
+    title: "Lots & Coffrets",
+    subtitle: "Tous nos coffrets et ensembles",
+    categoryKey: "Lots",
+  },
+
+  // Soins de la peau
+  {
+    slug: "anti-aging-kit",
+    title: "Kits anti-âge",
+    subtitle: "Routine complète pour peaux matures",
+    categoryKey: "Lots > Soins de la peau",
+  },
+  {
+    slug: "brightening-bundle",
+    title: "Lots éclaircissants",
+    subtitle: "Uniformise et illumine le teint",
+    categoryKey: "Lots > Soins de la peau",
+  },
+  {
+    slug: "hydration-pack",
+    title: "Packs hydratation",
+    subtitle: "Soin intense pour peaux sèches",
+    categoryKey: "Lots > Soins de la peau",
+  },
+
+  // Coffrets maquillage
+  {
+    slug: "makeup-gift-set",
+    title: "Coffrets maquillage",
+    subtitle: "Les plus beaux ensembles beauté",
+    categoryKey: "Lots > Maquillage",
+  },
+  {
+    slug: "eye-kit",
+    title: "Kits yeux",
+    subtitle: "Tout pour sublimer votre regard",
+    categoryKey: "Lots > Maquillage",
+  },
+  {
+    slug: "lip-kit",
+    title: "Kits lèvres",
+    subtitle: "Routine lèvres complète",
+    categoryKey: "Lots > Maquillage",
   },
 ];
 
-/**
- * Fonction pour mapper les produits à leurs slugs respectifs
- * @param product - Produit à mapper
- * @returns slug correspondant ou undefined
- */
-export function getProductSlug(product: { category: string; subcategory?: string; titre: string; description: string }): string | undefined {
-  const categoryMap: { [key: string]: { [key: string]: string } } = {
-    Skincare: {
-      "Nettoyants": "foam-cleanser",
-      "Sérums": "hyaluronic-acid",
-      "Toniques": "toners",
-      "Masques": "clay-mask",
-    },
-    Bodycare: {
-      "Savons": "soap",
-      "Gommages": "scrubs",
-      "Lotions": "body-lotion",
-      "Huiles": "body-oils",
-    },
-    Maquillage: {
-      "Rouge à lèvres": "matte-lipstick",
-      "Fond de teint": "liquid-foundation",
-      "Fard à paupières": "eyeshadow-palette",
-    },
-    Parfums: {
-      "Parfum Femme": "rose-perfume",
-      "Parfum Homme": "vanilla-essence",
-    },
-    Lots: {
-      "Ensembles soins": "anti-aging-kit",
-    },
-  };
-
-  const slug = categoryMap[product.category]?.[product.subcategory || ""];
-  return slug;
-}
-
-/**
- * Fonction pour mapper un slug et retourner tous les produits correspondants
- * @param slug - Le slug à chercher
- * @returns Object contenant les métadonnées et les produits associés
- */
-export function getProductsBySlug(slug: string, allProducts: any[]): { slug: string; title: string; subtitle: string; products: any[] } | null {
+export function getProductsBySlug(
+  slug: string,
+  allProducts: any[]
+): { slug: string; title: string; subtitle: string; products: any[] } | null {
   const slugItem = slugData.find((item) => item.slug === slug);
-  
   if (!slugItem) return null;
 
-  // Extraire la catégorie principale du categoryKey (avant le >)
-  const [mainCategory] = slugItem.categoryKey.split(">").map((s) => s.trim());
-  
-  // Trouver tous les produits qui correspondent à cette catégorie
-  const matchedProducts = allProducts.filter((product) => {
-    const productMainCategory = product.category.toLowerCase();
-    return productMainCategory === mainCategory.toLowerCase() || productMainCategory === mainCategory.replace("Beautés", "Beauté").toLowerCase();
-  });
+  const matchedProducts = allProducts.filter((product) =>
+    product.category?.includes(slugItem.categoryKey)
+  );
 
   return {
     slug,

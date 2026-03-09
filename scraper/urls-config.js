@@ -1,65 +1,73 @@
 /**
  * Configuration des URLs à scraper avec leurs catégories et sous-catégories
- * 
- * Format:
- * {
- *   url: "URL à scraper",
- *   category: "Catégorie principale",
- *   subCategory: "Sous-catégorie"
- * }
- * 
- * La catégorie sera stockée au format "Catégorie > Sous-catégorie" dans la base de données
+ *
+ * Format stocké en DB : "Category > SubCategory"
+ * Ce format doit correspondre exactement aux categoryKey dans src/data/data.ts
  */
 
 export const urlConfig = [
-  // Cosmétique
+  // ── BODYCARE ─────────────────────────────────────────────────────────────
   {
-    url: "https://www.lookfantastic.fr/c/health-beauty/new/new-in/eu/",
-    category: "Cosmétique",
-    subCategory: "Nouveautés",
-  },
-
-  // Maquillages
-  {
-    url: "https://www.lookfantastic.fr/c/maquillage/rouge-a-levres/eu/",
-    category: "Maquillages",
-    subCategory: "Rouge à lèvres",
-  },
-  {
-    url: "https://www.lookfantastic.fr/c/maquillage/fond-de-teint/eu/",
-    category: "Maquillages",
-    subCategory: "Fond de teint",
-  },
-  {
-    url: "https://www.lookfantastic.fr/c/maquillage/mascara/eu/",
-    category: "Maquillages",
-    subCategory: "Mascara",
-  },
-
-  // Parfums
-  {
-    url: "https://www.lookfantastic.fr/c/health-beauty/parfum/voir-tout/",
-    category: "Parfums",
-    subCategory: "Fragrances",
-  },
-
-  // Bodycare
-  {
-    url: "https://www.lookfantastic.fr/c/bodycare/body-care/eu/",
+    url: "https://www.lookfantastic.fr/c/health-beauty/body/bath-shower/",
     category: "Bodycare",
-    subCategory: "Soins du corps",
+    subCategory: "Savons & Nettoyants",
+  },
+  {
+    url: "https://www.lookfantastic.fr/c/health-beauty/body/moisturisers/creams/",
+    category: "Bodycare",
+    subCategory: "Soins hydratants",
   },
 
-  // Skincare
+  // ── SKINCARE ──────────────────────────────────────────────────────────────
   {
-    url: "https://www.lookfantastic.fr/c/skincare/face-care/eu/",
-    category: "Skincare",
-    subCategory: "Soins visage",
-  },
-  {
-    url: "https://www.lookfantastic.fr/c/skincare/cleansers/eu/",
+    url: "https://www.lookfantastic.fr/c/health-beauty/face/skincare-products/cleansers/",
     category: "Skincare",
     subCategory: "Nettoyants",
   },
+  {
+    url: "https://www.lookfantastic.fr/c/health-beauty/face/skincare-products/specific-care/serums/",
+    category: "Skincare",
+    subCategory: "Sérums",
+  },
 
+  // ── MAQUILLAGE ────────────────────────────────────────────────────────────
+  {
+    url: "https://www.lookfantastic.fr/c/health-beauty/make-up/complexion/foundations/",
+    category: "Maquillage",
+    subCategory: "Fond de teint",
+  },
+  {
+    url: "https://www.lookfantastic.fr/c/health-beauty/make-up/lips/lipsticks/",
+    category: "Maquillage",
+    subCategory: "Rouge à lèvres",
+  },
+  {
+    url: "https://www.lookfantastic.fr/c/health-beauty/make-up/eyes/palettes/",
+    category: "Maquillage",
+    subCategory: "Fard à paupières",
+  },
+
+  // ── PARFUMS ───────────────────────────────────────────────────────────────
+  {
+    url: "https://www.lookfantastic.fr/c/health-beauty/parfum/femme/shop-all/",
+    category: "Parfums",
+    subCategory: "Femme",
+  },
+  {
+    url: "https://www.lookfantastic.fr/c/health-beauty/parfum/homme/",
+    category: "Parfums",
+    subCategory: "Homme",
+  },
+
+  // ── LOTS ──────────────────────────────────────────────────────────────────
+  {
+    url: "https://www.lookfantastic.fr/c/health-beauty/gifting/skincare/",
+    category: "Lots",
+    subCategory: "Soins de la peau",
+  },
+  {
+    url: "https://www.lookfantastic.fr/c/health-beauty/gifting/makeup/",
+    category: "Lots",
+    subCategory: "Maquillage",
+  },
 ];

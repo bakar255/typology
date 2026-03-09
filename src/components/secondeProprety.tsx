@@ -5,18 +5,18 @@ export default function SecondProprety() {
     return (
         <div className="text-center mt-1">
 
-    <div className="container mx-auto max-w-7xl px-4 py-16">
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <div className="container mx-auto max-w-7xl px-4 py-2">
+     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
     
   
 
-        <div className="flex justify-center gap-8 mt-8 mx-auto space-x-52">
+        <div className="flex justify-center gap-1 ml-13 mb-7 mt-2 mx-auto space-x-20">
         <div className="flex flex-col items-center">
         <Image 
           src="/red.webp"
           alt="redbox"
           width={500}
-          height={300}
+          height={200}
           className="max-w-5xl"
         />
         <span className="uppercase text-sm font-medium mt-2 ">
@@ -39,7 +39,7 @@ export default function SecondProprety() {
       src="/box.webp"
       alt="box"
       width={500}
-      height={300}
+      height={200}
       className="max-w-5xl"
     />
   

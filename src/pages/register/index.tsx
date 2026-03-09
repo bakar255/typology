@@ -1,122 +1,118 @@
-"use client";
-
-import Footer from "@/components/footer"
+import Footer from "@/components/footer";
+import Header from "@/components/navbar/header";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { useState } from "react"
 import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
-export default function Registrer() {
-const router = useRouter();
-const { login } = useAuth();
+export default function Register() {
+  const router = useRouter();
+  const { login } = useAuth();
 
-    
-    const [email, setEmail] = useState("");
-    const [password, setPassword ] = useState("");
-    const [name, setName] = useState("");
-    const [error, setError] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleRegistrer = async (e:any) => {
-        e.preventDefault();
-        setError(false);
-        setIsLoading(true);
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setIsLoading(true);
 
-        try {
-            const res = await fetch("http://localhost:3001/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({email, password, name}),
-            });
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-            const data = await res.json();
-        
-            if(res.ok) {
-                console.log("Connecté", data);
-                // Use AuthContext to store user and token
-                if (data.user && data.token) {
-                    login(data.user, data.token);
-                    router.push("/");
-                } else {
-                    router.push("/login");
-                }
-            } else {
-                setError(true);
-                console.error("err:", data.message || data.error);
-            }
-        }  catch (err) {
-            console.error("Erreur", err);
-            setError(true);
-        } finally {
-            setIsLoading(false);
-        }
+      const data = await res.json();
+
+      if (res.ok) {
+        login(data.user, data.token);
+        router.push("/");
+      } else {
+        setError(data.message || "Erreur lors de l'inscription");
+      }
+    } catch {
+      setError("Erreur de connexion, réessayez.");
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    return (
-   <div>
-        <div className=" items-center justify-center flex flex-col py-20 min-h-screen bg-gray-50">
+  return (
+    <div>
+      <Header />
+      <div className="flex items-center justify-center min-h-[80vh] px-4 bg-[#fafafa]">
+        <div className="bg-white border border-gray-200 p-10 w-full max-w-md">
+          <h2 className="text-2xl font-medium playfair-family text-center mb-8">
+            Créer un compte
+          </h2>
 
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-                <h4 className="text-3xl  text-center mb-6 text-gray-800">Registrer</h4>
-
-                <form className="flex flex-col space-y-4">
-                    <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                        <input 
-                            onChange={(e) => setName(e.target.value)}
-                            type="text" 
-                            id="name"
-                            placeholder="Enter your name..."
-                            className="w-full text-gray-600 p-3 rounded-lg border-1 border-black focus:border-pink-500  focus:outline-none transition-colors text-sm"  
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input 
-                            onChange={(e) => setEmail(e.target.value)}
-                            type="email" 
-                            id="email"
-                            placeholder="Enter your email address..."
-                            className="w-full text-gray-600 p-3 rounded-lg border-1 border-black focus:border-pink-500  focus:outline-none transition-colors text-sm"  
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <input 
-                            onChange={(e) => setPassword(e.target.value)}
-                            type="password" 
-                            id="password"
-                            placeholder="Enter your password"
-                            className="w-full text-gray-600 p-3 rounded-lg border-1 border-black focus:border-pink-500 focus:outline-none transition-colors text-sm"  
-                        />
-                    </div>
-
-                    {error && (
-                        <div>
-                            <span className="text-red-800">Erreur lors du registre, réessayez s'il vous plaît</span>
-                        </div>
-                    )}
-
-                    <button 
-                        type="submit"
-                        onClick={handleRegistrer}
-                        disabled={isLoading}
-                        className="py-3 w-full bg-pink-500 hover:bg-pink-600 disabled:bg-pink-300 text-white rounded-lg text-sm font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
-                    >
-                        {isLoading ? "Inscription..." : "Continue"}
-                    </button>
-                </form>
-
-                
+          <form onSubmit={handleRegister} className="flex flex-col gap-5">
+            <div>
+              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">
+                Prénom & Nom
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full border border-gray-300 px-4 py-3 text-sm outline-none focus:border-black transition-colors"
+                placeholder="Marie Dupont"
+              />
             </div>
 
-        </div>
-         <Footer/>
+            <div>
+              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full border border-gray-300 px-4 py-3 text-sm outline-none focus:border-black transition-colors"
+                placeholder="votre@email.com"
+              />
+            </div>
 
-        </div>
+            <div>
+              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">
+                Mot de passe
+              </label>
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full border border-gray-300 px-4 py-3 text-sm outline-none focus:border-black transition-colors"
+                placeholder="••••••••"
+              />
+            </div>
 
-    )
+            {error && <p className="text-sm text-red-600">{error}</p>}
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-black text-white py-3 text-xs uppercase tracking-widest font-semibold hover:bg-gray-800 disabled:bg-gray-400 transition-colors"
+            >
+              {isLoading ? "Création..." : "Créer mon compte"}
+            </button>
+          </form>
+
+          <p className="text-center text-sm text-gray-500 mt-6">
+            Déjà un compte ?{" "}
+            <Link href="/login" className="underline text-black">
+              Se connecter
+            </Link>
+          </p>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ShoppingBasketIcon, X, Plus, Minus } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
-import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Cart() {
   const { cartItems, removeFromCart, updateQuantity, getTotalItems } = useCart();
@@ -45,12 +45,10 @@ export default function Cart() {
               <div className="space-y-3">
                 {cartItems.map((item) => (
                   <div key={item.id} className="flex items-center space-x-3 p-2 border-b border-gray-100">
-                    <Image
+                    <img
                       src={item.image}
                       alt={item.titre}
-                      width={50}
-                      height={50}
-                      className="rounded object-cover"
+                      className="w-12 h-12 object-cover rounded shrink-0"
                     />
                     <div className="flex-1">
                       <p className="font-medium text-sm">{item.titre}</p>
@@ -87,9 +85,13 @@ export default function Cart() {
                       {cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}€
                     </span>
                   </div>
-                  <button className="w-full bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors">
+                  <Link
+                    href="/cart"
+                    onClick={() => setIsCartOpen(false)}
+                    className="block w-full bg-black text-white py-2 px-4 text-center hover:bg-gray-800 transition-colors"
+                  >
                     Commander
-                  </button>
+                  </Link>
                 </div>
               </div>
             )}

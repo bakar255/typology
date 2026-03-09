@@ -97,19 +97,18 @@ export async function scrapePage(url, category, subCategory) {
         }
       }
 
-      // Sauvegarder si on a titre et prix
-      if (title && currentPrice) {
+      // Sauvegarder si on a titre, prix et URL (requis par Prisma)
+      const fullProductUrl = productUrl ? (productUrl.startsWith('http') ? productUrl : `https://www.lookfantastic.fr${productUrl}`) : null;
+      if (title && currentPrice && fullProductUrl) {
         products.push({
           name: title,
-          brand,
+          brand: brand || null,
           price: currentPrice,
           currency: "EUR",
           imageUrl: imageUrl || 'https://via.placeholder.com/300x400?text=' + encodeURIComponent(title),
-          productUrl: productUrl ? (productUrl.startsWith('http') ? productUrl : `https://www.lookfantastic.fr${productUrl}`) : null,
+          productUrl: fullProductUrl,
           category: `${category} > ${subCategory}`,
           description: null,
-          pricePerUnit: null,
-          fuild: false,
         });
       }
     });

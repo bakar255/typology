@@ -8,28 +8,66 @@ datasource db {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  externalId  String   @unique
+  id          Int        @id @default(autoincrement())
+  externalId  String     @unique
   name        String
   brand       String?
   price       Float?
   currency    String?
   imageUrl    String?
-  productUrl  String   @unique
+  productUrl  String     @unique
   category    String?
-  subcategory String?
   description String?
-  fuild   Boolean?
-  pricePerUnit String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  cartItems   CartItem[]
+  favorites   Favorite[]
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  email String @unique
-  password String
-  name String?
-  createdAt DateTime @default(now())
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  password  String
+  name      String?
+  createdAt DateTime   @default(now())
+  cartItems CartItem[]
+  favorites Favorite[]
+  orders    Order[]
 }
 
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  productId Int
+  quantity  Int      @default(1)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, productId])
+}
+
+model Favorite {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  productId Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+model Order {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  stripeSessionId String   @unique
+  amount          Float
+  currency        String   @default("eur")
+  status          String   @default("pending")
+  items           Json
+  user            User     @relation(fields: [userId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

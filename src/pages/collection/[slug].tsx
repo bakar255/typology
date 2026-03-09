@@ -1,22 +1,16 @@
 import Footer from "@/components/footer";
 import Header from "@/components/navbar/header";
+import ProductCard from "@/components/ProductCard";
 import { slugData } from "@/data/data";
-import { Search, Filter, ArrowUpDown } from "lucide-react";
+import { extractVolume, Product } from "@/data/products";
+import { Search, SlidersHorizontal, ArrowUpDown } from "lucide-react";
 import { useRouter } from "next/router";
 import { prisma } from "@/lib/prisma";
-
-interface ProductCardProps {
-  id: number;
-  name: string;
-  price: number;
-  imageUrl: string;
-  brand?: string | null;
-}
 
 interface SlugProps {
   title: string;
   subtitle: string;
-  products: ProductCardProps[];
+  products: Product[];
 }
 
 export default function SlugPage({ title, subtitle, products }: SlugProps) {
@@ -26,75 +20,64 @@ export default function SlugPage({ title, subtitle, products }: SlugProps) {
   if (!slug) return null;
 
   return (
-    <div>
+    <div className="">
       <Header />
-      <div className="text-center space-y-10 relative px-4">
-        <span className="absolute right-4"></span>
 
-        <h2 className=" text-4xl heading font-medium playfair-family mt-20">{title}</h2>
-        <h4 className="font-medium ">{subtitle}</h4>
-
-      </div>
-      <div className="flex mt-5 gap-4 px-6">
-        <div className="btnFilter">
-          <input
-            type="text"
-            className="text-black outline-none"
-            placeholder="Marque"
-          />
-          <Search size={16} className="ml-5" />
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center space-y-4 mt-20 mb-8">
+          <h2 className="collection-title text-4xl">{title}</h2>
+          <h4 className="collection-subtitle text-sm max-w-xl mx-auto leading-relaxed">{subtitle}</h4>
         </div>
-        <select className="btnFilter py-5 px-5">
-          <option>Préparation cheveux</option>
-          <option>Option 1</option>
-          <option>Option 2</option>
-        </select>
-        <select className="btnFilter relative">
-          <option>Genre</option>
-          <option>Homme</option>
-          <option>Femme</option>
-          <option>Unisexe</option>
-        </select>
-        <div className="ml-auto flex gap-2">
-          <button className="flex cursor-pointer text-gray-700 items-center justify-center px-4 py-2 border border-black bg-white  hover:bg-gray-50">
-            Filtrer
-            <Filter size={16} className="ml-2" />
-          </button>
-          <button className="flex items-center cursor-pointer justify-center px-4 py-2 border border-black bg-white hover:bg-gray-50">
-            Trier
-            <ArrowUpDown size={16} className="ml-2" />
-          </button>
-        </div>
-      </div>
 
-      {/* Grid des produits réels depuis la DB */}
-      <div className="px-4 mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
-          >
-            <img
-              src={product.imageUrl || "/placeholder.jpg"}
-              alt={product.name}
-              className="w-full h-64 object-cover bg-amber-50"
+        <div className="flex items-center gap-3 mb-10 pb-6 border-b border-gray-200">
+          {/* Search */}
+          <div className="relative">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+            <input
+              type="text"
+              className="pl-9 pr-4 py-2.5 w-64 border border-gray-300 text-sm bg-white outline-none focus:border-black transition-colors"
+              placeholder="Rechercher une marque..."
             />
-            <div className="p-4 flex flex-col gap-2">
-              {product.brand && (
-                <span className="text-xs uppercase tracking-wide text-gray-500">
-                  {product.brand}
-                </span>
-              )}
-              <h3 className="font-semibold text-lg">{product.name}</h3>
-              <span className="font-medium">{product.price.toFixed(2)} €</span>
+          </div>
+
+          {/* Sort */}
+          <div className="relative">
+            <ArrowUpDown size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+            <select className="pl-9 pr-8 py-2.5 border border-gray-300 text-sm bg-white outline-none focus:border-black transition-colors cursor-pointer appearance-none">
+              <option>Nouveautés</option>
+              <option>Prix croissant</option>
+              <option>Prix décroissant</option>
+              <option>Popularité</option>
+            </select>
+          </div>
+
+          {/* Genre */}
+          <div className="relative">
+            <SlidersHorizontal size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+            <select className="pl-9 pr-8 py-2.5 border border-gray-300 text-sm bg-white outline-none focus:border-black transition-colors cursor-pointer appearance-none">
+              <option>Tous</option>
+              <option>Femme</option>
+              <option>Homme</option>
+              <option>Unisexe</option>
+            </select>
+          </div>
+
+          {/* Count */}
+          <span className="ml-auto text-sm text-gray-400 tracking-wide">
+            {products.length} produit{products.length > 1 ? "s" : ""}
+          </span>
+        </div>
+
+        <div className="grid mb-18 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+          {products.length === 0 && (
+            <div className="col-span-full text-center text-gray-500 py-10">
+              Aucun produit trouvé pour cette collection.
             </div>
-          </div>
-        ))}
-        {products.length === 0 && (
-          <div className="col-span-full text-center text-gray-500 py-10">
-            Aucun produit trouvé pour cette collection.
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       <Footer />
@@ -106,8 +89,8 @@ export async function getStaticPaths() {
   const paths = slugData.map((item) => ({
     params: { slug: item.slug },
   }));
- 
-  return { paths, fallback: false }; 
+
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }: { params: { slug: string } }) {
@@ -118,43 +101,37 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
     return { notFound: true };
   }
 
-  let products: ProductCardProps[] = [];
+  let products: Product[] = [];
 
   try {
-    // On récupère les produits réels depuis la DB en filtrant par categoryKey
     const productsFromDb = await prisma.product.findMany({
       where: data.categoryKey
-        ? {
-            category: {
-              contains: data.categoryKey,
-            },
-          }
+        ? { category: { contains: data.categoryKey } }
         : {},
-      orderBy: {
-        createdAt: "desc",
-      },
-      take: 24,
+      orderBy: { createdAt: "desc" },
+      take: 48,
     });
 
     products = productsFromDb.map((p) => ({
       id: p.id,
-      name: p.name,
+      titre: p.name,
+      description: p.description || "",
+      image: p.imageUrl ?? "/placeholder.jpg",
       price: p.price ?? 0,
-      imageUrl: p.imageUrl ?? "/placeholder.jpg",
+      rating: 4.5,
+      reviews: 0,
+      category: p.category || "",
+      isBestSeller: false,
+      volume: extractVolume(p.name),
       brand: p.brand,
     }));
   } catch (error) {
-    // If database is unavailable during build, return empty products
     console.error("Failed to fetch products from database:", error);
     products = [];
   }
 
   return {
-    props: {
-      title: data.title,
-      subtitle: data.subtitle,
-      products,
-    },
-    revalidate: 3600, // Revalidate every hour
+    props: { title: data.title, subtitle: data.subtitle, products },
+    revalidate: 3600,
   };
 }

@@ -9,10 +9,17 @@ export interface Product {
     category: string;
     subcategory?: string;
     isBestSeller: boolean;
+    volume?: string | null;
+    brand?: string | null;
     detailedDescription?: string;
     ingredients?: string[];
     benefits?: string[];
     slug?: string;
+}
+
+export function extractVolume(name: string): string | null {
+    const match = name.match(/\b(\d+[\.,]?\d*\s*(ml|g|cl|l|oz))\b/i);
+    return match ? match[0].trim() : null;
 }
 
 export const products: Product[] = [

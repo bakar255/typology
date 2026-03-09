@@ -1,95 +1,121 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Product } from '@/data/products';
 
-interface CartItem extends Product {
-    quantity: number;
+export interface CartItem extends Product {
+  quantity: number;
 }
 
 interface CartContextType {
-    cartItems: CartItem[];
-    addToCart: (product: Product, quantity?: number) => void;
-    removeFromCart: (productId: number) => void;
-    updateQuantity: (productId: number, quantity: number) => void;
-    clearCart: () => void;
-    getTotalItems: () => number;
-    getTotalPrice: () => number;
+  cartItems: CartItem[];
+  addToCart: (product: Product, quantity?: number) => void;
+  removeFromCart: (productId: number) => void;
+  updateQuantity: (productId: number, quantity: number) => void;
+  clearCart: () => void;
+  getTotalItems: () => number;
+  getTotalPrice: () => number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const useCart = () => {
-    const context = useContext(CartContext);
-    if (!context) {
-        throw new Error('useCart must be used within a CartProvider');
-    }
-    return context;
+  const context = useContext(CartContext);
+  if (!context) throw new Error('useCart must be used within a CartProvider');
+  return context;
 };
 
-interface CartProviderProps {
-    children: ReactNode;
-}
+const getToken = () =>
+  typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-export const CartProvider = ({ children }: CartProviderProps) => {
-    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-    const addToCart = (product: Product, quantity: number = 1) => {
-        setCartItems(prevItems => {
-            const existingItem = prevItems.find(item => item.id === product.id);
-            
-            if (existingItem) {
-                return prevItems.map(item =>
-                    item.id === product.id
-                        ? { ...item, quantity: item.quantity + quantity }
-                        : item
-                );
-            } else {
-                return [...prevItems, { ...product, quantity }];
-            }
-        });
-    };
+  // Hydrater depuis localStorage au montage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('cart');
+      if (saved) setCartItems(JSON.parse(saved));
+    } catch {}
+  }, []);
 
-    const removeFromCart = (productId: number) => {
-        setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
-    };
+  // Persister dans localStorage à chaque changement
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
-    const updateQuantity = (productId: number, quantity: number) => {
-        if (quantity <= 0) {
-            removeFromCart(productId);
-            return;
-        }
-        
-        setCartItems(prevItems =>
-            prevItems.map(item =>
-                item.id === productId ? { ...item, quantity } : item
-            )
+  const addToCart = (product: Product, quantity = 1) => {
+    setCartItems((prev) => {
+      const existing = prev.find((i) => i.id === product.id);
+      if (existing) {
+        return prev.map((i) =>
+          i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i
         );
-    };
+      }
+      return [...prev, { ...product, quantity }];
+    });
 
-    const clearCart = () => {
-        setCartItems([]);
-    };
+    // Sync DB si connecté
+    const token = getToken();
+    if (token) {
+      fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ productId: product.id, quantity }),
+      }).catch(console.error);
+    }
+  };
 
-    const getTotalItems = () => {
-        return cartItems.reduce((total, item) => total + item.quantity, 0);
-    };
+  const removeFromCart = (productId: number) => {
+    setCartItems((prev) => prev.filter((i) => i.id !== productId));
 
-    const getTotalPrice = () => {
-        return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-    };
+    const token = getToken();
+    if (token) {
+      fetch(`/api/cart/${productId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      }).catch(console.error);
+    }
+  };
 
-    const value: CartContextType = {
-        cartItems,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        clearCart,
-        getTotalItems,
-        getTotalPrice,
-    };
-
-    return (
-        <CartContext.Provider value={value}>
-            {children}
-        </CartContext.Provider>
+  const updateQuantity = (productId: number, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(productId);
+      return;
+    }
+    setCartItems((prev) =>
+      prev.map((i) => (i.id === productId ? { ...i, quantity } : i))
     );
+
+    const token = getToken();
+    if (token) {
+      fetch(`/api/cart/${productId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ quantity }),
+      }).catch(console.error);
+    }
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem('cart');
+
+    const token = getToken();
+    if (token) {
+      fetch('/api/cart', {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      }).catch(console.error);
+    }
+  };
+
+  const getTotalItems = () => cartItems.reduce((sum, i) => sum + i.quantity, 0);
+  const getTotalPrice = () => cartItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
+
+  return (
+    <CartContext.Provider
+      value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart, getTotalItems, getTotalPrice }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };
