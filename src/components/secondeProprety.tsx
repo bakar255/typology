@@ -34,6 +34,22 @@ const slides = [
       "Des nouveautés fraîches et légères pour accueillir la belle saison avec éclat et légèreté.",
     cta: "Voir la collection",
   },
+  {
+    src: "/carousel 1.avif",
+    label: "TENDANCE",
+    title: "Les Must-Have de la saison",
+    description:
+      "Explorez notre sélection de produits tendance, soigneusement choisis pour sublimer votre routine beauté.",
+    cta: "Découvrir",
+  },
+  {
+    src: "/carousel 2.avif",
+    label: "EXCLUSIVITÉ",
+    title: "Nouveautés en exclusivité",
+    description:
+      "Soyez les premiers à découvrir nos dernières arrivées, disponibles en avant-première sur notre boutique.",
+    cta: "Voir les nouveautés",
+  },
 ];
 
 export default function SecondProprety() {

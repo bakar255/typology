@@ -38,7 +38,7 @@ export default function Cart() {
 
       {/* Cart Dropdown */}
       {isCartOpen && (
-        <div className="absolute top-full right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-1 w-80 max-h-96 overflow-y-auto z-50">
+        <div className="absolute top-full right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-1 w-80 max-h-96 overflow-y-auto z-[100]">
           <div className="p-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="">Panier ({getTotalItems()} articles)</h3>
