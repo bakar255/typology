@@ -67,7 +67,7 @@ export default function Hero() {
                 alt="Hero"
                 className="object-cover object-center"
                 fill
-                priorityle s
+                priority
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/20" />
             <div className="absolute inset-0 flex items-center justify-center">
