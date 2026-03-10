@@ -50,7 +50,17 @@ export default function Footer() {
 
   return (
     <div>
-      
+
+      {/* Mobile version */}
+      <div className="md:hidden py-5 border-t border-gray-200 text-center">
+        <p className="text-xs text-gray-400">
+          © Typology clone — Site portfolio, sans but lucratif.
+        </p>
+      </div>
+
+      {/* Desktop footer complet */}
+      <div className="hidden md:block">
+
       {!isAuthenticated && (
 
         <div className="flex w-screen h-30 bg-[#f8efdf] ">
@@ -174,6 +184,7 @@ export default function Footer() {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   )
 }

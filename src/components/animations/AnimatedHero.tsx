@@ -4,7 +4,7 @@ export default function SecondeHero() {
 
 
     return (
-        <div className="w-full h-screen max-h-[800px] relative"> 
+        <div className="hidden md:block w-full h-screen max-h-[800px] relative">
             <video
                 muted
                 loop

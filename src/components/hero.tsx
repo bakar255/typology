@@ -59,7 +59,30 @@ export default function Hero() {
     }, [isAutoPlay]);
 
     return (
-        <div className="relative w-full h-[80vh] overflow-hidden group">
+      <>
+        {/* Mobile: image statique, pas d'animation */}
+        <div className="md:hidden relative w-full h-[60vh] overflow-hidden">
+            <Image
+                src={images[0].src}
+                alt="Hero"
+                className="object-cover object-center"
+                fill
+                priorityle s
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/20" />
+            <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center text-white px-6">
+                    <h1 className="text-4xl font-bold mb-4 drop-shadow-2xl">{images[0].title}</h1>
+                    <p className="text-lg mb-6 drop-shadow-lg">{images[0].subtitle}</p>
+                    <button className="text-black bg-white font-semibold py-3 px-6 rounded-full">
+                        Découvrir la Collection
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {/* Desktop: carousel complet */}
+        <div className="hidden md:block relative w-full h-[80vh] overflow-hidden group">
             {/* Background  */}
             <div className="relative w-full h-full">
                 {images.map((image, index) => (
@@ -156,5 +179,6 @@ export default function Hero() {
                 )}
             </div>
         </div>
+      </>
     );
 }

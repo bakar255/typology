@@ -2,11 +2,21 @@ import { useState, useRef, useEffect } from 'react';
 import { ShoppingBasketIcon, X, Plus, Minus } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Cart() {
   const { cartItems, removeFromCart, updateQuantity, getTotalItems } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  const handleCartClick = () => {
+    if (window.innerWidth < 768) {
+      router.push('/cart');
+    } else {
+      setIsCartOpen(!isCartOpen);
+    }
+  };
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -21,19 +31,11 @@ export default function Cart() {
   return (
     <div className="relative" ref={cartRef}>
       <button
-        onClick={() => setIsCartOpen(!isCartOpen)}
-        className="relative cursor-pointer"
+        onClick={handleCartClick}
+        className="flex items-center gap-2 font-medium py-2 px-3 rounded transition-colors cursor-pointer relative"
       >
-
-      <div className='flex items-center gap-2  py-2 px-4'>
-        <ShoppingBasketIcon size={28} className='cursor-pointer mt-0'/>
-        <span className='font-medium '>Panier</span>
-      </div>
-        {getTotalItems() > 0 && (
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-            {getTotalItems()}
-          </span>
-        )}
+        <ShoppingBasketIcon size={28} />
+        <span className='font-medium hidden md:block'>Panier</span>
       </button>
 
       {/* Cart Dropdown */}

@@ -57,20 +57,19 @@ export default function Header() {
   return (
     <div className="w-full sticky top-0 z-50 bg-white border-b border-gray-100">
       <div className="py-4 px-4">
-        <div className="max-w-[1700px] mx-auto flex flex-wrap md:flex-nowrap items-center gap-y-2">
+        <div className="max-w-[1700px] mx-auto">
 
-          {/* Search: se place en bas sur mobile (order-last), à gauche sur desktop */}
-          <div className="w-full md:w-auto order-last md:order-first">
-            <SearchInput />
-          </div>
+          <div className="flex items-center">
 
-          {/* Logo: centré */}
-          <div className="flex-1 flex justify-center">
+            <div className="flex-1 flex">
+              <div className="hidden md:block w-72 xl:w-80">
+                <SearchInput />
+              </div>
+            </div>
+
             <Logo />
-          </div>
 
-          {/* Icônes: toujours à droite */}
-          <div className="flex items-center gap-1">
+            <div className="flex-1 flex justify-end items-center gap-1">
 
             {/* Panier */}
             <Cart />
@@ -79,7 +78,7 @@ export default function Header() {
             <div className="relative" ref={menuRef}>
               <button
                 onClick={() => isAuthenticated ? setUserMenuOpen((v) => !v) : router.push('/login')}
-                className="flex items-center gap-2 font-medium hover:bg-gray-100 py-2 px-3 rounded transition-colors cursor-pointer"
+                className="flex items-center gap-2 font-medium  py-2 px-3 rounded transition-colors cursor-pointer"
               >
                 <CircleUserIcon size={28} />
                 {isAuthenticated && user ? (
@@ -123,6 +122,13 @@ export default function Header() {
             </div>
 
           </div>
+          </div>
+
+          {/* Mobile search: full width below the top row */}
+          <div className="md:hidden mt-2">
+            <SearchInput />
+          </div>
+
         </div>
       </div>
 
