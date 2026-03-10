@@ -29,13 +29,13 @@ export default function SlugPage({ title, subtitle, products }: SlugProps) {
           <h4 className="collection-subtitle text-sm max-w-xl mx-auto leading-relaxed">{subtitle}</h4>
         </div>
 
-        <div className="flex items-center gap-3 mb-10 pb-6 border-b border-gray-200">
+        <div className="flex flex-wrap items-center gap-3 mb-10 pb-6 border-b border-gray-200">
           {/* Search */}
-          <div className="relative">
+          <div className="relative flex-1 min-w-[160px]">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
             <input
               type="text"
-              className="pl-9 pr-4 py-2.5 w-64 border border-gray-300 text-sm bg-white outline-none focus:border-black transition-colors"
+              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 text-sm bg-white outline-none focus:border-black transition-colors"
               placeholder="Rechercher une marque..."
             />
           </div>

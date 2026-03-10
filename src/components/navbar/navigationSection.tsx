@@ -148,8 +148,10 @@ export default function NavigationSection() {
 
   return (
 
-    <div className=" ">
+    <div>
       <div className="max-w-[1700px] mx-auto px-4 py-1 relative">
+
+        {/* Desktop : menu hover avec sous-catégories */}
         <nav className="hidden md:flex items-center justify-center">
 
           <div className="flex gap-8">
@@ -174,7 +176,6 @@ export default function NavigationSection() {
 
                       <div className="flex gap-x-32 justify-center flex-1">
 
-                        {/* Navigation Subtitle */}
                         {item.sectionItems?.map((section) => (
                           <div key={section.subItems} className="flex flex-col">
 
@@ -183,7 +184,6 @@ export default function NavigationSection() {
                             </p>
                             <div className="border-t border-gray-300 w-12 mb-3"></div>
 
-                            {/* Navigation subItems */}
                             {section.items.map((subItem) => (
                               <div key={subItem.name} className="mb-2 space-y-3.5">
                                 <Link
@@ -207,8 +207,22 @@ export default function NavigationSection() {
 
           </div>
         </nav>
-      </div >
-    </div >
+
+        {/* Mobile : scroll horizontal des catégories */}
+        <nav className="md:hidden flex overflow-x-auto gap-6 py-2 scrollbar-hide">
+          {navigationItems.map((item) => (
+            <button
+              key={item.title}
+              onClick={() => router.push(`/collection/${item.viewAllSlug}`)}
+              className="whitespace-nowrap flex-shrink-0 text-xs font-semibold uppercase tracking-widest text-gray-500 hover:text-black transition-colors cursor-pointer pb-1 border-b border-transparent hover:border-black"
+            >
+              {item.title}
+            </button>
+          ))}
+        </nav>
+
+      </div>
+    </div>
 
   )
 }

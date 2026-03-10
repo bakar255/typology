@@ -57,12 +57,20 @@ export default function Header() {
   return (
     <div className="w-full sticky top-0 z-50 bg-white border-b border-gray-100">
       <div className="py-4 px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between max-w-[1700px] mx-auto relative">
+        <div className="max-w-[1700px] mx-auto flex flex-wrap md:flex-nowrap items-center gap-y-2">
 
-          <SearchInput />
-          <Logo />
+          {/* Search: se place en bas sur mobile (order-last), à gauche sur desktop */}
+          <div className="w-full md:w-auto order-last md:order-first">
+            <SearchInput />
+          </div>
 
-          <div className="absolute top-1/2 -translate-y-1/2 right-5 flex items-center gap-1">
+          {/* Logo: centré */}
+          <div className="flex-1 flex justify-center">
+            <Logo />
+          </div>
+
+          {/* Icônes: toujours à droite */}
+          <div className="flex items-center gap-1">
 
             {/* Panier */}
             <Cart />
