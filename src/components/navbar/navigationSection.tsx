@@ -12,9 +12,9 @@ const navigationItems = [
         subItems: 'Savons & Nettoyants',
         subSlug: 'soaps-cleansers',
         items: [
-          { name: 'Savon en barre', slug: 'bar-soap' },
-          { name: 'Gel douche', slug: 'body-wash' },
-          { name: 'Gommages', slug: 'body-scrub' },
+          { name: 'Déodorants', slug: 'deodorant' },
+          { name: 'Gel douche', slug: 'gel-douche-corps' },
+          { name: 'Gommages', slug: 'gommage-corps' },
         ]
       },
       {
@@ -37,8 +37,8 @@ const navigationItems = [
         subItems: 'Nettoyants',
         subSlug: 'cleansers',
         items: [
-          { name: 'Gel nettoyant', slug: 'gel-cleanser' },
-          { name: 'Mousse nettoyante', slug: 'foam-cleanser' },
+          { name: 'Gel moussant nettoyant', slug: 'gel-moussant' },
+          { name: 'Baume & Huile nettoyante', slug: 'baume-nettoyant' },
           { name: 'Eau micellaire', slug: 'micellar-water' },
         ]
       },

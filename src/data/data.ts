@@ -23,22 +23,25 @@ export const slugData = [
 
   // Savons & Nettoyants
   {
-    slug: "bar-soap",
-    title: "Savons en barre",
-    subtitle: "Nettoyage doux et naturel",
+    slug: "deodorant",
+    title: "Déodorants",
+    subtitle: "Protection longue durée, peaux sensibles bienvenues",
     categoryKey: "Bodycare > Savons & Nettoyants",
+    nameFilters: ["déodorant", "deodorant", "anti-perspirant", "transpirant"],
   },
   {
-    slug: "body-wash",
+    slug: "gel-douche-corps",
     title: "Gels douche",
     subtitle: "Fraîcheur et douceur en un geste",
     categoryKey: "Bodycare > Savons & Nettoyants",
+    nameFilters: ["douche", "shower", "bain moussant", "body wash"],
   },
   {
-    slug: "body-scrub",
+    slug: "gommage-corps",
     title: "Gommages corporels",
     subtitle: "Exfoliation douce et régénérante",
     categoryKey: "Bodycare > Savons & Nettoyants",
+    nameFilters: ["gommage", "exfoliat", "scrub", "polish"],
   },
 
   // Soins hydratants
@@ -73,22 +76,25 @@ export const slugData = [
 
   // Nettoyants
   {
-    slug: "gel-cleanser",
-    title: "Nettoyants en gel",
-    subtitle: "Fraîcheur et légèreté",
+    slug: "gel-moussant",
+    title: "Gels moussants nettoyants",
+    subtitle: "Fraîcheur et légèreté, pores nettoyés en profondeur",
     categoryKey: "Skincare > Nettoyants",
+    nameFilters: ["moussant", "foaming", "mousse"],
   },
   {
-    slug: "foam-cleanser",
-    title: "Nettoyants moussants",
-    subtitle: "Nettoie en douceur sans agresser",
+    slug: "baume-nettoyant",
+    title: "Baumes & Huiles nettoyantes",
+    subtitle: "Démaquillage en douceur, peau confort",
     categoryKey: "Skincare > Nettoyants",
+    nameFilters: ["baume", "balm", "huile nettoyante", "cleansing oil"],
   },
   {
     slug: "micellar-water",
     title: "Eaux micellaires",
     subtitle: "Démaquillage et nettoyage en un geste",
     categoryKey: "Skincare > Nettoyants",
+    nameFilters: ["micellaire", "micellar", "démaquill", "makeup remover"],
   },
 
   // Sérums

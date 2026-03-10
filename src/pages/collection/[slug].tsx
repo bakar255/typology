@@ -109,10 +109,18 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
         ? { category: { contains: data.categoryKey } }
         : {},
       orderBy: { createdAt: "desc" },
-      take: 48,
+      take: 200,
     });
 
-    products = productsFromDb.map((p) => ({
+    const nameFilters = (data as any).nameFilters as string[] | undefined;
+    const filtered = nameFilters?.length
+      ? productsFromDb.filter((p) => {
+          const nameLower = p.name.toLowerCase();
+          return nameFilters.some((f) => nameLower.includes(f.toLowerCase()));
+        })
+      : productsFromDb;
+
+    products = filtered.slice(0, 48).map((p) => ({
       id: p.id,
       titre: p.name,
       description: p.description || "",
