@@ -28,13 +28,22 @@ A modern, fully-functional e-commerce website built with Next.js, TypeScript, an
 
 ##  Tech Stack
 
-- **Framework**: Next.js 15 with App Router, NodeJs Express, Prisma
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
+- **Frontend**: Next.js (App Router), React, TypeScript  
+- **Backend**: Node.js (API), Prisma ORM  
+- **Styling**: Tailwind CSS  
 - **State Management**: React Context API
 
-##  Architecture
+### 🔎 Search & Navigation
 
+- Search functionality with global context  
+- Dynamic navigation with multiple categories  
+
+### 🎨 UI / UX
+- Responsive design (mobile & desktop)  
+- Reusable components (ProductCard, Button, Navbar)  
+- Animated hero section  
+- Clean and modern interface inspired by real e-commerce platforms
+  
 ### **Context Providers**
 - `CartContext`: Global cart state management
 - `SearchContext`: Search functionality and results
@@ -66,17 +75,3 @@ src/
 - Add/remove/update quantities
 - Real-time total calculations
 - Session persistence
-
-### **Documentation**
-
-Typology is a e-commerce built e-commerce with mutiple categories insiped from various website on the internet, i did the following tasks :
-
-- Navbar with search engine context and mutiple functinanlity as favorite items, mutiple languages,
-
-- Hero section with animations
-
-- Reutilisable UI components for Logo, product-card, button with React
-
-- Legally scraped data from real websites and incorporate them to the actual database
-
-- Real footers with newsletters and informations about 
