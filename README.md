@@ -13,7 +13,7 @@ A modern, fully-functional e-commerce website built with Next.js, TypeScript, an
 </div>
 
 
-## 🚀 Live Demo
+##  Live Demo
 
 **[View Live Site](https://typology-clone.vercel.app/)**
 
@@ -33,12 +33,12 @@ A modern, fully-functional e-commerce website built with Next.js, TypeScript, an
 - **Styling**: Tailwind CSS  
 - **State Management**: React Context API
 
-### 🔎 Search & Navigation
+###  Search & Navigation
 
 - Search functionality with global context  
 - Dynamic navigation with multiple categories  
 
-### 🎨 UI / UX
+###  UI / UX
 - Responsive design (mobile & desktop)  
 - Reusable components (ProductCard, Button, Navbar)  
 - Animated hero section  
