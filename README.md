@@ -52,19 +52,19 @@ A modern, fully-functional e-commerce website built with Next.js, TypeScript, an
 ```
 src/
 ├── components/
-│   ├── header.tsx          # Navigation with search & cart
-│   ├── hero.tsx            # Animated hero carousel
-│   ├── proprety.tsx        # Product grid
-│   ├── footer.tsx          # Newsletter & links
-│   └── secondeProprety.tsx # Additional content
+│ ├── header.tsx
+│ ├── hero.tsx
+│ ├── property.tsx
+│ ├── footer.tsx
+│ └── secondeProperty.tsx
 ├── pages/
-│   ├── index.tsx           # Homepage
-│   └── product/[id].tsx    # Dynamic product pages
+│ ├── index.tsx
+│ └── product/[id].tsx
 ├── context/
-│   ├── CartContext.tsx     # Cart state management
-│   └── SearchContext.tsx   # Search functionality
+│ ├── CartContext.tsx
+│ └── SearchContext.tsx
 └── data/
-    └── products.ts         # Product data & types
+└── products.ts
 ```
 
 
