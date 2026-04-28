@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
+import { useRouter } from "next/router";
 import { Heart } from "lucide-react";
 import { Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
@@ -9,20 +10,37 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const router = useRouter();
   const { addToCart } = useCart();
   const { isFavorite, toggleFavorite } = useFavorites();
   const [isAdded, setIsAdded] = useState(false);
 
   const favorited = isFavorite(product.id);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     addToCart(product);
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 1500);
   };
 
+  const handleCardClick = () => {
+    router.push(`/product/${product.id}`);
+  };
+
   return (
-    <div className="group relative flex flex-col cursor-pointer justify-between transition-all duration-300 h-full bg-white hover:shadow-lg rounded-sm">
+    <div
+      onClick={handleCardClick}
+      className="group relative flex flex-col cursor-pointer justify-between transition-all duration-300 h-full bg-white hover:shadow-lg rounded-sm"
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleCardClick();
+        }
+      }}
+    >
       {/* Image */}
       <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#f8f6f3] mb-4">
         <img
@@ -37,6 +55,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
         {/* Bouton favori */}
         <button
+          type="button"
           onClick={(e) => {
             e.stopPropagation();
             toggleFavorite(product.id);
@@ -69,6 +88,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </span>
 
         <button
+          type="button"
           onClick={handleAddToCart}
           className="w-full bg-black text-white py-3 px-4 text-[11px] uppercase tracking-widest font-semibold hover:bg-gray-800 transition-colors duration-200 cursor-pointer"
         >

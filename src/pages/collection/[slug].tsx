@@ -56,9 +56,6 @@ export default function SlugPage({ title, subtitle, products }: SlugProps) {
             <SlidersHorizontal size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
             <select className="pl-9 pr-8 py-2.5 border border-gray-300 text-sm bg-white outline-none focus:border-black transition-colors cursor-pointer appearance-none">
               <option>Tous</option>
-              <option>Femme</option>
-              <option>Homme</option>
-              <option>Unisexe</option>
             </select>
           </div>
 

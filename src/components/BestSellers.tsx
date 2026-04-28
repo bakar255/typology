@@ -19,11 +19,15 @@ export default function BestSellers() {
             ]);
             const skincare = await skincareRes.json();
             const parfums = await parfumsRes.json();
+            
+            console.log(skincare)
 
             const curated = [
                 ...skincare.map((p: any) => ({ ...p, isBestSeller: true })),
                 ...parfums.map((p: any) => ({ ...p, isBestSeller: true })),
             ];
+
+
             setBestSellers(curated);
         } catch (error) {
             console.error("Error fetching best sellers:", error);
