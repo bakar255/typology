@@ -1,17 +1,20 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const slides = [
   {
-    src: "/red.webp",
+    src: "/coffret1.webp",
+    href: "/collection/liquid-foundation",
     label: "IN THE SPOTLIGHT",
     title: "La meilleur box de l'année 2025",
     description:
-      "Optez pour les produits qui travaillent plus dur – formulés par la marque qui sait créer une brillance qui attire tous les regards.",
+      "Optez pour les produits de beauté qui travaillent plus dur – formulés par la marque qui sait créer une brillance qui attire tous les regards.",
     cta: "En savoir plus",
   },
   {
     src: "/box.webp",
+    href: "/collection/makeup-gift-set",
     label: "ON THE WISHLIST",
     title: "La meilleur box de l'année 2024",
     description:
@@ -20,14 +23,16 @@ const slides = [
   },
   {
     src: "/red.webp",
+    href: "/collection/anti-aging-kit",
     label: "FEATURED",
     title: "Les essentiels beauté 2025",
     description:
-      "Découvrez notre sélection des produits incontournables de la saison pour sublimer votre routine quotidienne.",
+      "Découvrez notre sélection de produits anti-âge de la saison pour sublimer votre routine quotidienne.",
     cta: "Découvrir",
   },
   {
     src: "/box.webp",
+    href: "/collection/vitamin-c-serum",
     label: "NEW ARRIVALS",
     title: "Collection Printemps 2025",
     description:
@@ -36,6 +41,7 @@ const slides = [
   },
   {
     src: "/carousel 1.avif",
+    href: "/collection/makeup-gift-set",
     label: "TENDANCE",
     title: "Les Must-Have de la saison",
     description:
@@ -44,6 +50,7 @@ const slides = [
   },
   {
     src: "/carousel 2.avif",
+    href: "/collection/gel-moussant",
     label: "EXCLUSIVITÉ",
     title: "Nouveautés en exclusivité",
     description:
@@ -71,7 +78,7 @@ export default function SecondProprety() {
   const next = () => setCurrentIndex((i) => Math.min(maxIndex, i + 1));
 
   return (
-    <section className="py-16 px-6 max-w-7xl mx-auto">
+    <section className="py-16 mb-45 px-6 max-w-7xl mx-auto">
       {/* Header row */}
       <div className="flex items-end justify-between mb-8">
         <div>
@@ -136,7 +143,7 @@ export default function SecondProprety() {
             >
               <div className="flex flex-col group cursor-pointer">
                 {/* Image */}
-                <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+                <div className="relative w-full aspect-4/3 overflow-hidden bg-gray-100">
                   <Image
                     src={slide.src}
                     alt={slide.title}
@@ -156,9 +163,12 @@ export default function SecondProprety() {
                   <p className="text-sm text-gray-500 leading-relaxed mb-5 font-light">
                     {slide.description}
                   </p>
-                  <button className="border border-black px-6 py-2.5 text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer">
+                  <Link 
+                    href={slide.href}
+                    className="border border-black px-6 py-2.5 text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer inline-block"
+                  >
                     {slide.cta}
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -168,11 +178,15 @@ export default function SecondProprety() {
 
       {/* Progress bar */}
       <div className="mt-10 flex gap-1.5">
-        {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-          <button
+        {slides.map((slide, i) => (
+          <Link
+            href={slide.href}
             key={i}
-            onClick={() => setCurrentIndex(i)}
-            className="h-[1.5px] flex-1 cursor-pointer transition-colors duration-300"
+            onClick={(e) => {
+              e.preventDefault();
+              setCurrentIndex(i);
+            }}
+            className="h-[1.5px] flex-1 cursor-pointer transition-colors duration-300 block"
             style={{ backgroundColor: i === currentIndex ? "#111" : "#e5e7eb" }}
             aria-label={`Slide ${i + 1}`}
           />

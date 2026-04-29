@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from 'next/link'
 import { useState, useEffect } from "react";
 import { MoveRight, MoveLeft, Play, Pause } from "lucide-react";
 
@@ -142,13 +143,15 @@ export default function Hero() {
                         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl animate-fade-in-up">
                             {images[currentImage].title}
                         </h1>
-                        <p className="text-xl md:text-2xl mb-8 leading-relaxed drop-shadow-lg max-w-3xl mx-auto animate-fade-in-up-delay">
+                        <p className="text-xl md:text-2xl mb-8 leading-relaxzzzed drop-shadow-lg max-w-3xl mx-auto animate-fade-in-up-delay">
                             {images[currentImage].subtitle}
                         </p>
-                        
-                        <button className="border-black border-0 cursor-pointer text-black bg-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up-delay-2">
-                            Découvrir la Collection
-                        </button>
+                    
+                            <Link 
+                            href='/collection/cream-foundation' 
+                            className="border-black border-0 cursor-pointer text-black bg-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up-delay-2">  
+                             Découvrir la Collection 
+                            </Link>
                     </div>
                 </div>
 
@@ -182,3 +185,4 @@ export default function Hero() {
       </>
     );
 }
+
